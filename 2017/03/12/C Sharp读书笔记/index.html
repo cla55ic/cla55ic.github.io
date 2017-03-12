@@ -1,0 +1,51 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="cla55ic,476412784@qq.com"><title>C# 读书笔记 · 可啦思刻的博客</title><meta name="description" content="C# 读书笔记
+第一章 C# 简介1.1 .net Framework 的含义
+.net Framework跨平台. .net Framework 不止可以在 windows 环境下运行，在 Linux 、 Os X 下。可以使用 .net Framework 的开源版本 Mono。此外，移动设 I"><meta name="keywords" content="cla55ic"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">可啦思刻的博客</a></h3><div class="description"><p>你好，很高兴认识你。</p></div></div></div><ul class="social-links"></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a href="https://www.caicai.me"> CaiCai</a><span>&</span><a href="https://github.com/Ben02/hexo-theme-Anatole"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><!--liif is_current('about')
+  a.current(href="/about")= __('About')			
+else
+  a(href="/about")= __('About')--><li><a href="/archives">归档</a></li><!--liif is_current('links')
+  a.current(href="/links")= __('Links')					
+else
+  a(href="/links")= __('Links')		--></div><div class="information"><div class="back_btn"><li><a onclick="window.history.go(-1)" class="fa fa-chevron-left"> </a></li></div><div class="avatar"><img src="https://gss0.baidu.com/7Ls0a8Sm2Q5IlBGlnYG/sys/portraitl/item/fea16e57?t=1445937564"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>C# 读书笔记</a></h3></div><div class="post-content"><h1 id="C-读书笔记"><a href="#C-读书笔记" class="headerlink" title="C# 读书笔记"></a><center>C# 读书笔记</center></h1><hr>
+<h2 id="第一章-C-简介"><a href="#第一章-C-简介" class="headerlink" title="第一章 C# 简介"></a>第一章 C# 简介</h2><h3 id="1-1-net-Framework-的含义"><a href="#1-1-net-Framework-的含义" class="headerlink" title="1.1 .net Framework 的含义"></a>1.1 .net Framework 的含义</h3><ol>
+<li><strong>.net Framework跨平台.</strong> .net Framework 不止可以在 windows 环境下运行，在 Linux 、 Os X 下。可以使用 .net Framework 的开源版本 Mono。此外，移动设 Iphone/Ipad (Mono Touch) 和 Android (Mono for Android) 也可以使用 .net Framework 。</li>
+</ol>
+<ol>
+<li><strong>.net Framework不止支持一种语言.</strong> .net Framework 支持多种编程语言，例如 C++ 、 C# 、 VB 等，不同语言之间通过 .net Framework 可以互相通信。</li>
+</ol>
+<ol>
+<li><strong>.net Framework的内容.</strong> .net Framework包含一个庞大的代码库，供客户语言（如C#）访问。库中定义一些数据类型，成为通用类型系统 (Common Type System, CTS) ，此外，还包含.net公共语言运行库 (Common Language Runime, CLR)    ，它负责管理用 .net 库开发的应用程序的运行。</li>
+</ol>
+<ol>
+<li><strong>CIL 和 JIT.</strong> 在编译使用 .net 库的代码时，VS 会先把代码编译为通用中间语言 (Common Intermediate Language, CIL) 代码，这种代码通用于使用 .net 的所有语言。当应用程序开始执行时，Just-In-Time (JIT) 编译器会把 CIL 编译为专用于目标机器结构的本机代码。</li>
+</ol>
+<ol>
+<li><strong>托管代码.</strong> 除了将代码编译为 CIL ， 然后通过 JIT 编译为本机代码的任务外， CLR 还有内存管理、处理安全性、跨语言调试等任务，但是非托管应用程序，如C++编写的应用程序，不受 CLR 控制。</li>
+</ol>
+<ol>
+<li><strong>.net Framework的垃圾回收.</strong> 在 .net 以前，内存垃圾回收的操作一般由程序员编写代码来控制， .net 的垃圾回收功能，可使程序员不必须关心这项工作</li>
+</ol>
+<h3 id="1-2-C-的含义"><a href="#1-2-C-的含义" class="headerlink" title="1.2 C# 的含义"></a>1.2 C# 的含义</h3><ol>
+<li><strong>C# 是类型安全语言.</strong> C# 是一种类型安全语言，即定义了一个变量的类型，就不能再改变它的类型。</li>
+</ol>
+<ol>
+<li><strong>C# 和 .net Framework 的关系.</strong> C# 是用于 .net 开发最好的语言，它可以使用 .net Framework 代码库提供的所有功能，且 .net Framework 新加入的功能都能在 C# 中得到体现。</li>
+</ol>
+<ol>
+<li><strong>C# 可以做的事情.</strong> 用 C# 可以编写 桌面应用程序 (winform、WPF(Windows Presentation Foundation)) 、 Windows Store 应用程序、 Web 应用程序、 WCF服务。</li>
+</ol>
+<ol>
+<li><strong>C# 应用程序访问数据库.</strong> 第3条所示的应用程序可以通过 .net Framework 中的 ADO.NET (Active Server Pages) 和 C# 中的 LINQ (Language Integrated Query) 来访问数据库。</li>
+</ol>
+<h3 id="1-3-Visual-Studio"><a href="#1-3-Visual-Studio" class="headerlink" title="1.3 Visual Studio"></a>1.3 Visual Studio</h3><ol>
+<li><strong>Visual Studio.</strong> 通常使用 VS 来开发 C# 应用程序，它虽然不是必须的，但却是最方便的工具。除基本的代码编辑外， VS 还拥有调试、设计器、错误检查、快速创建项目等诸多实用功能。</li>
+</ol>
+<ol>
+<li><strong>解决方案.</strong> 解决方案可以包含多个项目，一个解决方案下的项目可以在硬盘的不同位置。也就是说通过解决方案，可以共享不同项目下的代码。</li>
+</ol>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2017-03-12</span><i class="fa fa-tag"></i><a href="/tags/C-Sharp/" title="C Sharp" class="tag">C Sharp </a></div></div></div></div><!--.share.evernote 
+  a.fa.fa-bookmark(href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title);}})();", ref="nofollow", target="_blank")
+.weibo 
+  a.fa.fa-weibo(href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&title=',e(d.title),'&appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));")
+.twitter 
+  a.fa.fa-twitter(href=url_for("http://twitter.com/home?status="+","+config.url+"/"+page.path+","+config.title+","+page.title+",;"))--><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a role="navigation" href="/2017/03/12/about/" title="about" class="btn">下一篇</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
