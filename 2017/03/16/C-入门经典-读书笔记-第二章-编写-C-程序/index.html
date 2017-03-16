@@ -5,15 +5,38 @@ else
   a.current(href="/links")= __('Links')					
 else
   a(href="/links")= __('Links')		--></div><div class="information"><div class="back_btn"><li><a onclick="window.history.go(-1)" class="fa fa-chevron-left"> </a></li></div><div class="avatar"><img src="https://gss0.baidu.com/7Ls0a8Sm2Q5IlBGlnYG/sys/portraitl/item/fea16e57?t=1445937564"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>[C#入门经典]读书笔记-第二章-编写 C# 程序</a></h3></div><div class="post-content"><h4 id="1-Visual-Studio-2012-开发环境"><a href="#1-Visual-Studio-2012-开发环境" class="headerlink" title="1 Visual Studio 2012 开发环境"></a>1 Visual Studio 2012 开发环境</h4><ul>
-<li><strong>VS 2012 最常用的窗口</strong><br>|功能名称（中文）|功能名称（英文）|作用|<br>|—|—|—|<br>|解决方案资源管理器|Solution Explorer|显示解决方案包含的项目及文件|<br>|属性|Properties|显示选中文件或元素的详细信息，并可进行更改|<br>|错误列表|Error List|显示程序中的错误、警告等信息|<br>注：使用 VSS 协作开发时，<code>挂起的签入</code> 窗口可显示当前签出的文件及修改信息。<h4 id="2-控制台应用程序"><a href="#2-控制台应用程序" class="headerlink" title="2 控制台应用程序"></a>2 控制台应用程序</h4></li>
-<li><strong>创建控制台应用程序</strong></li>
+<li><strong>VS 2012 最常用的窗口</strong></li>
 </ul>
 <ol>
-<li>选择 <code>新建</code> | <code>项目</code> | <code>控制台应用程序</code></li>
-<li><p>键入示例代码</p>
- <figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Console.WriteLine(<span class="string">"hello Wrold!"</span>);</div><div class="line">Console.ReadKey();</div></pre></td></tr></table></figure>
+<li>解决方案资源管理器 (Solution Explorer) ：显示解决方案包含的项目及文件</li>
+<li>属性 (Properties) ：显示选中文件或元素的详细信息，并可进行更改</li>
+<li>错误列表 (Error List) ：显示程序中的错误、警告等信息<blockquote>
+<p>使用 VSS 协作开发时，<code>挂起的签入</code> 窗口可显示当前签出的文件及修改信息。</p>
+</blockquote>
 </li>
-<li><p>选择 <code>调试</code> | <code>启动调试</code> 即可看到如图所示的结果<br><img src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png" alt="控制台应用程序运行结果"></p>
+</ol>
+<h4 id="2-控制台应用程序"><a href="#2-控制台应用程序" class="headerlink" title="2 控制台应用程序"></a>2 控制台应用程序</h4><ul>
+<li><strong>创建并运行控制台应用程序</strong></li>
+</ul>
+<ol>
+<li>选择 <code>文件</code> | <code>新建</code> | <code>项目</code> | <code>控制台应用程序</code></li>
+<li><p>键入示例代码</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Console.WriteLine(<span class="string">"hello Wrold!"</span>);</div><div class="line">Console.ReadKey();</div></pre></td></tr></table></figure>
+</li>
+<li><p>选择 <code>调试</code> | <code>启动调试</code> 或按 F5 即可看到如图所示的结果<br><img src="http://p1.bpimg.com/4851/edfb45cbc1bd97da.png" alt="控制台应用程序运行结果"></p>
+</li>
+</ol>
+<h4 id="3-桌面应用程序-WPF"><a href="#3-桌面应用程序-WPF" class="headerlink" title="3 桌面应用程序(WPF)"></a>3 桌面应用程序(WPF)</h4><ul>
+<li><strong>创建并运行桌面应用程序</strong></li>
+</ul>
+<ol>
+<li>选择 <code>文件</code> | <code>新建</code> | <code>项目</code> | <code>WPF 应用程序</code></li>
+<li>打开 <code>MainWindow.xaml</code> 文件，可以分别看到 <code>设计</code> 和 <code>代码</code> 两个窗口</li>
+<li>点击 <code>工具箱</code> ，双击 <code>Button</code> 控件，可以看到 <code>设计</code> 窗口中添加了一个按钮</li>
+<li><p>双击新加入的按钮，跳转到 ‘MainWindow.xaml.cs’ 文件中，键入示例代码</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">MessageBox.Show(<span class="string">"Hello World"</span>);</div></pre></td></tr></table></figure>
+</li>
+<li><p>选择 <code>调试</code> | <code>启动调试</code> 或按 F5 即可看到如图所示的结果<br><img src="http://p1.bpimg.com/4851/90880d8486238dca.png" alt="桌面应用程序运行结果"></p>
 </li>
 </ol>
 </div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2017-03-16</span><i class="fa fa-tag"></i><a href="/tags/C/" title="C#" class="tag">C# </a></div></div></div></div><!--.share.evernote 
