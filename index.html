@@ -337,10 +337,8 @@
       
         
           
-          
-首先在服务器上的 SQL Server 创建 登录名
- 12--  创建登录名create login TestUser with password='123456', default_database=TestDataBase
- 这一步骤创建了一个名称为 ‘TestUser’，密码为 ‘1234
+          在服务器上的 SQL Server 创建登录名12--  创建登录名create login TestUser with password='123456', default_database=TestDataBase
+这一步骤创建了一个名称为 ‘TestUser’，密码为 ‘123456’，默认连接数据库为 ‘TestDataBase’ 的 登录名 。可以在当前连接中的安全性|登录名中看到刚刚创建的登录名。此时还不能用此登录名进行登陆，需要在刚刚填写的默认连接数据库下 default_database=TestDataBase ，即 TestDataBase， 新建一个数据库用户，并且把此数
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -473,7 +471,18 @@ VS 2012 最常用的窗口
 
 解决方案资源管理器 (Solution Explorer) ：显示解决方案包含的项目及文件
 属性 (Properties) ：显示选中文件或元素的详细信息，并可进行更改
-错误列表 (Error List) ：显示程
+错误列表 (Error List) ：显示程序中的错误、警告等信息
+使用 VSS 协作开发时，挂起的签入 窗口可显示当前签出的文件及修改信息。
+
+
+
+2 控制台应用程序
+创建并运行控制台应用程序
+
+
+选择 文件 | 新建 | 项目 | 控制台应用程序
+键入示例代码
+12Console.WriteLine("hello Wrold!");Con
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -601,7 +610,9 @@ VS 2012 最常用的窗口
         
           
           1 .net Framework 的含义
-.net Framework跨平台.net Framework 不止可以在 windows 环境下运行，在 Linux 、 Os X 下。可以使用 .net Framework 的开源版本 Mono。此外，移动设 Iphone/Ipad (Mono Touc
+.net Framework跨平台.net Framework 不止可以在 windows 环境下运行，在 Linux 、 Os X 下。可以使用 .net Framework 的开源版本 Mono。此外，移动设 Iphone/Ipad (Mono Touch) 和 Android (Mono for Android) 也可以使用 .net Framework 。
+
+.net Framework不止支持一种语言.net Framework 支持多种编程语言，例如 C++ 、 C# 、 VB 等，不同语言之间通过 .net Framework 可以互相通
           ...
           <!--noindex-->
           <div class="post-button text-center">

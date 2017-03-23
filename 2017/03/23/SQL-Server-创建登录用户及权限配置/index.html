@@ -87,22 +87,19 @@
 
 
 
-<meta name="description" content="首先在服务器上的 SQL Server 创建 登录名
- 12--  创建登录名create login TestUser with password=&apos;123456&apos;, default_database=TestDataBase
- 这一步骤创建了一个名称为 ‘TestUser’，密码为 ‘123456’，默认连接数据库为 ‘TestDataBase’ 的 登录名 。 此时可以在当前连接中的 安全">
+<meta name="description" content="在服务器上的 SQL Server 创建登录名12--  创建登录名create login TestUser with password=&apos;123456&apos;, default_database=TestDataBase
+这一步骤创建了一个名称为 ‘TestUser’，密码为 ‘123456’，默认连接数据库为 ‘TestDataBase’ 的 登录名 。可以在当前连接中的安全性|登录名中看到刚刚创">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL Server 创建登录用户及权限配置">
 <meta property="og:url" content="http://yoursite.com/2017/03/23/SQL-Server-创建登录用户及权限配置/index.html">
 <meta property="og:site_name" content="可啦思刻的博客">
-<meta property="og:description" content="首先在服务器上的 SQL Server 创建 登录名
- 12--  创建登录名create login TestUser with password=&apos;123456&apos;, default_database=TestDataBase
- 这一步骤创建了一个名称为 ‘TestUser’，密码为 ‘123456’，默认连接数据库为 ‘TestDataBase’ 的 登录名 。 此时可以在当前连接中的 安全">
-<meta property="og:updated_time" content="2017-03-23T13:53:18.335Z">
+<meta property="og:description" content="在服务器上的 SQL Server 创建登录名12--  创建登录名create login TestUser with password=&apos;123456&apos;, default_database=TestDataBase
+这一步骤创建了一个名称为 ‘TestUser’，密码为 ‘123456’，默认连接数据库为 ‘TestDataBase’ 的 登录名 。可以在当前连接中的安全性|登录名中看到刚刚创">
+<meta property="og:updated_time" content="2017-03-23T15:02:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL Server 创建登录用户及权限配置">
-<meta name="twitter:description" content="首先在服务器上的 SQL Server 创建 登录名
- 12--  创建登录名create login TestUser with password=&apos;123456&apos;, default_database=TestDataBase
- 这一步骤创建了一个名称为 ‘TestUser’，密码为 ‘123456’，默认连接数据库为 ‘TestDataBase’ 的 登录名 。 此时可以在当前连接中的 安全">
+<meta name="twitter:description" content="在服务器上的 SQL Server 创建登录名12--  创建登录名create login TestUser with password=&apos;123456&apos;, default_database=TestDataBase
+这一步骤创建了一个名称为 ‘TestUser’，密码为 ‘123456’，默认连接数据库为 ‘TestDataBase’ 的 登录名 。可以在当前连接中的安全性|登录名中看到刚刚创">
 
 
 
@@ -337,55 +334,15 @@
       
 
       
-        <ol>
-<li><p>首先在服务器上的 SQL Server 创建 <strong>登录名</strong></p>
- <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--  创建登录名</span></div><div class="line"><span class="keyword">create</span> login TestUser <span class="keyword">with</span> <span class="keyword">password</span>=<span class="string">'123456'</span>, default_database=TestDataBase</div></pre></td></tr></table></figure>
-<p> 这一步骤创建了一个名称为 ‘TestUser’，密码为 ‘123456’，默认连接数据库为 ‘TestDataBase’ 的 <strong>登录名</strong> 。<br> 此时可以在当前连接中的 <code>安全性</code> | <code>登录名</code> 中看到刚刚创建的 <strong>登录名</strong>。</p>
-<p> 此时还不能用此 <strong>登录名</strong> 进行登陆，需要在刚刚填写的默认连接数据库下 <strong>default_database=TestDataBase</strong>，即 <strong>TestDataBase</strong>， 新建一个 <strong>数据库用户</strong>，并且把此 <strong>数据库用户</strong> 与刚刚创建的 <strong>登录名</strong> 建立关系(映射)。</p>
-</li>
-<li><p>创建 <strong>数据库用户</strong> 并与 <strong>登录名</strong> 建立关系</p>
- <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- 创建数据库用户</span></div><div class="line"><span class="keyword">create</span> <span class="keyword">user</span> TestUser <span class="keyword">for</span> login TestUser <span class="keyword">with</span> default_schema=dbo</div></pre></td></tr></table></figure>
-<p> 一般默认 <strong>数据库用户</strong> 名称和 <strong>登录名</strong> 名称相同。</p>
-<p> 这里通过 <code>default_schema=dbo</code> 语句指定了改 <strong>数据库用户</strong> 的默认 schema 为 dbo ，这意味着 当用户使用 <code>select * from TestTable</code> 语句时，实际上是 <code>select * from dbo.TestTable</code> 。</p>
-<p> 此时可以用该 <code>登录名</code> 进行登录，但是无法访问相应的数据，这是因为与此映射的数据库用户还没有相应的权限。</p>
-</li>
-<li><p>为 <strong>数据库用户</strong> 配置权限</p>
- <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- 为数据库用户配置权限</span></div><div class="line">exec sp_addrolemember 'db_owner', 'TestUser'</div></pre></td></tr></table></figure>
-</li>
-<li><p>SQL Sever 中，对 <strong>登录名</strong> 和 <strong>数据库用户</strong> 的更多操作</p>
-<ul>
-<li><p>使 <strong>登录名</strong> 可以对多个数据库操作</p>
-  <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- 只需要在该数据库下 (`use database_name`) 执行上述语句即可</span></div><div class="line"><span class="keyword">create</span> <span class="keyword">user</span> TestUser <span class="keyword">for</span> login TestUser <span class="keyword">with</span> default_schema=dbo</div><div class="line">exec sp_addrolemember <span class="string">'db_owner'</span>, <span class="string">'TestUser'</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>禁用和启用 <strong>登陆名</strong></p>
-  <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">alter</span> login TestUser <span class="keyword">disable</span></div><div class="line"><span class="keyword">alter</span> login TestUser <span class="keyword">enable</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>更改 <strong>登陆名</strong> 名称和密码</p>
-  <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">alter</span> login TestUser <span class="keyword">with</span> <span class="keyword">name</span>=TestUser2</div><div class="line"><span class="keyword">alter</span> login TestUser <span class="keyword">with</span> <span class="keyword">password</span>=<span class="string">'654321'</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>更改 <strong>数据库用户</strong> 名称和默认 schema</p>
-  <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">alter</span> <span class="keyword">user</span> TestUser <span class="keyword">with</span> <span class="keyword">name</span>=TestUser2</div><div class="line"><span class="keyword">alter</span> <span class="keyword">user</span> TestUser <span class="keyword">with</span> default_schema=sales</div></pre></td></tr></table></figure>
-</li>
-<li><p>删除 <strong>登录名</strong> 和 <strong>数据库用户</strong></p>
-  <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">drop</span> login TestUser</div><div class="line"><span class="keyword">drop</span> login TestUser</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p><strong>登录名</strong> 和 <strong>数据库用户</strong> 的关系 <a href="https://zhidao.baidu.com/question/569078198.html" target="_blank" rel="external">#参考自：百度知道</a></p>
-<blockquote>
-<p>SQLSERVER把登录名与用户的关系称为映射。用登录名登录SQLSERVER后，在访问各个数据库时，SQLSERVER会自动查询此数据库中是否存在与此登录名关联的用户，若存在就使用此用户的权限访问此数据库，若不存在就是用guest用户访问此数据库。</p>
+        <h3 id="在服务器上的-SQL-Server-创建登录名"><a href="#在服务器上的-SQL-Server-创建登录名" class="headerlink" title="在服务器上的 SQL Server 创建登录名"></a>在服务器上的 SQL Server 创建登录名</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--  创建登录名</span></div><div class="line"><span class="keyword">create</span> login TestUser <span class="keyword">with</span> <span class="keyword">password</span>=<span class="string">'123456'</span>, default_database=TestDataBase</div></pre></td></tr></table></figure>
+<p>这一步骤创建了一个名称为 ‘TestUser’，密码为 ‘123456’，默认连接数据库为 ‘TestDataBase’ 的 <strong>登录名</strong> 。<br>可以在当前连接中的<code>安全性</code>|<code>登录名</code>中看到刚刚创建的<strong>登录名</strong>。<br>此时还不能用此<strong>登录名</strong>进行登陆，需要在刚刚填写的默认连接数据库下 <code>default_database=TestDataBase</code> ，即 <strong>TestDataBase</strong>， 新建一个<strong>数据库用户</strong>，并且把此<strong>数据库用户</strong>与刚刚创建的<strong>登录名</strong>建立关系(映射)。</p>
+<h3 id="创建数据库用户并与登录名建立关系"><a href="#创建数据库用户并与登录名建立关系" class="headerlink" title="创建数据库用户并与登录名建立关系"></a>创建数据库用户并与登录名建立关系</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- 创建数据库用户</span></div><div class="line"><span class="keyword">create</span> <span class="keyword">user</span> TestUser <span class="keyword">for</span> login TestUser <span class="keyword">with</span> default_schema=dbo</div></pre></td></tr></table></figure>
+<p>一般默认<strong>数据库用户</strong>名称和<strong>登录名</strong>名称相同。<br>这里通过 <code>default_schema=dbo</code> 语句指定了改<strong>数据库用户</strong>的默认 schema 为 dbo ，这意味着当用户使用 <code>select * from TestTable</code> 语句时，实际上是 <code>select * from dbo.TestTable</code> 。<br>此时可以用该<strong>登录名</strong>进行登录，但是无法访问相应的数据，这是因为与此映射的数据库用户还没有相应的权限。</p>
+<h3 id="登录名和数据库用户的关系"><a href="#登录名和数据库用户的关系" class="headerlink" title="登录名和数据库用户的关系"></a>登录名和数据库用户的关系</h3><blockquote>
+<p>SQLSERVER把登录名与用户的关系称为映射。用登录名登录SQLSERVER后，在访问各个数据库时，SQLSERVER会自动查询此数据库中是否存在与此登录名关联的用户，若存在就使用此用户的权限访问此数据库，若不存在就是用guest用户访问此数据库。<em><a href="https://zhidao.baidu.com/question/569078198.html" target="_blank" rel="external">#参考自：百度知道</a></em></p>
 </blockquote>
-</li>
-<li><p><strong>数据库用户</strong> 的各种权限和解释 <a href="http://www.2cto.com/database/201306/223514.html" target="_blank" rel="external">#参考自：2cto</a></p>
-</li>
-</ol>
-<style>
-table th:first-of-type {
-    width: 130px;
-}
-</style>
-
-<table>
+<h3 id="为数据库用户配置权限"><a href="#为数据库用户配置权限" class="headerlink" title="为数据库用户配置权限"></a>为<strong>数据库用户</strong>配置权限</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- 为数据库用户配置权限</span></div><div class="line">exec sp_addrolemember 'db_owner', 'TestUser'</div></pre></td></tr></table></figure>
+<h3 id="数据库用户的各种权限和解释"><a href="#数据库用户的各种权限和解释" class="headerlink" title="数据库用户的各种权限和解释"></a>数据库用户的各种权限和解释</h3><table>
 <thead>
 <tr>
 <th>权限名</th>
@@ -431,10 +388,32 @@ table th:first-of-type {
 </tr>
 </tbody>
 </table>
+<p><em><a href="http://www.2cto.com/database/201306/223514.html" target="_blank" rel="external">#参考自：2cto</a></em></p>
+<h3 id="对登录名和数据库用户的更多操作"><a href="#对登录名和数据库用户的更多操作" class="headerlink" title="对登录名和数据库用户的更多操作"></a>对登录名和数据库用户的更多操作</h3><ul>
+<li><p>使<strong>登录名</strong>可以对多个数据库操作</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- 只需要在该数据库下 (`use database_name`) 执行上述语句即可</span></div><div class="line"><span class="keyword">create</span> <span class="keyword">user</span> TestUser <span class="keyword">for</span> login TestUser <span class="keyword">with</span> default_schema=dbo</div><div class="line">exec sp_addrolemember <span class="string">'db_owner'</span>, <span class="string">'TestUser'</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>禁用和启用<strong>登陆名</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">alter</span> login TestUser <span class="keyword">disable</span></div><div class="line"><span class="keyword">alter</span> login TestUser <span class="keyword">enable</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>更改<strong>登陆名</strong>名称和密码</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">alter</span> login TestUser <span class="keyword">with</span> <span class="keyword">name</span>=TestUser2</div><div class="line"><span class="keyword">alter</span> login TestUser <span class="keyword">with</span> <span class="keyword">password</span>=<span class="string">'654321'</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>更改<strong>数据库用户</strong>名称和默认 schema</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">alter</span> <span class="keyword">user</span> TestUser <span class="keyword">with</span> <span class="keyword">name</span>=TestUser2</div><div class="line"><span class="keyword">alter</span> <span class="keyword">user</span> TestUser <span class="keyword">with</span> default_schema=sales</div></pre></td></tr></table></figure>
+</li>
+<li><p>删除<strong>登录名</strong>和<strong>数据库用户</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">drop</span> login TestUser</div><div class="line"><span class="keyword">drop</span> login TestUser</div></pre></td></tr></table></figure>
+</li>
+</ul>
 <blockquote>
-<p>参考 <a href="http://www.cnblogs.com/xwdreamer" target="_blank" rel="external">http://www.cnblogs.com/xwdreamer</a></p>
+<p>文章参考自：<a href="http://www.cnblogs.com/xwdreamer" target="_blank" rel="external">http://www.cnblogs.com/xwdreamer</a></p>
 </blockquote>
-
+<style>
+table th:first-of-type {
+    width: 130px;
+}
+</style>
       
     </div>
 
@@ -531,8 +510,17 @@ table th:first-of-type {
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -585,6 +573,22 @@ table th:first-of-type {
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#在服务器上的-SQL-Server-创建登录名"><span class="nav-number">1.</span> <span class="nav-text">在服务器上的 SQL Server 创建登录名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建数据库用户并与登录名建立关系"><span class="nav-number">2.</span> <span class="nav-text">创建数据库用户并与登录名建立关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登录名和数据库用户的关系"><span class="nav-number">3.</span> <span class="nav-text">登录名和数据库用户的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为数据库用户配置权限"><span class="nav-number">4.</span> <span class="nav-text">为数据库用户配置权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库用户的各种权限和解释"><span class="nav-number">5.</span> <span class="nav-text">数据库用户的各种权限和解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对登录名和数据库用户的更多操作"><span class="nav-number">6.</span> <span class="nav-text">对登录名和数据库用户的更多操作</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
