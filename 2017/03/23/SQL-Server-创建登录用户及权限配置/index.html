@@ -1,0 +1,698 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="SQL Server, SQL Server用户, SQL Server权限" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="首先在服务器上的 SQL Server 创建 登录名
+ 12--  创建登录名create login TestUser with password=&apos;123456&apos;, default_database=TestDataBase
+ 这一步骤创建了一个名称为 ‘TestUser’，密码为 ‘123456’，默认连接数据库为 ‘TestDataBase’ 的 登录名 。 此时可以在当前连接中的 安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL Server 创建登录用户及权限配置">
+<meta property="og:url" content="http://yoursite.com/2017/03/23/SQL-Server-创建登录用户及权限配置/index.html">
+<meta property="og:site_name" content="可啦思刻的博客">
+<meta property="og:description" content="首先在服务器上的 SQL Server 创建 登录名
+ 12--  创建登录名create login TestUser with password=&apos;123456&apos;, default_database=TestDataBase
+ 这一步骤创建了一个名称为 ‘TestUser’，密码为 ‘123456’，默认连接数据库为 ‘TestDataBase’ 的 登录名 。 此时可以在当前连接中的 安全">
+<meta property="og:updated_time" content="2017-03-23T13:52:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL Server 创建登录用户及权限配置">
+<meta name="twitter:description" content="首先在服务器上的 SQL Server 创建 登录名
+ 12--  创建登录名create login TestUser with password=&apos;123456&apos;, default_database=TestDataBase
+ 这一步骤创建了一个名称为 ‘TestUser’，密码为 ‘123456’，默认连接数据库为 ‘TestDataBase’ 的 登录名 。 此时可以在当前连接中的 安全">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/23/SQL-Server-创建登录用户及权限配置/"/>
+
+
+
+
+
+  <title> SQL Server 创建登录用户及权限配置 | 可啦思刻的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2385a75ec51281bae03b58fccb06fb1c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">可啦思刻的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/23/SQL-Server-创建登录用户及权限配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="可啦思刻">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="可啦思刻的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                SQL Server 创建登录用户及权限配置
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-23T21:08:55+08:00">
+                2017-03-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ol>
+<li><p>首先在服务器上的 SQL Server 创建 <strong>登录名</strong></p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--  创建登录名</span></div><div class="line"><span class="keyword">create</span> login TestUser <span class="keyword">with</span> <span class="keyword">password</span>=<span class="string">'123456'</span>, default_database=TestDataBase</div></pre></td></tr></table></figure>
+<p> 这一步骤创建了一个名称为 ‘TestUser’，密码为 ‘123456’，默认连接数据库为 ‘TestDataBase’ 的 <strong>登录名</strong> 。<br> 此时可以在当前连接中的 <code>安全性</code> | <code>登录名</code> 中看到刚刚创建的 <strong>登录名</strong>。</p>
+<p> 此时还不能用此 <strong>登录名</strong> 进行登陆，需要在刚刚填写的默认连接数据库下 <strong>default_database=TestDataBase</strong>，即 <strong>TestDataBase</strong>， 新建一个 <strong>数据库用户</strong>，并且把此 <strong>数据库用户</strong> 与刚刚创建的 <strong>登录名</strong> 建立关系(映射)。</p>
+</li>
+<li><p>创建 <strong>数据库用户</strong> 并与 <strong>登录名</strong> 建立关系</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- 创建数据库用户</span></div><div class="line"><span class="keyword">create</span> <span class="keyword">user</span> TestUser <span class="keyword">for</span> login TestUser <span class="keyword">with</span> default_schema=dbo</div></pre></td></tr></table></figure>
+<p> 一般默认 <strong>数据库用户</strong> 名称和 <strong>登录名</strong> 名称相同。</p>
+<p> 这里通过 <code>default_schema=dbo</code> 语句指定了改 <strong>数据库用户</strong> 的默认 schema 为 dbo ，这意味着 当用户使用 <code>select * from TestTable</code> 语句时，实际上是 <code>select * from dbo.TestTable</code> 。</p>
+<p> 此时可以用该 <code>登录名</code> 进行登录，但是无法访问相应的数据，这是因为与此映射的数据库用户还没有相应的权限。</p>
+</li>
+<li><p>为 <strong>数据库用户</strong> 配置权限</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- 为数据库用户配置权限</span></div><div class="line">exec sp_addrolemember 'db_owner', 'TestUser'</div></pre></td></tr></table></figure>
+</li>
+<li><p>SQL Sever 中，对 <strong>登录名</strong> 和 <strong>数据库用户</strong> 的更多操作</p>
+<ul>
+<li><p>使 <strong>登录名</strong> 可以对多个数据库操作</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- 只需要在该数据库下 (`use database_name`) 执行上述语句即可</span></div><div class="line"><span class="keyword">create</span> <span class="keyword">user</span> TestUser <span class="keyword">for</span> login TestUser <span class="keyword">with</span> default_schema=dbo</div><div class="line">exec sp_addrolemember <span class="string">'db_owner'</span>, <span class="string">'TestUser'</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>禁用和启用 <strong>登陆名</strong></p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">alter</span> login TestUser <span class="keyword">disable</span></div><div class="line"><span class="keyword">alter</span> login TestUser <span class="keyword">enable</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>更改 <strong>登陆名</strong> 名称和密码</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">alter</span> login TestUser <span class="keyword">with</span> <span class="keyword">name</span>=TestUser2</div><div class="line"><span class="keyword">alter</span> login TestUser <span class="keyword">with</span> <span class="keyword">password</span>=<span class="string">'654321'</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>更改 <strong>数据库用户</strong> 名称和默认 schema</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">alter</span> <span class="keyword">user</span> TestUser <span class="keyword">with</span> <span class="keyword">name</span>=TestUser2</div><div class="line"><span class="keyword">alter</span> <span class="keyword">user</span> TestUser <span class="keyword">with</span> default_schema=sales</div></pre></td></tr></table></figure>
+</li>
+<li><p>删除 <strong>登录名</strong> 和 <strong>数据库用户</strong></p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">drop</span> login TestUser</div><div class="line"><span class="keyword">drop</span> login TestUser</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>登录名</strong> 和 <strong>数据库用户</strong> 的关系 <a href="https://zhidao.baidu.com/question/569078198.html" target="_blank" rel="external">#参考自：百度知道</a></p>
+<blockquote>
+<p>SQLSERVER把登录名与用户的关系称为映射。用登录名登录SQLSERVER后，在访问各个数据库时，SQLSERVER会自动查询此数据库中是否存在与此登录名关联的用户，若存在就使用此用户的权限访问此数据库，若不存在就是用guest用户访问此数据库。</p>
+</blockquote>
+</li>
+<li><p><strong>数据库用户</strong> 的各种权限和解释 <a href="http://www.2cto.com/database/201306/223514.html" target="_blank" rel="external">#参考自：2cto</a></p>
+</li>
+</ol>
+<style>
+table th:first-of-type {
+    width: 130px;
+}
+</style>
+
+<p>　　| 权限名 | 作用 |<br>　　|—–|—–|<br>　　| db_owner | 固定数据库角色的成员可以执行数据库的所有配置和维护活动，还可以删除数据库 |<br>　　| db_securityadmin | 固定数据库角色的成员可以修改角色成员身份和管理权限。向此角色中添加主体可能会导致意外的权限升级 |<br>　　| db_accessadmin | 固定数据库角色的成员可以为 Windows 登录名、Windows 组和 SQL Server 登录名添加或删除数据库访问权限 |<br>　　| db_backupoperator | 固定数据库角色的成员可以备份数据库 |<br>　　| db_ddladmin | 固定数据库角色的成员可以在数据库中运行任何数据定义语言 (DDL) 命令 |<br>　　| db_datawriter | 固定数据库角色的成员可以在所有用户表中添加、删除或更改数据 |<br>　　| db_datareader | 固定数据库角色的成员可以从所有用户表中读取所有数据 |<br>　　| db_denydatawriter | 固定数据库角色的成员不能添加、修改或删除数据库内用户表中的任何数据 |<br>　　| db_denydatareader | 固定数据库角色的成员不能读取数据库内用户表中的任何数据 |</p>
+<blockquote>
+<p>参考 <a href="http://www.cnblogs.com/xwdreamer" target="_blank" rel="external">http://www.cnblogs.com/xwdreamer</a></p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SQL-Server/" rel="tag"># SQL Server</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/16/C-入门经典-读书笔记-第二章-编写-C-程序/" rel="next" title="[C#入门经典]读书笔记-第二章-编写 C# 程序">
+                <i class="fa fa-chevron-left"></i> [C#入门经典]读书笔记-第二章-编写 C# 程序
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="可啦思刻" />
+          <p class="site-author-name" itemprop="name">可啦思刻</p>
+           
+              <p class="site-description motion-element" itemprop="description">时光若刻</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">可啦思刻</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
