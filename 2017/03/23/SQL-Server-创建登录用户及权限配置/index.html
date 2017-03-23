@@ -97,7 +97,7 @@
 <meta property="og:description" content="首先在服务器上的 SQL Server 创建 登录名
  12--  创建登录名create login TestUser with password=&apos;123456&apos;, default_database=TestDataBase
  这一步骤创建了一个名称为 ‘TestUser’，密码为 ‘123456’，默认连接数据库为 ‘TestDataBase’ 的 登录名 。 此时可以在当前连接中的 安全">
-<meta property="og:updated_time" content="2017-03-23T13:52:38.000Z">
+<meta property="og:updated_time" content="2017-03-23T13:53:18.335Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL Server 创建登录用户及权限配置">
 <meta name="twitter:description" content="首先在服务器上的 SQL Server 创建 登录名
@@ -385,7 +385,52 @@ table th:first-of-type {
 }
 </style>
 
-<p>　　| 权限名 | 作用 |<br>　　|—–|—–|<br>　　| db_owner | 固定数据库角色的成员可以执行数据库的所有配置和维护活动，还可以删除数据库 |<br>　　| db_securityadmin | 固定数据库角色的成员可以修改角色成员身份和管理权限。向此角色中添加主体可能会导致意外的权限升级 |<br>　　| db_accessadmin | 固定数据库角色的成员可以为 Windows 登录名、Windows 组和 SQL Server 登录名添加或删除数据库访问权限 |<br>　　| db_backupoperator | 固定数据库角色的成员可以备份数据库 |<br>　　| db_ddladmin | 固定数据库角色的成员可以在数据库中运行任何数据定义语言 (DDL) 命令 |<br>　　| db_datawriter | 固定数据库角色的成员可以在所有用户表中添加、删除或更改数据 |<br>　　| db_datareader | 固定数据库角色的成员可以从所有用户表中读取所有数据 |<br>　　| db_denydatawriter | 固定数据库角色的成员不能添加、修改或删除数据库内用户表中的任何数据 |<br>　　| db_denydatareader | 固定数据库角色的成员不能读取数据库内用户表中的任何数据 |</p>
+<table>
+<thead>
+<tr>
+<th>权限名</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>db_owner</td>
+<td>固定数据库角色的成员可以执行数据库的所有配置和维护活动，还可以删除数据库</td>
+</tr>
+<tr>
+<td>db_securityadmin</td>
+<td>固定数据库角色的成员可以修改角色成员身份和管理权限。向此角色中添加主体可能会导致意外的权限升级</td>
+</tr>
+<tr>
+<td>db_accessadmin</td>
+<td>固定数据库角色的成员可以为 Windows 登录名、Windows 组和 SQL Server 登录名添加或删除数据库访问权限</td>
+</tr>
+<tr>
+<td>db_backupoperator</td>
+<td>固定数据库角色的成员可以备份数据库</td>
+</tr>
+<tr>
+<td>db_ddladmin</td>
+<td>固定数据库角色的成员可以在数据库中运行任何数据定义语言 (DDL) 命令</td>
+</tr>
+<tr>
+<td>db_datawriter</td>
+<td>固定数据库角色的成员可以在所有用户表中添加、删除或更改数据</td>
+</tr>
+<tr>
+<td>db_datareader</td>
+<td>固定数据库角色的成员可以从所有用户表中读取所有数据</td>
+</tr>
+<tr>
+<td>db_denydatawriter</td>
+<td>固定数据库角色的成员不能添加、修改或删除数据库内用户表中的任何数据</td>
+</tr>
+<tr>
+<td>db_denydatareader</td>
+<td>固定数据库角色的成员不能读取数据库内用户表中的任何数据</td>
+</tr>
+</tbody>
+</table>
 <blockquote>
 <p>参考 <a href="http://www.cnblogs.com/xwdreamer" target="_blank" rel="external">http://www.cnblogs.com/xwdreamer</a></p>
 </blockquote>
