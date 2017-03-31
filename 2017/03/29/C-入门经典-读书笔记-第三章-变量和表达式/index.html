@@ -104,7 +104,7 @@ C# 代码中可以包含注释，注释供开发者阅读，在编辑器编译�
 12// 在需要注释的语句开头加入 // 符号// 这是一条单行注释
 123/* 在需要注释的语句块的开始">
 <meta property="og:image" content="http://ondaqbq0q.bkt.clouddn.com/%E4%BB%A3%E7%A0%81%E5%A4%A7%E7%BA%B2%E6%95%88%E6%9E%9C.png">
-<meta property="og:updated_time" content="2017-03-29T16:42:44.000Z">
+<meta property="og:updated_time" content="2017-03-31T15:25:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[C#入门经典]读书笔记-第三章-变量和表达式">
 <meta name="twitter:description" content="C# 的基本语法C# 语法由若干句语句构成，每条语句后应加入 ; 表示语句结束。
@@ -363,56 +363,56 @@ C# 代码中可以包含注释，注释供开发者阅读，在编辑器编译�
 <p>数据可存储在变量之中，也可以从变量中取出数据，修改数据等。</p>
 <p>变量是有类型的，不同类型的变量存储不同类型的数据，同时变量也有名称，使用 <code>&lt;type&gt;&lt;name&gt;</code> 的方式来声明一个变量。</p>
 <p>因为变量的类型可以自己定义，所以变量类型是无限多的。有些简单的类型是已经预定义的。</p>
-<p>多数简单类型是用来存储数值的，那么，为什么不使用一种类型而是多种类型来存储数值呢？原因是因为，不同的类型占用内存中不同的位数，位数越大，存储的数值范围越大，如果只用一种类型存储数值，那么它占用的位数必然很大，所以，存储小数值时，就会造成很多的浪费。</p>
+<h3 id="简单类型"><a href="#简单类型" class="headerlink" title="简单类型"></a><em>简单类型</em></h3><p>多数简单类型是用来存储数值的，那么，为什么不使用一种类型而是多种类型来存储数值呢？原因是因为，不同的类型占用内存中不同的位数，位数越大，存储的数值范围越大，如果只用一种类型存储数值，那么它占用的位数必然很大，所以，存储小数值时，就会造成很多的浪费。</p>
 <p>整数类型</p>
 <table>
 <thead>
 <tr>
-<th>类型</th>
-<th>别名</th>
-<th>允许的值</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">别名</th>
+<th style="text-align:center">允许的值</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>sbyte</td>
-<td>System.SByte</td>
-<td>[-128, 127]</td>
+<td style="text-align:center">sbyte</td>
+<td style="text-align:center">System.SByte</td>
+<td style="text-align:center">[-128, 127]</td>
 </tr>
 <tr>
-<td>byte</td>
-<td>System.Byte</td>
-<td>[0, 255]</td>
+<td style="text-align:center">byte</td>
+<td style="text-align:center">System.Byte</td>
+<td style="text-align:center">[0, 255]</td>
 </tr>
 <tr>
-<td>short</td>
-<td>System.Int16</td>
-<td>[-32768, 32767]</td>
+<td style="text-align:center">short</td>
+<td style="text-align:center">System.Int16</td>
+<td style="text-align:center">[-32768, 32767]</td>
 </tr>
 <tr>
-<td>ushort</td>
-<td>System.UInt16</td>
-<td>[0, 65535]</td>
+<td style="text-align:center">ushort</td>
+<td style="text-align:center">System.UInt16</td>
+<td style="text-align:center">[0, 65535]</td>
 </tr>
 <tr>
-<td>int</td>
-<td>System.Int32</td>
-<td>[-2147483648, 2147483647]</td>
+<td style="text-align:center">int</td>
+<td style="text-align:center">System.Int32</td>
+<td style="text-align:center">[-2147483648, 2147483647]</td>
 </tr>
 <tr>
-<td>uint</td>
-<td>System.UInt32</td>
-<td>[0, 4294967295]</td>
+<td style="text-align:center">uint</td>
+<td style="text-align:center">System.UInt32</td>
+<td style="text-align:center">[0, 4294967295]</td>
 </tr>
 <tr>
-<td>long</td>
-<td>System.Int64</td>
-<td>[-9223372036854775808, 9223372036854775807]</td>
+<td style="text-align:center">long</td>
+<td style="text-align:center">System.Int64</td>
+<td style="text-align:center">[-9223372036854775808, 9223372036854775807]</td>
 </tr>
 <tr>
-<td>ulong</td>
-<td>System.UInt64</td>
-<td>[0, 18446744073709551615]</td>
+<td style="text-align:center">ulong</td>
+<td style="text-align:center">System.UInt64</td>
+<td style="text-align:center">[0, 18446744073709551615]</td>
 </tr>
 </tbody>
 </table>
@@ -424,38 +424,38 @@ C# 代码中可以包含注释，注释供开发者阅读，在编辑器编译�
 <table>
 <thead>
 <tr>
-<th>类型</th>
-<th>别名</th>
-<th>m 的范围</th>
-<th>e 的范围</th>
-<th>近似最小值</th>
-<th>近似最大值</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">别名</th>
+<th style="text-align:center">m 的范围</th>
+<th style="text-align:center">e 的范围</th>
+<th style="text-align:center">近似最小值</th>
+<th style="text-align:center">近似最大值</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>float</td>
-<td>System.Single</td>
-<td>[0, $2^{24}$]</td>
-<td>[-149, 104]</td>
-<td>1.5 × $10^{-45}$</td>
-<td>3.4 × $10^{38}$</td>
+<td style="text-align:center">float</td>
+<td style="text-align:center">System.Single</td>
+<td style="text-align:center">[0, $2^{24}$]</td>
+<td style="text-align:center">[-149, 104]</td>
+<td style="text-align:center">1.5 × $10^{-45}$</td>
+<td style="text-align:center">3.4 × $10^{38}$</td>
 </tr>
 <tr>
-<td>double</td>
-<td>System.Double</td>
-<td>[0, $2^{53}$]</td>
-<td>[-1075, 970]</td>
-<td>5.0 × $10^{-324}$</td>
-<td>1.7 × $10^{308}$</td>
+<td style="text-align:center">double</td>
+<td style="text-align:center">System.Double</td>
+<td style="text-align:center">[0, $2^{53}$]</td>
+<td style="text-align:center">[-1075, 970]</td>
+<td style="text-align:center">5.0 × $10^{-324}$</td>
+<td style="text-align:center">1.7 × $10^{308}$</td>
 </tr>
 <tr>
-<td>decimal</td>
-<td>System.Decimal</td>
-<td>[0, $2^{96}$]</td>
-<td>[-28, 0]</td>
-<td>1.0 × $10^{-28}$</td>
-<td>7.9 × $10^{28}$</td>
+<td style="text-align:center">decimal</td>
+<td style="text-align:center">System.Decimal</td>
+<td style="text-align:center">[0, $2^{96}$]</td>
+<td style="text-align:center">[-28, 0]</td>
+<td style="text-align:center">1.0 × $10^{-28}$</td>
+<td style="text-align:center">7.9 × $10^{28}$</td>
 </tr>
 </tbody>
 </table>
@@ -464,39 +464,354 @@ C# 代码中可以包含注释，注释供开发者阅读，在编辑器编译�
 <table>
 <thead>
 <tr>
-<th>类型</th>
-<th>别名</th>
-<th>允许的值</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">别名</th>
+<th style="text-align:center">允许的值</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>char</td>
-<td>System.Char</td>
-<td>一个 Unicode 字符，存储 [0, 65535] 之间的整数</td>
+<td style="text-align:center">char</td>
+<td style="text-align:center">System.Char</td>
+<td style="text-align:center">一个 Unicode 字符，存储 [0, 65535] 之间的整数</td>
 </tr>
 <tr>
-<td>bool</td>
-<td>System.Boolean</td>
-<td>布尔值：true 或 false</td>
+<td style="text-align:center">bool</td>
+<td style="text-align:center">System.Boolean</td>
+<td style="text-align:center">布尔值：true 或 false</td>
 </tr>
 <tr>
-<td>string</td>
-<td>System.String</td>
-<td>一组字符</td>
+<td style="text-align:center">string</td>
+<td style="text-align:center">System.String</td>
+<td style="text-align:center">一组字符</td>
 </tr>
 </tbody>
 </table>
-<p>string 的字符数量没有数量，它使用可变大小的内存。</p>
+<p>string 的字符数量没有上限，因为它使用可变大小的内存。</p>
 <p>布尔类型常常用在分支当中，例如一个问题有多种选择。也常用于两种变量值之间的比较等。</p>
 <p>简单类型的声明和使用的示例如下</p>
 <figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> myInteger;</div><div class="line"><span class="keyword">string</span> myString;</div><div class="line">myInteger = <span class="number">17</span>;</div><div class="line">myString = <span class="string">"\"myInteger\" is"</span>;</div><div class="line">Console.WriteLine(<span class="string">"&#123;0&#125; &#123;1&#125;."</span>, myString, myInteger);</div><div class="line">Console.ReadKey();</div></pre></td></tr></table></figure>
 <p>第一、二行声明了两个变量，第三、四行对变量进行赋值，第五行使用变量输出了一些内容。</p>
+<blockquote>
+<p>WriteLine() 可以用于输出内容，ReadLine() 可以用于读取用户的输入</p>
+</blockquote>
 <p>变量的声明和赋值可以同时进行，例如： <code>int myInteger = 17;</code> 。</p>
 <p>相同类型的变量可以同时声明和赋值，如： <code>int a, b;</code> 和 <code>int a = 1, b = 2;</code>，但这种情况 <code>int a, b = 3</code> 只是对变量 b 进行了赋值。</p>
 <p>string类型存储的一组字符需要用 <code>&quot;</code> 包裹起来，如果字符本身含有 <code>&quot;</code> 则需要转义，即使用 <code>\&quot;</code> 来表示双引号，另外需要注意，不可在字符串(一组字符)中直接使用回车换行，若需要对字符串换行则使用 <code>\n</code> 进行转义。所有的转义序列都包含一个反斜杠，反斜杠本身也需要转义，即 <code>\\</code> 。</p>
-<p><code>Console.WriteLine(&quot;{0} {1}.&quot;, myString, myInteger);</code> 中，使用 {n} 来表示输出的字符串中的变量，在字符串后跟变量名称，用逗号分隔，变量标记从 0 开始。</p>
-<center><em>未完待续…</em></center>
+<p><code>Console.WriteLine(&quot;{0} {1}.&quot;, myString, myInteger);</code> 中，使用 <code>{n}</code> 来表示输出的字符串中的变量，在字符串后跟变量名称，用逗号分隔，变量标记从 0 开始。</p>
+<h3 id="变量的命名"><a href="#变量的命名" class="headerlink" title="变量的命名"></a><em>变量的命名</em></h3><p>变量的命名规则</p>
+<ul>
+<li>第一个字母必须是字母、下划线或者@。</li>
+<li>余下的字母可以是字母、数字、下划线。</li>
+<li>不可使用关键字。</li>
+<li>变量名称区分大小写。</li>
+</ul>
+<p>建议的命名约定(camelCase 和 PascalCase)</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">约定</th>
+<th style="text-align:center">示例</th>
+<th style="text-align:center">作用于</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">camelCase</td>
+<td style="text-align:center">myInteger、myString</td>
+<td style="text-align:center">用于变量</td>
+</tr>
+<tr>
+<td style="text-align:center">PascalCase</td>
+<td style="text-align:center">StringToHtml、SqlHelper</td>
+<td style="text-align:center">用于类名、函数名、命名空间等</td>
+</tr>
+</tbody>
+</table>
+<h3 id="字面值"><a href="#字面值" class="headerlink" title="字面值"></a><em>字面值</em></h3><p>前面提到了两各字面值 整数 (17) 和字符串 (“\”myInteger\” is”) 。一个字面值有多种类型，也有的字面值可以在后面添加后缀来制定想要的类型。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">类别</th>
+<th style="text-align:center">后缀</th>
+<th style="text-align:center">示例/允许的值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">bool</td>
+<td style="text-align:center">布尔</td>
+<td style="text-align:center">无</td>
+<td style="text-align:center">true 或 false</td>
+</tr>
+<tr>
+<td style="text-align:center">int, uint, long, ulong</td>
+<td style="text-align:center">整数</td>
+<td style="text-align:center">无</td>
+<td style="text-align:center">100</td>
+</tr>
+<tr>
+<td style="text-align:center">uint, ulong</td>
+<td style="text-align:center">整数</td>
+<td style="text-align:center">u 或 U</td>
+<td style="text-align:center">100U</td>
+</tr>
+<tr>
+<td style="text-align:center">long, ulong</td>
+<td style="text-align:center">整数</td>
+<td style="text-align:center">l 或 L</td>
+<td style="text-align:center">100L</td>
+</tr>
+<tr>
+<td style="text-align:center">ulong</td>
+<td style="text-align:center">整数</td>
+<td style="text-align:center">ul、uL、Ul、UL、lu、lU、Lu、LU</td>
+<td style="text-align:center">100UL</td>
+</tr>
+<tr>
+<td style="text-align:center">float</td>
+<td style="text-align:center">实数</td>
+<td style="text-align:center">f 或 F</td>
+<td style="text-align:center">1.5F</td>
+</tr>
+<tr>
+<td style="text-align:center">double</td>
+<td style="text-align:center">实数</td>
+<td style="text-align:center">无、d 或 D</td>
+<td style="text-align:center">1.5</td>
+</tr>
+<tr>
+<td style="text-align:center">decimal</td>
+<td style="text-align:center">实数</td>
+<td style="text-align:center">m 或 M</td>
+<td style="text-align:center">1.5M</td>
+</tr>
+<tr>
+<td style="text-align:center">char</td>
+<td style="text-align:center">字符</td>
+<td style="text-align:center">无</td>
+<td style="text-align:center">‘a’ 或转义序列</td>
+</tr>
+<tr>
+<td style="text-align:center">string</td>
+<td style="text-align:center">字符串</td>
+<td style="text-align:center">无</td>
+<td style="text-align:center">‘a…a’ 或转义序列</td>
+</tr>
+</tbody>
+</table>
+<h3 id="转义序列"><a href="#转义序列" class="headerlink" title="转义序列"></a><em>转义序列</em></h3><table>
+<thead>
+<tr>
+<th style="text-align:center">转义序列</th>
+<th style="text-align:center">产生的字符</th>
+<th style="text-align:center">字符的 Unicode 值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">\’</td>
+<td style="text-align:center">单引号</td>
+<td style="text-align:center">0x0027</td>
+</tr>
+<tr>
+<td style="text-align:center">\”</td>
+<td style="text-align:center">双引号</td>
+<td style="text-align:center">0x0022</td>
+</tr>
+<tr>
+<td style="text-align:center">\</td>
+<td style="text-align:center">反斜杠</td>
+<td style="text-align:center">0x005C</td>
+</tr>
+<tr>
+<td style="text-align:center">\0</td>
+<td style="text-align:center">空</td>
+<td style="text-align:center">0x0000</td>
+</tr>
+<tr>
+<td style="text-align:center">\a</td>
+<td style="text-align:center">警告(产生蜂鸣)</td>
+<td style="text-align:center">0x0007</td>
+</tr>
+<tr>
+<td style="text-align:center">\b</td>
+<td style="text-align:center">退格</td>
+<td style="text-align:center">0x0008</td>
+</tr>
+<tr>
+<td style="text-align:center">\f</td>
+<td style="text-align:center">换页</td>
+<td style="text-align:center">0x000C</td>
+</tr>
+<tr>
+<td style="text-align:center">\n</td>
+<td style="text-align:center">换行</td>
+<td style="text-align:center">0x000A</td>
+</tr>
+<tr>
+<td style="text-align:center">\r</td>
+<td style="text-align:center">回车</td>
+<td style="text-align:center">0x000D</td>
+</tr>
+<tr>
+<td style="text-align:center">\t</td>
+<td style="text-align:center">水平制表符</td>
+<td style="text-align:center">0x0009</td>
+</tr>
+<tr>
+<td style="text-align:center">\v</td>
+<td style="text-align:center">垂直制表符</td>
+<td style="text-align:center">0x000B</td>
+</tr>
+</tbody>
+</table>
+<p>上表中 “字符的 Unicode 值” 列是字符在 Unicode 字符集中的十六进制值。可以使用任何 Unicode 转义序列转义对应的字符。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//下面两个字符串完全等价</span></div><div class="line"><span class="string">"I\'m a student."</span></div><div class="line"><span class="string">"I\u0027m a student."</span></div></pre></td></tr></table></figure>
+<p>如果不想使用转义序列来转义，那么可以在包含需要转义的字符的字符串前使用 <code>@</code> 来避免使用转义序列。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//使用转义序列的字符串</span></div><div class="line"><span class="string">"C:\\WINDOWS\\FONTS\\Arial.ttf"</span></div><div class="line"><span class="comment">//不使用转义序列的字符串</span></div><div class="line"><span class="string">@"C:\WINDOWS\FONTS\Arial.ttf"</span></div></pre></td></tr></table></figure>
+<h2 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h2><p>表达式用来处理变量。</p>
+<p>操作数 (变量和字面值) 与运算符结合起来构成表达式。</p>
+<p>运算符大致有三种</p>
+<ul>
+<li>一元运算符，处理一个操作数。</li>
+<li>二元运算符，处理两个操作数。</li>
+<li>三元运算符，处理三个操作数。</li>
+</ul>
+<h3 id="数学运算符"><a href="#数学运算符" class="headerlink" title="数学运算符"></a><em>数学运算符</em></h3><table>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th style="text-align:center">类别</th>
+<th style="text-align:center">示例</th>
+<th style="text-align:center">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:center">二元</td>
+<td style="text-align:center">a = b + c</td>
+<td style="text-align:center">a 的值是 b 和 c 的和</td>
+</tr>
+<tr>
+<td style="text-align:center">-</td>
+<td style="text-align:center">二元</td>
+<td style="text-align:center">a = b - c</td>
+<td style="text-align:center">a 的值是 b 减去 c 所得的值</td>
+</tr>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:center">二元</td>
+<td style="text-align:center">a = b * c</td>
+<td style="text-align:center">a 的值是 b 和 c 的乘积</td>
+</tr>
+<tr>
+<td style="text-align:center">/</td>
+<td style="text-align:center">二元</td>
+<td style="text-align:center">a = b / c</td>
+<td style="text-align:center">a 的值是 b 除以 c 所得的值</td>
+</tr>
+<tr>
+<td style="text-align:center">%</td>
+<td style="text-align:center">二元</td>
+<td style="text-align:center">a = b % c</td>
+<td style="text-align:center">a 的值是 b 除以 c 余下的值</td>
+</tr>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:center">一元</td>
+<td style="text-align:center">a = +b</td>
+<td style="text-align:center">a 的值等于 b 的值</td>
+</tr>
+<tr>
+<td style="text-align:center">-</td>
+<td style="text-align:center">一元</td>
+<td style="text-align:center">a = -b</td>
+<td style="text-align:center">a 的值等于 b 的值的相反数</td>
+</tr>
+</tbody>
+</table>
+<p>两个布尔类型的值相加 <code>true + false</code> 是错误的，两个 char 类型的值相加，因为 char 类型实际上存储的是数字，所以相加会得到一个数字 (int 类型) 。</p>
+<p>二元运算符 <code>+</code> 也可以对字符串进行操作， <code>&quot;abc&quot;</code> + <code>&quot;def&quot;</code> 会得到一个新的字符串 <code>&quot;abcdef&quot;</code> ，但是其他的数学运算符不能对字符串进行操作。</p>
+<p>还有另外两个一元运算符</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th style="text-align:center">类别</th>
+<th style="text-align:center">示例</th>
+<th style="text-align:center">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">++</td>
+<td style="text-align:center">一元</td>
+<td style="text-align:center">a = ++b</td>
+<td style="text-align:center">a 的值是 b+1，b 递增 1</td>
+</tr>
+<tr>
+<td style="text-align:center">–</td>
+<td style="text-align:center">一元</td>
+<td style="text-align:center">a = –b</td>
+<td style="text-align:center">a 的值是 b-1，b 递减 1</td>
+</tr>
+<tr>
+<td style="text-align:center">++</td>
+<td style="text-align:center">一元</td>
+<td style="text-align:center">a = b++</td>
+<td style="text-align:center">a 的值是 b，b 递增 1</td>
+</tr>
+<tr>
+<td style="text-align:center">++</td>
+<td style="text-align:center">一元</td>
+<td style="text-align:center">a = b++</td>
+<td style="text-align:center">a 的值是 b，b 递增 1</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>++ 在前，先自增，再运算。++在后，先运算，后自增。</p>
+</blockquote>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> a, b = <span class="number">5</span>, c = <span class="number">6</span>;</div><div class="line">a = b++ * --c;</div><div class="line"><span class="comment">//这里 a 的值是</span></div></pre></td></tr></table></figure>
+<p><code>a++</code> 实际上是 <code>a = a + 1</code> 的简写形式。</p>
+<p><code>++</code> 和 <code>--</code> 常用在循环中。</p>
+<h3 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a><em>赋值运算符</em></h3><p>除等号 <code>=</code> 是一种赋值运算符以外，还有多种与数学运算符结合起来的赋值运算符。<code>+=</code> 、 <code>-=</code> 、 <code>*=</code> 、 <code>/=</code> 和 <code>%=</code> 。</p>
+<p>‘a += b’ 等同于  <code>a = a + b</code> ，其他运算符类似。</p>
+<h3 id="运算符优先级"><a href="#运算符优先级" class="headerlink" title="运算符优先级"></a><em>运算符优先级</em></h3><p>复杂的表达式中有多个运算符，那么就有先后计算的问题，下面是各运算符的优先级</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">优先级</th>
+<th style="text-align:center">运算符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">高</td>
+<td style="text-align:center">++(前缀)、–(前缀)、+(一元)、-(一元)</td>
+</tr>
+<tr>
+<td style="text-align:center">↑</td>
+<td style="text-align:center">*、/、%</td>
+</tr>
+<tr>
+<td style="text-align:center">↑</td>
+<td style="text-align:center">+、-</td>
+</tr>
+<tr>
+<td style="text-align:center">↑</td>
+<td style="text-align:center">=、+=、-=、*=、/=、%=</td>
+</tr>
+<tr>
+<td style="text-align:center">低</td>
+<td style="text-align:center">++(后缀)，–(后缀)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="名称空间"><a href="#名称空间" class="headerlink" title="名称空间"></a><em>名称空间</em></h3><center>未完待续…</center>
       
     </div>
 
@@ -660,7 +975,7 @@ C# 代码中可以包含注释，注释供开发者阅读，在编辑器编译�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#C-的基本语法"><span class="nav-number">1.</span> <span class="nav-text">C# 的基本语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-控制台应用程序的基本结构"><span class="nav-number">2.</span> <span class="nav-text">C# 控制台应用程序的基本结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量"><span class="nav-number">3.</span> <span class="nav-text">变量</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#C-的基本语法"><span class="nav-number">1.</span> <span class="nav-text">C# 的基本语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-控制台应用程序的基本结构"><span class="nav-number">2.</span> <span class="nav-text">C# 控制台应用程序的基本结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量"><span class="nav-number">3.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单类型"><span class="nav-number">3.1.</span> <span class="nav-text">简单类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量的命名"><span class="nav-number">3.2.</span> <span class="nav-text">变量的命名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字面值"><span class="nav-number">3.3.</span> <span class="nav-text">字面值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转义序列"><span class="nav-number">3.4.</span> <span class="nav-text">转义序列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表达式"><span class="nav-number">4.</span> <span class="nav-text">表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数学运算符"><span class="nav-number">4.1.</span> <span class="nav-text">数学运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#赋值运算符"><span class="nav-number">4.2.</span> <span class="nav-text">赋值运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运算符优先级"><span class="nav-number">4.3.</span> <span class="nav-text">运算符优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#名称空间"><span class="nav-number">4.4.</span> <span class="nav-text">名称空间</span></a></li></ol></li></ol></div>
             
 
           </div>
