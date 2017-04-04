@@ -104,7 +104,7 @@ C# 代码中可以包含注释，注释供开发者阅读，在编辑器编译�
 12// 在需要注释的语句开头加入 // 符号// 这是一条单行注释
 123/* 在需要注释的语句块的开始">
 <meta property="og:image" content="http://ondaqbq0q.bkt.clouddn.com/%E4%BB%A3%E7%A0%81%E5%A4%A7%E7%BA%B2%E6%95%88%E6%9E%9C.png">
-<meta property="og:updated_time" content="2017-03-31T15:25:15.000Z">
+<meta property="og:updated_time" content="2017-04-04T15:56:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[C#入门经典]读书笔记-第三章-变量和表达式">
 <meta name="twitter:description" content="C# 的基本语法C# 语法由若干句语句构成，每条语句后应加入 ; 表示语句结束。
@@ -811,7 +811,38 @@ C# 代码中可以包含注释，注释供开发者阅读，在编辑器编译�
 </tr>
 </tbody>
 </table>
-<h3 id="名称空间"><a href="#名称空间" class="headerlink" title="名称空间"></a><em>名称空间</em></h3><center>未完待续…</center>
+<h3 id="名称空间"><a href="#名称空间" class="headerlink" title="名称空间"></a><em>名称空间</em></h3><p>名称空间是 .NET 中提供应用程序代码容器的方式，这样就可以唯一的标识代码及其内容。</p>
+<p>在 A 名称空间中使用 A 名称空间中的项，只需要引用名称即可。而在 B 名称空间中使用 A 中的项，就必须写出该名称空间中的限定名称。限定名称包含它所有的分层信息。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">namespace</span> <span class="title">LevelOne</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">using</span> LevelTwo;</div><div class="line">    <span class="comment">// NameOne</span></div><div class="line">    <span class="comment">// NameThree</span></div><div class="line">    <span class="keyword">namespace</span> <span class="title">LevelTwo</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// NameTwo</span></div><div class="line">        <span class="comment">// NameThree</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// global namespace</span></div></pre></td></tr></table></figure>
+<p>名称空间可以嵌套。</p>
+<p>在名称空间 <code>LevelOne</code> 中可直接使用使用 <code>NameOne</code> ，使用 <code>NameTwo</code> 需引用为 <code>LevelTwo.NameTwo</code> 。</p>
+<p>在全局名称空间中使用 <code>NameOne</code> 需引用为 <code>LevelOne.NameOne</code> ，使用 <code>NameTwo</code> 需引用为 <code>LevelOne.LevelTwo.NameTwo</code> 。</p>
+<p>名称由名称空间唯一定义，所以 <code>NameThree</code> 可分别在 <code>LevelOne</code> 和 <code>LevelTwo</code> 中定义。</p>
+<p>在全局命名空间中可使用 <code>LevelOne.NameThree</code> 和 <code>LevelOne.LevelTwo.NameThree</code> 分别引用两个名称。</p>
+<p>使用限定名称来引用不同名称空间中的项，十分繁琐。所以可使用 <code>using</code> 关键字避免这种情况。如上所示，在 <code>LevelOne</code> 中使用 <code>using LevelTwo</code> ，就可直接在 <code>LevelOne</code> 中使用名称来访问 <code>NameTwo</code> 。</p>
+<p>但是对于两个名称空间都包含的 <code>NameThree</code> ，若直接使用名称则会产生错误，所以可以把 <code>using LevelTwo;</code> 改为 <code>using LT = LevelTwo;</code> ，这样就可以在 <code>LevelOne</code> 中使用 <code>LT.NameThree</code> 来引用 <code>LevelTwo</code> 中的 <code>NameThree</code> 。</p>
+<p><code>using</code> 语句应用到包含它的名称空间及其嵌套的名称空间中。</p>
+<p>在创建的控制台程序中可以看到 <code>using System;</code> ，如果没有这个引用，那么 <code>Console.WriteLine(&quot;balabala...&quot;);</code> 就必须写成 <code>System.Console.WriteLine(&quot;balabala...&quot;);</code> 。</p>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p><strong>Q: 在下面的代码中，如何从名称空间 fabulous 的代码中引用名称 great ？</strong></p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">namespace</span> <span class="title">fabulous</span></div><div class="line">&#123;</div><div class="line">    <span class="comment">// code in fabulous namespace</span></div><div class="line">    <span class="keyword">namespace</span> <span class="title">super</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">namespace</span> <span class="title">smashing</span></div><div class="line">        &#123;</div><div class="line">            <span class="comment">// great name defined</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>A: <code>super.smashing.great</code> 或者使用 <code>using super.smashing;</code> 就可以直接使用名称访问。</p>
+<p><strong>Q: 下面哪些变量名不合法？</strong></p>
+<ul>
+<li>myVariableIsGood</li>
+<li>99Flake</li>
+<li>_floor</li>
+<li>time2GetJiggyWidIt</li>
+<li>wrox.com</li>
+</ul>
+<p>A: 第二个和最后一个。</p>
+<p><strong>Q: 字符串 “supercalifragilisticexpialidocious” 是不是太长了，不能放在 string 变量中？</strong></p>
+<p>A: 可以，因为 string 类型的字符数量没有上限，因为它使用可变大小的内存。</p>
+<p><strong>Q: 考虑运算符的优先级，列出下列表达式的计算步骤。</strong></p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">resultVar += var1 * var2 + var3 % var4 / var5;</div></pre></td></tr></table></figure>
+<p>A: 先算 <code>*</code> 、 <code>%</code> 和 <code>/</code> ，再算 <code>+</code> ， 最后算 <code>+=</code> 。</p>
+<p>**Q: 编写一个控制台应用程序，要求用户输入 4 个 int 值，并显示他们的乘积。</p>
+<p>A:<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> num1, num2, num3, num4;</div><div class="line">Console.WriteLine(<span class="string">"请依次输入 4 个整数，每次输入按回车键以确认"</span>);</div><div class="line">num1 = Convert.ToInt32(Console.ReadLine());</div><div class="line">num2 = Convert.ToInt32(Console.ReadLine());</div><div class="line">num3 = Convert.ToInt32(Console.ReadLine());</div><div class="line">num4 = Convert.ToInt32(Console.ReadLine());</div><div class="line">Console.WriteLine(<span class="string">"&#123;0&#125;、&#123;1&#125;、&#123;2&#125; 和 &#123;3&#125; 的乘积是：&#123;4&#125;"</span>,</div><div class="line">    num1, num2, num3, num4, num1*num2*num3*num4);</div><div class="line">Console.ReadKey();</div></pre></td></tr></table></figure></p>
+
       
     </div>
 
@@ -975,7 +1006,7 @@ C# 代码中可以包含注释，注释供开发者阅读，在编辑器编译�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#C-的基本语法"><span class="nav-number">1.</span> <span class="nav-text">C# 的基本语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-控制台应用程序的基本结构"><span class="nav-number">2.</span> <span class="nav-text">C# 控制台应用程序的基本结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量"><span class="nav-number">3.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单类型"><span class="nav-number">3.1.</span> <span class="nav-text">简单类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量的命名"><span class="nav-number">3.2.</span> <span class="nav-text">变量的命名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字面值"><span class="nav-number">3.3.</span> <span class="nav-text">字面值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转义序列"><span class="nav-number">3.4.</span> <span class="nav-text">转义序列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表达式"><span class="nav-number">4.</span> <span class="nav-text">表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数学运算符"><span class="nav-number">4.1.</span> <span class="nav-text">数学运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#赋值运算符"><span class="nav-number">4.2.</span> <span class="nav-text">赋值运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运算符优先级"><span class="nav-number">4.3.</span> <span class="nav-text">运算符优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#名称空间"><span class="nav-number">4.4.</span> <span class="nav-text">名称空间</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#C-的基本语法"><span class="nav-number">1.</span> <span class="nav-text">C# 的基本语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-控制台应用程序的基本结构"><span class="nav-number">2.</span> <span class="nav-text">C# 控制台应用程序的基本结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量"><span class="nav-number">3.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单类型"><span class="nav-number">3.1.</span> <span class="nav-text">简单类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量的命名"><span class="nav-number">3.2.</span> <span class="nav-text">变量的命名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字面值"><span class="nav-number">3.3.</span> <span class="nav-text">字面值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转义序列"><span class="nav-number">3.4.</span> <span class="nav-text">转义序列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表达式"><span class="nav-number">4.</span> <span class="nav-text">表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数学运算符"><span class="nav-number">4.1.</span> <span class="nav-text">数学运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#赋值运算符"><span class="nav-number">4.2.</span> <span class="nav-text">赋值运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运算符优先级"><span class="nav-number">4.3.</span> <span class="nav-text">运算符优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#名称空间"><span class="nav-number">4.4.</span> <span class="nav-text">名称空间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习"><span class="nav-number">5.</span> <span class="nav-text">练习</span></a></li></ol></div>
             
 
           </div>
