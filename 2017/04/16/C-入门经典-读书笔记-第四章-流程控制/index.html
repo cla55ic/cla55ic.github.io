@@ -87,118 +87,25 @@
 
 
 
-<meta name="description" content="Visual Studio 2012 开发环境
-VS 2012 最常用的窗口
-
-
-
-
-中文名
-英文名
-作用
-
-
-
-
-解决方案资源管理器
-Solution Explorer
-显示解决方案包含的项目及文件
-
-
-属性
-Properties
-显示选中文件或元素的详细信息，并可进行更改
-
-
-错误列表
-Error List
-显示程序中的错误、警告等信息
-
-
-
-控制台应用程序
-创建并运行控制台应用程序
-
-
-选择">
+<meta name="description" content="布尔逻辑分支和循环可以控制C#代码的执行顺序。分支根据结果有条件的执行，循环重复执行相同的语句，满足条件后停止。
+条件使用布尔值来表示，例如 myVar &amp;gt; 10 可以得到 true 或 false ，比较后得到的布尔值 便可以作为循环或者分支的条件。
+布尔比较运算符有 ==、!=、&amp;lt;、&amp;gt;、&amp;lt;= 和 &amp;gt;= 几种。
+数值类型的比较可以使用上述的所有运算符。字符串类型的比">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[C#入门经典]读书笔记-第二章-编写 C# 程序">
-<meta property="og:url" content="http://yoursite.com/2017/03/16/C-入门经典-读书笔记-第二章-编写-C-程序/index.html">
+<meta property="og:title" content="[C#入门经典]读书笔记-第四章-流程控制">
+<meta property="og:url" content="http://yoursite.com/2017/04/16/C-入门经典-读书笔记-第四章-流程控制/index.html">
 <meta property="og:site_name" content="可啦思刻的博客">
-<meta property="og:description" content="Visual Studio 2012 开发环境
-VS 2012 最常用的窗口
-
-
-
-
-中文名
-英文名
-作用
-
-
-
-
-解决方案资源管理器
-Solution Explorer
-显示解决方案包含的项目及文件
-
-
-属性
-Properties
-显示选中文件或元素的详细信息，并可进行更改
-
-
-错误列表
-Error List
-显示程序中的错误、警告等信息
-
-
-
-控制台应用程序
-创建并运行控制台应用程序
-
-
-选择">
-<meta property="og:image" content="http://ondaqbq0q.bkt.clouddn.com/%E6%8E%A7%E5%88%B6%E5%8F%B0%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png">
-<meta property="og:image" content="http://ondaqbq0q.bkt.clouddn.com/%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png">
-<meta property="og:updated_time" content="2017-03-29T14:41:03.121Z">
+<meta property="og:description" content="布尔逻辑分支和循环可以控制C#代码的执行顺序。分支根据结果有条件的执行，循环重复执行相同的语句，满足条件后停止。
+条件使用布尔值来表示，例如 myVar &amp;gt; 10 可以得到 true 或 false ，比较后得到的布尔值 便可以作为循环或者分支的条件。
+布尔比较运算符有 ==、!=、&amp;lt;、&amp;gt;、&amp;lt;= 和 &amp;gt;= 几种。
+数值类型的比较可以使用上述的所有运算符。字符串类型的比">
+<meta property="og:updated_time" content="2017-04-20T15:46:18.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="[C#入门经典]读书笔记-第二章-编写 C# 程序">
-<meta name="twitter:description" content="Visual Studio 2012 开发环境
-VS 2012 最常用的窗口
-
-
-
-
-中文名
-英文名
-作用
-
-
-
-
-解决方案资源管理器
-Solution Explorer
-显示解决方案包含的项目及文件
-
-
-属性
-Properties
-显示选中文件或元素的详细信息，并可进行更改
-
-
-错误列表
-Error List
-显示程序中的错误、警告等信息
-
-
-
-控制台应用程序
-创建并运行控制台应用程序
-
-
-选择">
-<meta name="twitter:image" content="http://ondaqbq0q.bkt.clouddn.com/%E6%8E%A7%E5%88%B6%E5%8F%B0%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png">
+<meta name="twitter:title" content="[C#入门经典]读书笔记-第四章-流程控制">
+<meta name="twitter:description" content="布尔逻辑分支和循环可以控制C#代码的执行顺序。分支根据结果有条件的执行，循环重复执行相同的语句，满足条件后停止。
+条件使用布尔值来表示，例如 myVar &amp;gt; 10 可以得到 true 或 false ，比较后得到的布尔值 便可以作为循环或者分支的条件。
+布尔比较运算符有 ==、!=、&amp;lt;、&amp;gt;、&amp;lt;= 和 &amp;gt;= 几种。
+数值类型的比较可以使用上述的所有运算符。字符串类型的比">
 
 
 
@@ -226,13 +133,13 @@ Error List
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/16/C-入门经典-读书笔记-第二章-编写-C-程序/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/16/C-入门经典-读书笔记-第四章-流程控制/"/>
 
 
 
 
 
-  <title> [C#入门经典]读书笔记-第二章-编写 C# 程序 | 可啦思刻的博客 </title>
+  <title> [C#入门经典]读书笔记-第四章-流程控制 | 可啦思刻的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -361,7 +268,7 @@ Error List
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/16/C-入门经典-读书笔记-第二章-编写-C-程序/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/16/C-入门经典-读书笔记-第四章-流程控制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="可啦思刻">
@@ -382,7 +289,7 @@ Error List
             
             
               
-                [C#入门经典]读书笔记-第二章-编写 C# 程序
+                [C#入门经典]读书笔记-第四章-流程控制
               
             
           </h1>
@@ -397,8 +304,8 @@ Error List
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-16T22:55:20+08:00">
-                2017-03-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-16T22:56:07+08:00">
+                2017-04-16
               </time>
             
 
@@ -433,60 +340,64 @@ Error List
       
 
       
-        <h3 id="Visual-Studio-2012-开发环境"><a href="#Visual-Studio-2012-开发环境" class="headerlink" title="Visual Studio 2012 开发环境"></a>Visual Studio 2012 开发环境</h3><ul>
-<li><strong>VS 2012 最常用的窗口</strong></li>
-</ul>
+        <h2 id="布尔逻辑"><a href="#布尔逻辑" class="headerlink" title="布尔逻辑"></a>布尔逻辑</h2><p>分支和循环可以控制C#代码的执行顺序。分支根据结果有条件的执行，循环重复执行相同的语句，满足条件后停止。</p>
+<p>条件使用布尔值来表示，例如 <code>myVar &gt; 10</code> 可以得到 <code>true</code> 或 <code>false</code> ，比较后得到的布尔值 便可以作为循环或者分支的条件。</p>
+<p><strong>布尔比较运算符</strong>有 <code>==</code>、<code>!=</code>、<code>&lt;</code>、<code>&gt;</code>、<code>&lt;=</code> 和 <code>&gt;=</code> 几种。</p>
+<p>数值类型的比较可以使用上述的所有运算符。字符串类型的比较仅可以使用 <code>!=</code> 和 <code>==</code> 。布尔类型的比较可以使用 <code>!=</code> 和 <code>==</code>。</p>
+<p>布尔类型的比较除了上述两种类型外还可以使用如下类型。</p>
 <table>
 <thead>
 <tr>
-<th>中文名</th>
-<th>英文名</th>
-<th>作用</th>
+<th>运算符</th>
+<th>类别</th>
+<th>示例</th>
+<th>结果</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>解决方案资源管理器</td>
-<td>Solution Explorer</td>
-<td>显示解决方案包含的项目及文件</td>
+<td>!</td>
+<td>一元</td>
+<td>var1 = !var2</td>
+<td>var1的值是var2的相反的结果 (<strong>逻辑非</strong>)</td>
 </tr>
 <tr>
-<td>属性</td>
-<td>Properties</td>
-<td>显示选中文件或元素的详细信息，并可进行更改</td>
+<td>&amp;</td>
+<td>二元</td>
+<td>var1 = var2 &amp; var3</td>
+<td>只有 var2 和 var3 同时为 true 时，var1才为 true ，否则为 false (<strong>逻辑与</strong>)</td>
 </tr>
 <tr>
-<td>错误列表</td>
-<td>Error List</td>
-<td>显示程序中的错误、警告等信息</td>
+<td>&#124;</td>
+<td>二元</td>
+<td>var1 = var2 &#124; var3</td>
+<td>var2 或 var3 其中之一为 true (或都是 true )，var1就是 true (<strong>逻辑或</strong>)</td>
+</tr>
+<tr>
+<td>^</td>
+<td>二元</td>
+<td>var1 = var2 ^ var3</td>
+<td>var2 或 var3 有且仅有一个为 true，var1 才为 true ， 否则为 false (<strong>逻辑异或</strong>)</td>
 </tr>
 </tbody>
 </table>
-<h3 id="控制台应用程序"><a href="#控制台应用程序" class="headerlink" title="控制台应用程序"></a>控制台应用程序</h3><ul>
-<li><strong>创建并运行控制台应用程序</strong></li>
-</ul>
-<ol>
-<li>选择 <code>文件</code> | <code>新建</code> | <code>项目</code> | <code>控制台应用程序</code></li>
-<li><p>键入示例代码</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Console.WriteLine(<span class="string">"hello Wrold!"</span>);</div><div class="line">Console.ReadKey();</div></pre></td></tr></table></figure>
-</li>
-<li><p>选择 <code>调试</code> | <code>启动调试</code> 或按 F5 即可看到如图所示的结果<br><img src="http://ondaqbq0q.bkt.clouddn.com/%E6%8E%A7%E5%88%B6%E5%8F%B0%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png" alt="控制台应用程序运行结果"></p>
-</li>
-</ol>
-<h3 id="桌面应用程序-WPF"><a href="#桌面应用程序-WPF" class="headerlink" title="桌面应用程序(WPF)"></a>桌面应用程序(WPF)</h3><ul>
-<li><strong>创建并运行桌面应用程序</strong></li>
-</ul>
-<ol>
-<li>选择 <code>文件</code> | <code>新建</code> | <code>项目</code> | <code>WPF 应用程序</code></li>
-<li>打开 <code>MainWindow.xaml</code> 文件，可以分别看到 <code>设计</code> 和 <code>代码</code> 两个窗口</li>
-<li>点击 <code>工具箱</code> ，双击 <code>Button</code> 控件，可以看到 <code>设计</code> 窗口中添加了一个按钮</li>
-<li><p>双击新加入的按钮，跳转到 <code>MainWindow.xaml.cs</code> 文件中，键入示例代码</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">MessageBox.Show(<span class="string">"Hello World"</span>);</div></pre></td></tr></table></figure>
-</li>
-<li><p>选择 <code>调试</code> | <code>启动调试</code> 或按 F5 即可看到如图所示的结果<br><img src="http://ondaqbq0q.bkt.clouddn.com/%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png" alt="桌面应用程序运行结果"></p>
-</li>
-</ol>
-
+<p>和 <code>|</code> 、 <code>&amp;</code> 类似的还有两种 <code>||</code> 、 <code>&amp;&amp;</code> ，两者使用方式和结果相同，但通常使用 <code>||</code> 、 <code>&amp;&amp;</code> ， 因为 <code>||</code> 、 <code>&amp;&amp;</code> 在检查左边的值以后，如果能判断出结果则跳过第二个。例如 <code>true || true</code> ， 左边为 <code>true</code> 的情况下，判断右边的值已经没有意义。因为使用这种方式效率更高。</p>
+<p>使用 <code>&amp;&amp;</code> 、 <code>||</code> 的另一个好处就是避免程序出错。例如 <code>var1 = (var2 != 0) &amp; (var3 / var 2 &gt; 2)</code> ，此时如果 var2 值为 0 的话，程序在检测右边时就会出错，而使用 <code>&amp;&amp;</code> ，程序就会跳过右边。</p>
+<p><code>||</code> 和 <code>&amp;&amp;</code> 存在的意义在于<strong>按位运算符</strong>，它处理变量的位，而非变量的值。</p>
+<p><strong>布尔赋值运算符</strong> <code>&amp;=</code> 、 <code>!=</code> 和 <code>^=</code> 。使用方法和 <code>+=</code> 、 <code>*=</code> 等类似。</p>
+<p><code>&amp;=</code> 、 <code>!=</code> 其实使用的是 <code>&amp;</code> 、 <code>|</code> 而不是 <code>&amp;&amp;</code> 、 <code>||</code> 。</p>
+<p><center>未完待续…</center></p>
+<style>
+table:nth-of-type(1) th:nth-of-type(1) {
+    width: 70px;
+}
+table:nth-of-type(1) th:nth-of-type(2) {
+    width: 100px;
+}
+table:nth-of-type(1) th:nth-of-type(3) {
+    width: 130px;
+}
+</style>
       
     </div>
 
@@ -528,8 +439,8 @@ Error List
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/12/C-入门经典-读书笔记-第一章-C-简介/" rel="next" title="[C#入门经典]读书笔记-第一章-C#简介">
-                <i class="fa fa-chevron-left"></i> [C#入门经典]读书笔记-第一章-C#简介
+              <a href="/2017/03/29/C-入门经典-读书笔记-第三章-变量和表达式/" rel="next" title="[C#入门经典]读书笔记-第三章-变量和表达式">
+                <i class="fa fa-chevron-left"></i> [C#入门经典]读书笔记-第三章-变量和表达式
               </a>
             
           </div>
@@ -537,10 +448,6 @@ Error List
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/23/SQL-Server-创建登录用户及权限配置/" rel="prev" title="SQL Server 创建登录用户及权限配置">
-                SQL Server 创建登录用户及权限配置 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -660,7 +567,7 @@ Error List
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual-Studio-2012-开发环境"><span class="nav-number">1.</span> <span class="nav-text">Visual Studio 2012 开发环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制台应用程序"><span class="nav-number">2.</span> <span class="nav-text">控制台应用程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#桌面应用程序-WPF"><span class="nav-number">3.</span> <span class="nav-text">桌面应用程序(WPF)</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#布尔逻辑"><span class="nav-number">1.</span> <span class="nav-text">布尔逻辑</span></a></li></ol></div>
             
 
           </div>
