@@ -87,25 +87,49 @@
 
 
 
-<meta name="description" content="布尔逻辑分支和循环可以控制C#代码的执行顺序。分支根据结果有条件的执行，循环重复执行相同的语句，满足条件后停止。
-条件使用布尔值来表示，例如 myVar &amp;gt; 10 可以得到 true 或 false ，比较后得到的布尔值 便可以作为循环或者分支的条件。
-布尔比较运算符有 ==、!=、&amp;lt;、&amp;gt;、&amp;lt;= 和 &amp;gt;= 几种。
-数值类型的比较可以使用上述的所有运算符。字符串类型的比">
+<meta name="description" content="table:nth-of-type(1) th:nth-of-type(1) {
+    width: 70px;
+}
+table:nth-of-type(1) th:nth-of-type(2) {
+    width: 100px;
+}
+table:nth-of-type(1) th:nth-of-type(3) {
+    width: 130px;
+}
+
+
+布尔逻辑分支和循环可以控制C#">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[C#入门经典]读书笔记-第四章-流程控制">
 <meta property="og:url" content="http://yoursite.com/2017/04/16/C-入门经典-读书笔记-第四章-流程控制/index.html">
 <meta property="og:site_name" content="可啦思刻的博客">
-<meta property="og:description" content="布尔逻辑分支和循环可以控制C#代码的执行顺序。分支根据结果有条件的执行，循环重复执行相同的语句，满足条件后停止。
-条件使用布尔值来表示，例如 myVar &amp;gt; 10 可以得到 true 或 false ，比较后得到的布尔值 便可以作为循环或者分支的条件。
-布尔比较运算符有 ==、!=、&amp;lt;、&amp;gt;、&amp;lt;= 和 &amp;gt;= 几种。
-数值类型的比较可以使用上述的所有运算符。字符串类型的比">
-<meta property="og:updated_time" content="2017-04-20T15:46:18.000Z">
+<meta property="og:description" content="table:nth-of-type(1) th:nth-of-type(1) {
+    width: 70px;
+}
+table:nth-of-type(1) th:nth-of-type(2) {
+    width: 100px;
+}
+table:nth-of-type(1) th:nth-of-type(3) {
+    width: 130px;
+}
+
+
+布尔逻辑分支和循环可以控制C#">
+<meta property="og:updated_time" content="2017-04-25T13:47:48.473Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[C#入门经典]读书笔记-第四章-流程控制">
-<meta name="twitter:description" content="布尔逻辑分支和循环可以控制C#代码的执行顺序。分支根据结果有条件的执行，循环重复执行相同的语句，满足条件后停止。
-条件使用布尔值来表示，例如 myVar &amp;gt; 10 可以得到 true 或 false ，比较后得到的布尔值 便可以作为循环或者分支的条件。
-布尔比较运算符有 ==、!=、&amp;lt;、&amp;gt;、&amp;lt;= 和 &amp;gt;= 几种。
-数值类型的比较可以使用上述的所有运算符。字符串类型的比">
+<meta name="twitter:description" content="table:nth-of-type(1) th:nth-of-type(1) {
+    width: 70px;
+}
+table:nth-of-type(1) th:nth-of-type(2) {
+    width: 100px;
+}
+table:nth-of-type(1) th:nth-of-type(3) {
+    width: 130px;
+}
+
+
+布尔逻辑分支和循环可以控制C#">
 
 
 
@@ -340,54 +364,7 @@
       
 
       
-        <h2 id="布尔逻辑"><a href="#布尔逻辑" class="headerlink" title="布尔逻辑"></a>布尔逻辑</h2><p>分支和循环可以控制C#代码的执行顺序。分支根据结果有条件的执行，循环重复执行相同的语句，满足条件后停止。</p>
-<p>条件使用布尔值来表示，例如 <code>myVar &gt; 10</code> 可以得到 <code>true</code> 或 <code>false</code> ，比较后得到的布尔值 便可以作为循环或者分支的条件。</p>
-<p><strong>布尔比较运算符</strong>有 <code>==</code>、<code>!=</code>、<code>&lt;</code>、<code>&gt;</code>、<code>&lt;=</code> 和 <code>&gt;=</code> 几种。</p>
-<p>数值类型的比较可以使用上述的所有运算符。字符串类型的比较仅可以使用 <code>!=</code> 和 <code>==</code> 。布尔类型的比较可以使用 <code>!=</code> 和 <code>==</code>。</p>
-<p>布尔类型的比较除了上述两种类型外还可以使用如下类型。</p>
-<table>
-<thead>
-<tr>
-<th>运算符</th>
-<th>类别</th>
-<th>示例</th>
-<th>结果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>!</td>
-<td>一元</td>
-<td>var1 = !var2</td>
-<td>var1的值是var2的相反的结果 (<strong>逻辑非</strong>)</td>
-</tr>
-<tr>
-<td>&amp;</td>
-<td>二元</td>
-<td>var1 = var2 &amp; var3</td>
-<td>只有 var2 和 var3 同时为 true 时，var1才为 true ，否则为 false (<strong>逻辑与</strong>)</td>
-</tr>
-<tr>
-<td>&#124;</td>
-<td>二元</td>
-<td>var1 = var2 &#124; var3</td>
-<td>var2 或 var3 其中之一为 true (或都是 true )，var1就是 true (<strong>逻辑或</strong>)</td>
-</tr>
-<tr>
-<td>^</td>
-<td>二元</td>
-<td>var1 = var2 ^ var3</td>
-<td>var2 或 var3 有且仅有一个为 true，var1 才为 true ， 否则为 false (<strong>逻辑异或</strong>)</td>
-</tr>
-</tbody>
-</table>
-<p>和 <code>|</code> 、 <code>&amp;</code> 类似的还有两种 <code>||</code> 、 <code>&amp;&amp;</code> ，两者使用方式和结果相同，但通常使用 <code>||</code> 、 <code>&amp;&amp;</code> ， 因为 <code>||</code> 、 <code>&amp;&amp;</code> 在检查左边的值以后，如果能判断出结果则跳过第二个。例如 <code>true || true</code> ， 左边为 <code>true</code> 的情况下，判断右边的值已经没有意义。因为使用这种方式效率更高。</p>
-<p>使用 <code>&amp;&amp;</code> 、 <code>||</code> 的另一个好处就是避免程序出错。例如 <code>var1 = (var2 != 0) &amp; (var3 / var 2 &gt; 2)</code> ，此时如果 var2 值为 0 的话，程序在检测右边时就会出错，而使用 <code>&amp;&amp;</code> ，程序就会跳过右边。</p>
-<p><code>||</code> 和 <code>&amp;&amp;</code> 存在的意义在于<strong>按位运算符</strong>，它处理变量的位，而非变量的值。</p>
-<p><strong>布尔赋值运算符</strong> <code>&amp;=</code> 、 <code>!=</code> 和 <code>^=</code> 。使用方法和 <code>+=</code> 、 <code>*=</code> 等类似。</p>
-<p><code>&amp;=</code> 、 <code>!=</code> 其实使用的是 <code>&amp;</code> 、 <code>|</code> 而不是 <code>&amp;&amp;</code> 、 <code>||</code> 。</p>
-<p><center>未完待续…</center></p>
-<style>
+        <style>
 table:nth-of-type(1) th:nth-of-type(1) {
     width: 70px;
 }
@@ -398,6 +375,124 @@ table:nth-of-type(1) th:nth-of-type(3) {
     width: 130px;
 }
 </style>
+
+<h2 id="布尔逻辑"><a href="#布尔逻辑" class="headerlink" title="布尔逻辑"></a>布尔逻辑</h2><p>分支和循环可以控制C#代码的执行顺序。分支根据结果有条件的执行，循环重复执行相同的语句，满足条件后停止。</p>
+<p>条件使用布尔值来表示，例如 <code>myVar &gt; 10</code> 可以得到 <code>true</code> 或 <code>false</code> ，比较后得到的布尔值 便可以作为循环或者分支的条件。</p>
+<p><strong>布尔比较运算符</strong>有 <code>==</code>、<code>!=</code>、<code>&lt;</code>、<code>&gt;</code>、<code>&lt;=</code> 和 <code>&gt;=</code> 几种。</p>
+<p>数值类型的比较可以使用上述的所有运算符。字符串类型的比较仅可以使用 <code>!=</code> 和 <code>==</code> 。布尔类型的比较可以使用 <code>!=</code> 和 <code>==</code>。</p>
+<p>布尔类型的比较除了上述两种类型外还可以使用如下类型。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">运算符</th>
+<th style="text-align:center">类别</th>
+<th style="text-align:center">示例</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">!</td>
+<td style="text-align:center">一元</td>
+<td style="text-align:center">var1 = !var2</td>
+<td>var1的值是var2的相反的结果 (<strong>逻辑非</strong>)</td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;</td>
+<td style="text-align:center">二元</td>
+<td style="text-align:center">var1 = var2 &amp; var3</td>
+<td>只有 var2 和 var3 同时为 true 时，var1才为 true ，否则为 false (<strong>逻辑与</strong>)</td>
+</tr>
+<tr>
+<td style="text-align:center">&#124;</td>
+<td style="text-align:center">二元</td>
+<td style="text-align:center">var1 = var2 &#124; var3</td>
+<td>var2 或 var3 其中之一为 true (或都是 true )，var1就是 true (<strong>逻辑或</strong>)</td>
+</tr>
+<tr>
+<td style="text-align:center">^</td>
+<td style="text-align:center">二元</td>
+<td style="text-align:center">var1 = var2 ^ var3</td>
+<td>var2 或 var3 有且仅有一个为 true，var1 才为 true ， 否则为 false (<strong>逻辑异或</strong>)</td>
+</tr>
+</tbody>
+</table>
+<p>和 <code>|</code> 、 <code>&amp;</code> 类似的还有两种 <code>||</code> 、 <code>&amp;&amp;</code> ，两者使用方式和结果相同，但通常使用 <code>||</code> 、 <code>&amp;&amp;</code> ， 因为 <code>||</code> 、 <code>&amp;&amp;</code> 在检查左边的值以后，如果能判断出结果则跳过第二个。例如 <code>true || true</code> ， 左边为 <code>true</code> 的情况下，判断右边的值已经没有意义。因为使用这种方式效率更高。</p>
+<p>使用 <code>&amp;&amp;</code> 、 <code>||</code> 的另一个好处就是避免程序出错。例如 <code>var1 = (var2 != 0) &amp; (var3 / var 2 &gt; 2)</code> ，此时如果 var2 值为 0 的话，程序在检测右边时就会出错，而使用 <code>&amp;&amp;</code> ，程序就会跳过右边。</p>
+<p><code>||</code> 和 <code>&amp;&amp;</code> 存在的意义在于<strong>按位运算符</strong>，它处理变量的位，而非变量的值。</p>
+<h3 id="布尔赋值运算符"><a href="#布尔赋值运算符" class="headerlink" title="布尔赋值运算符"></a><em>布尔赋值运算符</em></h3><p><strong>布尔赋值运算符</strong> <code>&amp;=</code> 、 <code>|=</code> 和 <code>^=</code> 。使用方法和 <code>+=</code> 、 <code>*=</code> 等类似。</p>
+<p><code>&amp;=</code> 其实使用的是 <code>&amp;</code> 而不是 <code>&amp;&amp;</code> ，<code>|=</code> 、 <code>^=</code> 与之类似。</p>
+<h3 id="按位运算符"><a href="#按位运算符" class="headerlink" title="按位运算符"></a><em>按位运算符</em></h3><p><code>&amp;</code> 和 <code>|</code> 不仅可以处理变量值，还可以处理变量中的位，这个时候称它为<strong>按位运算符</strong>。</p>
+<p>使用按位运算符时，操作数1的每一位都与操作数2中相同位置的位进行比较，比较的方式如下两表所示。</p>
+<p>按位运算符 <code>&amp;</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">操作数 1 中的位</th>
+<th style="text-align:center">操作数 2 中的位</th>
+<th style="text-align:center">&amp; 的结果位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+<p>按位运算符 <code>|</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">操作数 1 中的位</th>
+<th style="text-align:center">操作数 2 中的位</th>
+<th style="text-align:center">&#124; 的结果位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> result, op1, op2;</div><div class="line">op1 = <span class="number">4</span>;</div><div class="line">op2 = <span class="number">5</span>;</div><div class="line">result = op1 &amp; op2;</div></pre></td></tr></table></figure>
+<p>首先按位运算中的<strong>位</strong>指的是二进制位，4 和 5 的 二进制位分别是 <code>100</code> 和 <code>101</code>。运算过程如下</p>
+<p>\begin{equation}\begin{split}<br>&amp;\ \ \ \ 1\ 0\ 0\qquad\ \ \ \ 4\\<br>&amp;\&amp;\ 1\ 0\ 1\qquad\&amp;\ 5\\<br>&amp;\underline{\hspace{4cm}}\\<br>&amp;\ \ \ \ 1\ 0\ 0\qquad\ \ \ \ 4\\<br>\end{split}\end{equation}</p>
+<p>二进制 <code>100</code> 的十进制数是 4 ，所以 <code>result</code> 的值为 4 。</p>
+
       
     </div>
 
@@ -567,7 +662,7 @@ table:nth-of-type(1) th:nth-of-type(3) {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#布尔逻辑"><span class="nav-number">1.</span> <span class="nav-text">布尔逻辑</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#布尔逻辑"><span class="nav-number">1.</span> <span class="nav-text">布尔逻辑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#布尔赋值运算符"><span class="nav-number">1.1.</span> <span class="nav-text">布尔赋值运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#按位运算符"><span class="nav-number">1.2.</span> <span class="nav-text">按位运算符</span></a></li></ol></li></ol></div>
             
 
           </div>
