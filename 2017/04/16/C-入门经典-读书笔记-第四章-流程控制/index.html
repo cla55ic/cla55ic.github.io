@@ -115,7 +115,7 @@ table:nth-of-type(1) th:nth-of-type(3) {
 
 
 布尔逻辑分支和循环可以控制C#">
-<meta property="og:updated_time" content="2017-04-25T13:47:48.473Z">
+<meta property="og:updated_time" content="2017-04-25T15:53:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[C#入门经典]读书笔记-第四章-流程控制">
 <meta name="twitter:description" content="table:nth-of-type(1) th:nth-of-type(1) {
@@ -422,8 +422,8 @@ table:nth-of-type(1) th:nth-of-type(3) {
 <p><code>||</code> 和 <code>&amp;&amp;</code> 存在的意义在于<strong>按位运算符</strong>，它处理变量的位，而非变量的值。</p>
 <h3 id="布尔赋值运算符"><a href="#布尔赋值运算符" class="headerlink" title="布尔赋值运算符"></a><em>布尔赋值运算符</em></h3><p><strong>布尔赋值运算符</strong> <code>&amp;=</code> 、 <code>|=</code> 和 <code>^=</code> 。使用方法和 <code>+=</code> 、 <code>*=</code> 等类似。</p>
 <p><code>&amp;=</code> 其实使用的是 <code>&amp;</code> 而不是 <code>&amp;&amp;</code> ，<code>|=</code> 、 <code>^=</code> 与之类似。</p>
-<h3 id="按位运算符"><a href="#按位运算符" class="headerlink" title="按位运算符"></a><em>按位运算符</em></h3><p><code>&amp;</code> 和 <code>|</code> 不仅可以处理变量值，还可以处理变量中的位，这个时候称它为<strong>按位运算符</strong>。</p>
-<p>使用按位运算符时，操作数1的每一位都与操作数2中相同位置的位进行比较，比较的方式如下两表所示。</p>
+<h3 id="按位运算符"><a href="#按位运算符" class="headerlink" title="按位运算符"></a><em>按位运算符</em></h3><p><code>&amp;</code> 、 <code>|</code> 和 <code>^</code> 不仅可以处理变量值，还可以处理变量中的位，这个时候称它为<strong>按位运算符</strong>。</p>
+<p>使用按位运算符 <code>&amp;</code> 时，操作数1的每一位都与操作数2中相同位置的位进行比较，比较的方式如下表所示。</p>
 <p>按位运算符 <code>&amp;</code></p>
 <table>
 <thead>
@@ -456,43 +456,106 @@ table:nth-of-type(1) th:nth-of-type(3) {
 </tr>
 </tbody>
 </table>
-<p>按位运算符 <code>|</code></p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> result, op1, op2;</div><div class="line">op1 = <span class="number">4</span>;</div><div class="line">op2 = <span class="number">5</span>;</div><div class="line">result = op1 &amp; op2;</div></pre></td></tr></table></figure>
+<p>首先按位运算中的<strong>位</strong>指的是二进制位，4 和 5 的 二进制位分别是 <code>100</code> 和 <code>101</code>。运算过程如下</p>
+<p>\begin{equation}\begin{split}<br>&amp;\ \ \ \ 1\ 0\ 0\qquad\ \ \ \ 4\\<br>&amp;\&amp;\ 1\ 0\ 1\qquad\&amp;\ 5\\<br>&amp;\underline{\hspace{3cm}}\\<br>&amp;\ \ \ \ 1\ 0\ 0\qquad\ \ \ \ 4\\<br>\end{split}\end{equation}</p>
+<p>二进制 <code>100</code> 的十进制数是 4 ，所以 <code>result</code> 的值为 4 。</p>
+<p><code>|</code> 和 <code>^</code> 用法与 <code>&amp;</code> 类似。</p>
+<p>还有一个一元的按位运算符 <code>~</code> ，它可以将变量中的位取反。</p>
+<p>.NET 中使用<strong>补码</strong>存储整数，int类型是一个32位的数字。</p>
+<p>5 的完整二进制为：</p>
+<p>00000000000000000000000000000101</p>
+<p>-5 的完整二进制为</p>
+<p>111111111111111111111111111111011</p>
+<p>按照补码系统，(-x)定义为(~x+1) 。例如，10 + (-5) 即是 10 + (~5+1)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">   000000000000000000000000000001010</div><div class="line">+  111111111111111111111111111111011</div><div class="line">= 1000000000000000000000000000000101</div></pre></td></tr></table></figure>
+<p>截掉最左端的 1 ，即是 5 的二进制结果。</p>
+<p>除了上述四种外，还有两种运算符 <code>&gt;&gt;</code> 和 <code>&lt;&lt;</code></p>
+<p>举例说明</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> var1, var2 = <span class="number">10</span>, var3 = <span class="number">2</span>;</div><div class="line">var1 = var2 &lt;&lt; var3;  <span class="comment">//var1 的值是40</span></div></pre></td></tr></table></figure>
+<ul>
+<li>10 的 二进制值是 1010</li>
+<li><code>&lt;&lt;</code> 代表把该值往左移动 2 位，即 <code>101000</code></li>
+<li><code>101000</code> 的十进制值是 40 。</li>
+</ul>
+<p>实际上每左移 <code>&lt;&lt;</code> 一次就是把该值乘以 2 。右移 <code>&gt;&gt;</code> 一次就是除以 2，而右移后的非整余数将丢失(取整)，例如 10 &gt;&gt; 2 的值是 2 。</p>
+<p><code>&lt;&lt;</code> 和 <code>&gt;&gt;</code> 也有类似 <code>+=</code> 的赋值运算符 <code>&lt;&lt;=</code> 和 <code>&gt;&gt;=</code> 。</p>
+<h3 id="运算符的优先级"><a href="#运算符的优先级" class="headerlink" title="运算符的优先级"></a><em>运算符的优先级</em></h3><p>增加了更多运算符后的优先级表如下所示</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:center">操作数 1 中的位</th>
-<th style="text-align:center">操作数 2 中的位</th>
-<th style="text-align:center">&#124; 的结果位</th>
+<th style="text-align:center">优先级</th>
+<th style="text-align:center">运算符</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
+<td style="text-align:center">高</td>
+<td style="text-align:center">++(前缀)、–(前缀)、+(一元)、-(一元)</td>
 </tr>
 <tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
+<td style="text-align:center">↑</td>
+<td style="text-align:center">*、/、%</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
+<td style="text-align:center">↑</td>
+<td style="text-align:center">+、-</td>
 </tr>
 <tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">0</td>
+<td style="text-align:center">↑</td>
+<td style="text-align:center">&lt;&lt;、&gt;&gt;</td>
+</tr>
+<tr>
+<td style="text-align:center">↑</td>
+<td style="text-align:center">&lt;、&gt;、&lt;=、&gt;=</td>
+</tr>
+<tr>
+<td style="text-align:center">↑</td>
+<td style="text-align:center">==、!=</td>
+</tr>
+<tr>
+<td style="text-align:center">↑</td>
+<td style="text-align:center">&amp;</td>
+</tr>
+<tr>
+<td style="text-align:center">↑</td>
+<td style="text-align:center">^</td>
+</tr>
+<tr>
+<td style="text-align:center">↑</td>
+<td style="text-align:center">&#124;</td>
+</tr>
+<tr>
+<td style="text-align:center">↑</td>
+<td style="text-align:center">&amp;&amp;</td>
+</tr>
+<tr>
+<td style="text-align:center">↑</td>
+<td style="text-align:center">&#124;&#124;</td>
+</tr>
+<tr>
+<td style="text-align:center">↑</td>
+<td style="text-align:center">=、+=、-=、*=、/=、%=、&lt;&lt;=、&gt;&gt;=、&amp;=、^=、&#124;=</td>
+</tr>
+<tr>
+<td style="text-align:center">低</td>
+<td style="text-align:center">++(后缀)，–(后缀)</td>
 </tr>
 </tbody>
 </table>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> result, op1, op2;</div><div class="line">op1 = <span class="number">4</span>;</div><div class="line">op2 = <span class="number">5</span>;</div><div class="line">result = op1 &amp; op2;</div></pre></td></tr></table></figure>
-<p>首先按位运算中的<strong>位</strong>指的是二进制位，4 和 5 的 二进制位分别是 <code>100</code> 和 <code>101</code>。运算过程如下</p>
-<p>\begin{equation}\begin{split}<br>&amp;\ \ \ \ 1\ 0\ 0\qquad\ \ \ \ 4\\<br>&amp;\&amp;\ 1\ 0\ 1\qquad\&amp;\ 5\\<br>&amp;\underline{\hspace{4cm}}\\<br>&amp;\ \ \ \ 1\ 0\ 0\qquad\ \ \ \ 4\\<br>\end{split}\end{equation}</p>
-<p>二进制 <code>100</code> 的十进制数是 4 ，所以 <code>result</code> 的值为 4 。</p>
-
+<p>同样的，使用()包裹仍然可以改变表达式中各运算的顺序。</p>
+<h2 id="goto-语句"><a href="#goto-语句" class="headerlink" title="goto 语句"></a>goto 语句</h2><p>C#中可以给代码行加上标签，并使用 goto 语句直接跳转到该代码行。goto语句的优点是可以十分简单的控制代码的执行顺序，缺点是过多的使用将使代码变得难懂。使用方法如下</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> myInt = <span class="number">5</span>;</div><div class="line"><span class="keyword">goto</span> myLabel;</div><div class="line">myInt += <span class="number">10</span>;</div><div class="line">myLabel:</div><div class="line">Console.WriteLine(myInt);</div></pre></td></tr></table></figure>
+<p>最后输入 myInt 的值为 5 ，因为 goto 直接跳过了 <code>myInt += 10;</code></p>
+<p>这样做在编译时，会产生一个警告 <code>监测到无法访问的代码</code>。</p>
+<p>应谨慎使用goto语句，原因是goto语句容易使代码变得难懂。</p>
+<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><p>分支有三种类型</p>
+<ul>
+<li>三元运算符</li>
+<li>if 语句</li>
+<li>switch 语句</li>
+</ul>
+<center>未完待续…</center>
       
     </div>
 
@@ -662,7 +725,7 @@ table:nth-of-type(1) th:nth-of-type(3) {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#布尔逻辑"><span class="nav-number">1.</span> <span class="nav-text">布尔逻辑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#布尔赋值运算符"><span class="nav-number">1.1.</span> <span class="nav-text">布尔赋值运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#按位运算符"><span class="nav-number">1.2.</span> <span class="nav-text">按位运算符</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#布尔逻辑"><span class="nav-number">1.</span> <span class="nav-text">布尔逻辑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#布尔赋值运算符"><span class="nav-number">1.1.</span> <span class="nav-text">布尔赋值运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#按位运算符"><span class="nav-number">1.2.</span> <span class="nav-text">按位运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运算符的优先级"><span class="nav-number">1.3.</span> <span class="nav-text">运算符的优先级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#goto-语句"><span class="nav-number">2.</span> <span class="nav-text">goto 语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支"><span class="nav-number">3.</span> <span class="nav-text">分支</span></a></li></ol></div>
             
 
           </div>
