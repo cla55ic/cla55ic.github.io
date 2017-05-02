@@ -87,49 +87,25 @@
 
 
 
-<meta name="description" content="table:nth-of-type(1) th:nth-of-type(1) {
-    width: 70px;
-}
-table:nth-of-type(1) th:nth-of-type(2) {
-    width: 100px;
-}
-table:nth-of-type(1) th:nth-of-type(3) {
-    width: 130px;
-}
-
-
-布尔逻辑分支和循环可以控制C#">
+<meta name="description" content="布尔逻辑分支和循环可以控制C#代码的执行顺序。分支根据结果有条件的执行，循环重复执行相同的语句，满足条件后停止。
+条件使用布尔值来表示，例如 myVar &amp;gt; 10 可以得到 true 或 false ，比较后得到的布尔便可以作为循环或者分支的条件。
+布尔比较运算符有 ==、!=、&amp;lt;、&amp;gt;、&amp;lt;= 和 &amp;gt;= 几种。
+数值类型的比较可以使用上述的所有运算符。字符串类型的比较仅">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[C#入门经典]读书笔记-第四章-流程控制">
 <meta property="og:url" content="http://yoursite.com/2017/04/16/C-入门经典-读书笔记-第四章-流程控制/index.html">
 <meta property="og:site_name" content="可啦思刻的博客">
-<meta property="og:description" content="table:nth-of-type(1) th:nth-of-type(1) {
-    width: 70px;
-}
-table:nth-of-type(1) th:nth-of-type(2) {
-    width: 100px;
-}
-table:nth-of-type(1) th:nth-of-type(3) {
-    width: 130px;
-}
-
-
-布尔逻辑分支和循环可以控制C#">
-<meta property="og:updated_time" content="2017-04-26T17:19:09.069Z">
+<meta property="og:description" content="布尔逻辑分支和循环可以控制C#代码的执行顺序。分支根据结果有条件的执行，循环重复执行相同的语句，满足条件后停止。
+条件使用布尔值来表示，例如 myVar &amp;gt; 10 可以得到 true 或 false ，比较后得到的布尔便可以作为循环或者分支的条件。
+布尔比较运算符有 ==、!=、&amp;lt;、&amp;gt;、&amp;lt;= 和 &amp;gt;= 几种。
+数值类型的比较可以使用上述的所有运算符。字符串类型的比较仅">
+<meta property="og:updated_time" content="2017-05-02T16:16:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[C#入门经典]读书笔记-第四章-流程控制">
-<meta name="twitter:description" content="table:nth-of-type(1) th:nth-of-type(1) {
-    width: 70px;
-}
-table:nth-of-type(1) th:nth-of-type(2) {
-    width: 100px;
-}
-table:nth-of-type(1) th:nth-of-type(3) {
-    width: 130px;
-}
-
-
-布尔逻辑分支和循环可以控制C#">
+<meta name="twitter:description" content="布尔逻辑分支和循环可以控制C#代码的执行顺序。分支根据结果有条件的执行，循环重复执行相同的语句，满足条件后停止。
+条件使用布尔值来表示，例如 myVar &amp;gt; 10 可以得到 true 或 false ，比较后得到的布尔便可以作为循环或者分支的条件。
+布尔比较运算符有 ==、!=、&amp;lt;、&amp;gt;、&amp;lt;= 和 &amp;gt;= 几种。
+数值类型的比较可以使用上述的所有运算符。字符串类型的比较仅">
 
 
 
@@ -364,19 +340,7 @@ table:nth-of-type(1) th:nth-of-type(3) {
       
 
       
-        <style>
-table:nth-of-type(1) th:nth-of-type(1) {
-    width: 70px;
-}
-table:nth-of-type(1) th:nth-of-type(2) {
-    width: 100px;
-}
-table:nth-of-type(1) th:nth-of-type(3) {
-    width: 130px;
-}
-</style>
-
-<h2 id="布尔逻辑"><a href="#布尔逻辑" class="headerlink" title="布尔逻辑"></a>布尔逻辑</h2><p>分支和循环可以控制C#代码的执行顺序。分支根据结果有条件的执行，循环重复执行相同的语句，满足条件后停止。</p>
+        <h2 id="布尔逻辑"><a href="#布尔逻辑" class="headerlink" title="布尔逻辑"></a>布尔逻辑</h2><p>分支和循环可以控制C#代码的执行顺序。分支根据结果有条件的执行，循环重复执行相同的语句，满足条件后停止。</p>
 <p>条件使用布尔值来表示，例如 <code>myVar &gt; 10</code> 可以得到 <code>true</code> 或 <code>false</code> ，比较后得到的布尔便可以作为循环或者分支的条件。</p>
 <p><strong>布尔比较运算符</strong>有 <code>==</code>、<code>!=</code>、<code>&lt;</code>、<code>&gt;</code>、<code>&lt;=</code> 和 <code>&gt;=</code> 几种。</p>
 <p>数值类型的比较可以使用上述的所有运算符。字符串类型的比较仅可以使用 <code>!=</code> 和 <code>==</code> 。布尔类型的比较可以使用 <code>!=</code> 和 <code>==</code>。</p>
@@ -594,9 +558,63 @@ table:nth-of-type(1) th:nth-of-type(3) {
 <p>以下两种赋值方式对常量来说是非法的</p>
 <figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> myInt;</div><div class="line">myInt = <span class="number">2</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> myInt = <span class="number">1</span>;</div><div class="line">myInt = <span class="number">2</span>;</div></pre></td></tr></table></figure>
 <p>可以看出 switch 也可用于字符串的判断，但在判断用户输入的字符串时，往往不能确定用户输入字符串的大小写。这就使判断变得困难，例如姓名 <code>Ben</code>，用户可能有多种可能输入 <code>ben</code> 、<code>BEN</code> 等等。这时候可以使用字符串变量的两个函数 ToLower() 和 ToUpper()。</p>
-<p>ToLower() 把字符串变成全小写，ToUpper() 把字符串变成全大写，示例如下<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span> name = Console.ReadLine();</div><div class="line">Console.WriteLine(<span class="string">"capitals: &#123;0&#125;, lower-case: &#123;1&#125;"</span>,name.ToUpper(), name.ToLower());</div><div class="line">Console.ReadKey();</div></pre></td></tr></table></figure></p>
+<p>ToLower() 把字符串变成全小写，ToUpper() 把字符串变成全大写，示例如下</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span> name = Console.ReadLine();</div><div class="line">Console.WriteLine(<span class="string">"capitals: &#123;0&#125;, lower-case: &#123;1&#125;"</span>,name.ToUpper(), name.ToLower());</div><div class="line">Console.ReadKey();</div></pre></td></tr></table></figure>
 <p>假设用户输入 <code>Ben</code> ，则程序输出 <code>capitals: BEN, lower-case: ben</code> 。</p>
-<center>未完待续…</center>
+<h2 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h2><p>循环可以方便的执行重复的语句。<br>重复语句的示例：假定存款金额为 1000 ，利率为 5% ，计算 10 年后该账户总金额<br>若不使用循环，则需要每年做一次运算</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">double</span> balance = <span class="number">1000</span>;</div><div class="line"><span class="keyword">double</span> interestRate = <span class="number">1.05</span>;</div><div class="line">balance *= interestRate;</div><div class="line">balance *= interestRate;</div><div class="line">balance *= interestRate;</div><div class="line"><span class="comment">//...</span></div></pre></td></tr></table></figure>
+<p>这里 <code>balance *= interestRate;</code> 即为重复的代码，循环可以简化这些操作。</p>
+<h3 id="do-循环"><a href="#do-循环" class="headerlink" title="do 循环"></a><em>do 循环</em></h3><p>对应上述例子的简单的 do 循环示例</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line"><span class="keyword">do</span></div><div class="line">&#123;</div><div class="line">    balance *= interestRate;</div><div class="line">    i++;</div><div class="line">&#125; <span class="keyword">while</span> (i &lt; <span class="number">10</span>);</div></pre></td></tr></table></figure>
+<p>do 循环首先执行<strong>循环体</strong>内的代码，然后进行一个布尔测试，弱国条件满足，就再次执行，若不满足，则退出循环。</p>
+<p><code>i</code> 变量在这里可以成为<strong>计数器</strong>，它的值决定着是否执行循环。</p>
+<p>这里注意 while 语句之后需要加上分号。</p>
+<p>用户输入存款起始金额(balance)、利率(interestRate)、目标金额(targetBalance)，程序计算需要多少年才能达到目标金额。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">double</span> balance = Convert.ToDouble(Console.ReadLine());</div><div class="line"><span class="keyword">double</span> interestRate = <span class="number">1</span> + Convert.ToDouble(Console.ReadLine()) / <span class="number">100</span>;</div><div class="line"><span class="keyword">double</span> targetBalance = Convert.ToDouble(Console.ReadLine());</div><div class="line"></div><div class="line"><span class="keyword">int</span> totalYears = <span class="number">0</span>;</div><div class="line"><span class="keyword">do</span></div><div class="line">&#123;</div><div class="line">    balance *= interestRate;</div><div class="line">    totalYears++;</div><div class="line">&#125; <span class="keyword">while</span> (targetBalance &gt; balance);</div><div class="line">Console.WriteLine(<span class="string">"&#123;0&#125;年"</span>, totalYears);</div><div class="line">Console.ReadKey();</div></pre></td></tr></table></figure>
+<p>当我们输入的其实金额大于目标金额时(错误情况)，程序仍然会输出 1 ，这是因为 do 循环是先执行再判断，所以至少会执行一次。我们可以在循环外层加上 if 语句来判断这种情况，但更好的方式是使用 while 循环。</p>
+<h3 id="while-循环"><a href="#while-循环" class="headerlink" title="while 循环"></a><em>while 循环</em></h3><p>使用 while 循环对以上示例稍作修改</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">double</span> balance = Convert.ToDouble(Console.ReadLine());</div><div class="line"><span class="keyword">double</span> interestRate = <span class="number">1</span> + Convert.ToDouble(Console.ReadLine()) / <span class="number">100</span>;</div><div class="line"><span class="keyword">double</span> targetBalance = Convert.ToDouble(Console.ReadLine());</div><div class="line"></div><div class="line"><span class="keyword">int</span> totalYears = <span class="number">0</span>;</div><div class="line"><span class="keyword">while</span>(targetBalance &gt; balance)</div><div class="line">&#123;</div><div class="line">    balance *= interestRate;</div><div class="line">    totalYears++;</div><div class="line">&#125;</div><div class="line">Console.WriteLine(totalYears == <span class="number">0</span> ? <span class="string">"输入错误"</span> : <span class="string">"&#123;0&#125;年"</span>, totalYears);</div><div class="line">Console.ReadKey();</div></pre></td></tr></table></figure>
+<p>while 循环在循环体执行之前，就对条件进行检查。避免了之前的错误情况发生。</p>
+<p>用户输入的值是我们预料不到的，例如此示例中的错误输入，也可能是我们期望用户输入数字，却得到了字符串。这些是我们无法避免的，所以对用户输入的值进行校验非常重要。</p>
+<h3 id="for-循环"><a href="#for-循环" class="headerlink" title="for 循环"></a><em>for 循环</em></h3><p>for 循环可以完成所有 while 和 do 循环可以完成的工作。</p>
+<p>for 循环语法</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(初始化;条件;计算)</div><div class="line">&#123;</div><div class="line">    循环体</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用 for 循环编写以上示例</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> totalYears;</div><div class="line"><span class="keyword">for</span> (totalYears = <span class="number">0</span>; targetBalance &gt; balance; totalYears++)</div><div class="line">&#123;</div><div class="line">    balance *= interestRate;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>for 循环的 <code>()</code> 内做了三件事，初始化变量，判断是否满足条件，计数器自增。</p>
+<p>需要注意的是，不只可以初始化计数器，也可以初始化其他的变量，甚至同时初始化多个变量，例如 <code>totalYears = 0,myInt=0;</code> 。 同时自增也可以多个变量自增，例如 <code>totalYears++, myInt+=2</code> 。</p>
+<p>初始化变量部分，也可以同时完成对变量的定义，例如 <code>for (int totalYears = 0; targetBalance &gt; balance; totalYears++)</code> ，但是牵扯到<strong>变量作用域</strong>的问题，此时 <code>totalYears</code> 只能在 for 循环中起作用，不能在 for 循环之外使用 <code>totalYears</code> 变量。</p>
+<h3 id="循环的中断"><a href="#循环的中断" class="headerlink" title="循环的中断"></a><strong>循环的中断</strong></h3><p>C# 提供了四条语句来中断循环，每种都有不同的作用</p>
+<ul>
+<li>break ： 终止循环</li>
+<li>continue ： 终止此次循环</li>
+<li>goto ： 跳转到指定的标记位置</li>
+<li>return ： 跳出循环以及包含该循环的函数</li>
+</ul>
+<p>break、continue、return 的简单示例</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (i == <span class="number">6</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">break</span>; <span class="comment">// continue、return</span></div><div class="line">    &#125;</div><div class="line">    Console.WriteLine(i);</div><div class="line">&#125;</div><div class="line">Console.WriteLine(<span class="string">"循环结束"</span>);</div><div class="line">Console.ReadKey();</div></pre></td></tr></table></figure>
+<p>break 输出 ： 1 2 3 4 5 循环结束<br>continue 输出 ： 1 2 3 4 5 7 8 9 循环结束<br>return 输出 ： 1 2 3 4 5</p>
+<p>这里仍然不提倡使用 goto ， 另外需要注意的是使用 goto 跳出循环是合法的，但是使用 goto 进入循环是非法的。</p>
+<h3 id="无限循环"><a href="#无限循环" class="headerlink" title="无限循环"></a><strong>无限循环</strong></h3><p>当循环条件恒为真时，则为无限循环，在无限循环的循环体内，可根据中断循环的四条语句来终止循环。</p>
+<p>无限循环在特定条件下是有意义的。</p>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p><strong>Q: 如果两个整数存储在变量 var1 和 var2 中，该进行什么样的布尔测试，看看其中的一个(但不是两个)是否大于10</strong>。</p>
+<p>A: <code>var1 &gt; 10 ^ var2 &gt; 10</code> </p>
+<p><strong>Q: 编写一个应用程序，其中包含上一个练习的逻辑，要求用户输入两个数字，并且显示它们。但拒绝接受两个数字都大于 10 的情况，并要求用户重新输入。</strong></p>
+<p>A:<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">double</span> var1;</div><div class="line"><span class="keyword">double</span> var2;</div><div class="line"><span class="keyword">while</span> (<span class="literal">true</span>)</div><div class="line">&#123;</div><div class="line">    var1 = Convert.ToDouble(Console.ReadLine());</div><div class="line">    var2 = Convert.ToDouble(Console.ReadLine());</div><div class="line"></div><div class="line">    <span class="keyword">if</span>(var1 &gt; <span class="number">10</span> ^ var2 &gt; <span class="number">10</span>)</div><div class="line">    &#123;</div><div class="line">        Console.WriteLine(<span class="string">"var1 : &#123;0&#125; , var2 : &#123;1&#125;"</span>, var1, var2);</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        Console.WriteLine(<span class="string">"input again"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">Console.ReadKey();</div></pre></td></tr></table></figure></p>
+<p><strong>Q: 下面的代码存在什么错误</strong></p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> i;</div><div class="line"><span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>((i % <span class="number">2</span>) = <span class="number">0</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">continue</span>;</div><div class="line">    &#125;</div><div class="line">    Console.WriteLine(i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>A: <code>if((i % 2) = 0)</code> 改为 <code>if((i % 2) == 0)</code> ， <code>=</code> 是赋值运算符，<code>==</code> 才是比较运算符。</p>
+<style>
+table:nth-of-type(1) th:nth-of-type(1) {
+    width: 70px;
+}
+table:nth-of-type(1) th:nth-of-type(2) {
+    width: 100px;
+}
+table:nth-of-type(1) th:nth-of-type(3) {
+    width: 130px;
+}
+</style>
       
     </div>
 
@@ -766,7 +784,7 @@ table:nth-of-type(1) th:nth-of-type(3) {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#布尔逻辑"><span class="nav-number">1.</span> <span class="nav-text">布尔逻辑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#布尔赋值运算符"><span class="nav-number">1.1.</span> <span class="nav-text">布尔赋值运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#按位运算符"><span class="nav-number">1.2.</span> <span class="nav-text">按位运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运算符的优先级"><span class="nav-number">1.3.</span> <span class="nav-text">运算符的优先级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#goto-语句"><span class="nav-number">2.</span> <span class="nav-text">goto 语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支"><span class="nav-number">3.</span> <span class="nav-text">分支</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三元运算符"><span class="nav-number">3.1.</span> <span class="nav-text">三元运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#if-语句"><span class="nav-number">3.2.</span> <span class="nav-text">if 语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#switch-语句"><span class="nav-number">3.3.</span> <span class="nav-text">switch 语句</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#布尔逻辑"><span class="nav-number">1.</span> <span class="nav-text">布尔逻辑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#布尔赋值运算符"><span class="nav-number">1.1.</span> <span class="nav-text">布尔赋值运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#按位运算符"><span class="nav-number">1.2.</span> <span class="nav-text">按位运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运算符的优先级"><span class="nav-number">1.3.</span> <span class="nav-text">运算符的优先级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#goto-语句"><span class="nav-number">2.</span> <span class="nav-text">goto 语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支"><span class="nav-number">3.</span> <span class="nav-text">分支</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三元运算符"><span class="nav-number">3.1.</span> <span class="nav-text">三元运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#if-语句"><span class="nav-number">3.2.</span> <span class="nav-text">if 语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#switch-语句"><span class="nav-number">3.3.</span> <span class="nav-text">switch 语句</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环"><span class="nav-number">4.</span> <span class="nav-text">循环</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#do-循环"><span class="nav-number">4.1.</span> <span class="nav-text">do 循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#while-循环"><span class="nav-number">4.2.</span> <span class="nav-text">while 循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for-循环"><span class="nav-number">4.3.</span> <span class="nav-text">for 循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环的中断"><span class="nav-number">4.4.</span> <span class="nav-text">循环的中断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无限循环"><span class="nav-number">4.5.</span> <span class="nav-text">无限循环</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习"><span class="nav-number">5.</span> <span class="nav-text">练习</span></a></li></ol></div>
             
 
           </div>
