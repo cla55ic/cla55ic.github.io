@@ -1,0 +1,866 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C#入门经典, C#读书笔记, C#" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="类型转换无论是什么类型，所有数据都是一系列的 0 和 1 ，但是不同的类型对相同的位有不同的解释。即使可以把一系列位从一种类型移动到另一种类型，结果也可能与期望不同。例如把 string 类型表示 123 的位，用 int 类型来解释，得到的结果不是数字 123 。要想正确的转换就需要对数据类型转换。
+转换方式有两种
+
+隐式转换 从类型 A 转换为类型 B ，可在所有情况下进行，规则简单，此时编译">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[C#入门经典]读书笔记-第五章-变量的更多内容">
+<meta property="og:url" content="http://yoursite.com/2017/05/03/C-入门经典-读书笔记-第五章-变量的更多内容/index.html">
+<meta property="og:site_name" content="可啦思刻的博客">
+<meta property="og:description" content="类型转换无论是什么类型，所有数据都是一系列的 0 和 1 ，但是不同的类型对相同的位有不同的解释。即使可以把一系列位从一种类型移动到另一种类型，结果也可能与期望不同。例如把 string 类型表示 123 的位，用 int 类型来解释，得到的结果不是数字 123 。要想正确的转换就需要对数据类型转换。
+转换方式有两种
+
+隐式转换 从类型 A 转换为类型 B ，可在所有情况下进行，规则简单，此时编译">
+<meta property="og:updated_time" content="2017-05-06T19:17:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[C#入门经典]读书笔记-第五章-变量的更多内容">
+<meta name="twitter:description" content="类型转换无论是什么类型，所有数据都是一系列的 0 和 1 ，但是不同的类型对相同的位有不同的解释。即使可以把一系列位从一种类型移动到另一种类型，结果也可能与期望不同。例如把 string 类型表示 123 的位，用 int 类型来解释，得到的结果不是数字 123 。要想正确的转换就需要对数据类型转换。
+转换方式有两种
+
+隐式转换 从类型 A 转换为类型 B ，可在所有情况下进行，规则简单，此时编译">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/03/C-入门经典-读书笔记-第五章-变量的更多内容/"/>
+
+
+
+
+
+  <title> [C#入门经典]读书笔记-第五章-变量的更多内容 | 可啦思刻的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2385a75ec51281bae03b58fccb06fb1c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">可啦思刻的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/03/C-入门经典-读书笔记-第五章-变量的更多内容/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="可啦思刻">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="可啦思刻的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                [C#入门经典]读书笔记-第五章-变量的更多内容
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-03T00:49:55+08:00">
+                2017-05-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><p>无论是什么类型，所有数据都是一系列的 0 和 1 ，但是不同的类型对相同的位有不同的解释。即使可以把一系列位从一种类型移动到另一种类型，结果也可能与期望不同。例如把 string 类型表示 <code>123</code> 的位，用 int 类型来解释，得到的结果不是数字 123 。要想正确的转换就需要对数据类型转换。</p>
+<p>转换方式有两种</p>
+<ul>
+<li><strong>隐式转换</strong> 从类型 A 转换为类型 B ，可在所有情况下进行，规则简单，此时编译器就会自动转换。</li>
+<li><strong>显式转换</strong> 从类型 A 转换为类型 B ，只可在某些情况下进行，规则复杂，此时就需要额外的转换处理。</li>
+</ul>
+<h3 id="隐式转换"><a href="#隐式转换" class="headerlink" title="隐式转换"></a><em>隐式转换</em></h3><p>简单的隐式转换示例</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ushort</span> a;</div><div class="line"><span class="keyword">char</span> b = <span class="string">'a'</span>;</div><div class="line">a = b;</div><div class="line">Console.WriteLine(a + <span class="string">", "</span> + b);</div><div class="line">Console.ReadKey();</div><div class="line"><span class="comment">// 输出97, a</span></div></pre></td></tr></table></figure>
+<p>编译器自动把 char 类型转换为 ushort 类型。</p>
+<p>从输出 <code>97, a</code> 这里可以看出，虽然两个变量存储的信息相同，但是不同的类型解释它们时，结果也是不同的。</p>
+<p>这里注意 char 类型存储的是数值。</p>
+<p>不是所有的类型都可以进行隐式转换，它是有条件的。但是我们并不需要记忆哪些类型转换可以隐式执行。</p>
+<p>任何类型 A ，只要其中的取值范围完全包含在类型 B 中，就可以隐式转换为类型 B 。</p>
+<p>例如 short 存储 [0, 32767] ，而 byte 存储 [0, 255] ，那么 byte 就可以安全的转换为 short，反之则不行。</p>
+<p>如果 short 中存储的值在 [0, 255] 之间，也不可以将 short 隐式转换为 byte ， 而必须使用显式转换。</p>
+<h3 id="显式转换"><a href="#显式转换" class="headerlink" title="显式转换"></a><em>显式转换</em></h3><p>进行显式转换最简单的方法就是<strong>强制转换</strong></p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">short</span> a = <span class="number">123</span>;</div><div class="line"><span class="keyword">byte</span> b = (<span class="keyword">byte</span>)a;</div></pre></td></tr></table></figure>
+<p>这时就把 short 类型的 123 转换为了 byte 类型的 123 。</p>
+<p>需要注意的是，彼此之间没有联系的类型不能进行强制转换。</p>
+<p>如果此时 <code>a = 266</code> 的情况下进行强制转换，会发生什么呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">short a = 266;</div><div class="line">byte b = (byte)a;</div></pre></td></tr></table></figure>
+<p>最后 a 为 256，b 为 10，而 byte 所能表示的最大值为 255。这并不是我们需要的结果。下面是这三个数的二进制表示</p>
+<p>\begin{equation}\begin{split}<br>&amp; 266 = 100001010 \\<br>&amp; \ \ 10 = 000001010 \\<br>&amp; 255 = 011111111 \\<br>\end{split}\end{equation}</p>
+<p>可以看到，10 相较于 266 丢失了最左边的位。这是错误的强制转换。</p>
+<p>使用 checked 可以使编译器在转换期间检查是否丢失位。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">short</span> a = <span class="number">266</span>;</div><div class="line"><span class="keyword">byte</span> b = <span class="keyword">checked</span>((<span class="keyword">byte</span>)a);</div></pre></td></tr></table></figure>
+<p>此时如果再次编译程序则会报错 <code>算术运算导致溢出</code> 。与此相反的是 <code>unchecked</code> 。</p>
+<h3 id="使用-Convert-命令进行显式转换"><a href="#使用-Convert-命令进行显式转换" class="headerlink" title="使用 Convert 命令进行显式转换"></a><em>使用 Convert 命令进行显式转换</em></h3><p>使用 Convert 进行显式转换的简单示例</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span> a = <span class="string">"123"</span>;</div><div class="line"><span class="keyword">int</span> b = Convert.ToInt32(a);</div></pre></td></tr></table></figure>
+<p>Convert.ToInt32 命令把 字符串 <code>&quot;123&quot;</code> 转换为 数值 123。</p>
+<p>此类转换要求字符串必须是数值的有效表达式，除简单的正数，还有正负(+、-)、科学计数法表示的数值。例如字符串 <code>&quot;number&quot;</code> 就不能转换为数值类型。</p>
+<p>除此之外还有 Convert.ToBoolean 、Convert.ToString 等等。</p>
+<p>转换的名称略不同于 C# 类型名称，例如要转换为 int 类型 需要使用 Convert.ToInt32 。这时因为这些命令来自 .NET Framework 的 System 名称空间，而不是 C# 本身。这样它们就可以兼容 .NET 中的其他语言。</p>
+<p><code>shortVal * floatVal</code> ，这里没有指定显式转换，所以如有可能，会执行隐式转换把 <code>shortVal</code> 转换为 float 类型。</p>
+<p>也可以改变这种行为，比如 <code>shortVal * (short)floatVal</code></p>
+<p>这种数据类型转换语法与其他一元运算符优先级是一样的。</p>
+<p>如果语句设计混合类型，就会根据运算符优先级进行转换。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">doubleResult = floatVal + (shortVal * floatVal);</div></pre></td></tr></table></figure>
+<ul>
+<li>先处理 <code>shortVal * floatVal</code> ， 将 <code>shortVal</code> 转换为 float 。</li>
+<li>两个 float 类型相加并不需要转换。</li>
+<li>最后将结果转换为 double 类型。</li>
+</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">shortVal1 * shortVal2</div></pre></td></tr></table></figure>
+<p>两个 short 类型数值相乘的结果实际上是 int 类型。因为结果很有可能大于 short 能存储的最大值。</p>
+<h2 id="复杂的变量类型"><a href="#复杂的变量类型" class="headerlink" title="复杂的变量类型"></a>复杂的变量类型</h2><p>除了简单的变量类型，C# 还提供了 3 个较为复杂的变量类型：枚举、结构和数组。</p>
+<h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a><em>枚举</em></h3><p>除了 String 外，每种简单类型都有明确的取值范围。有时我们希望能自定义一种类型，这个类型只能存储我们指定的值。例如 Gender 类型，只能存储 male 和 female ，这时就可以使用枚举。</p>
+<p>这里不仅仅是声明一个给定类型的变量，而是声明和描述一个自定义类型，再声明这个类型的变量。</p>
+<p>定义枚举</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">enum</span> Gender &#123;</div><div class="line">    Male,</div><div class="line">    Female</div><div class="line">&#125;</div><div class="line"><span class="comment">// 最后一个值的逗号可忽略</span></div></pre></td></tr></table></figure>
+<p>声明这个枚举类型的变量，并赋值</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Gender gender = Gender.Male;</div></pre></td></tr></table></figure>
+<p>枚举类型可声明在类里面并且和函数同级，也可以声明在名称空间里面并且和类同级。推荐声明在名称空间内，这样所有在此名称空间内的类都可以使用此枚举。</p>
+<p>枚举使用一个基本类型来存储，其中的每个值都存储为该基本类型的一个值，默认为 int ， 但也可以指定其他基本类型。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">enum</span> Gender : <span class="keyword">byte</span> &#123;</div><div class="line">    Male,</div><div class="line">    Female</div><div class="line">&#125;</div><div class="line"><span class="comment">// 最后一个值的逗号可忽略</span></div></pre></td></tr></table></figure>
+<p>除 char 之外的所有整数类型都可以被指定。</p>
+<p>每个值都会根据定义的顺序(从 0 开始)，自动赋给对应的基本类型值。那么此示例中， Male 的值为 0 ，Female 的值为 1 。我们也可以自定义这个值。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">enum</span> Gender:<span class="keyword">byte</span> &#123;</div><div class="line">    Male = <span class="number">10</span>,</div><div class="line">    Female = <span class="number">11</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>还可以给多个枚举指定相同的值</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">enum</span> Orientation:<span class="keyword">byte</span> &#123;</div><div class="line">    North = <span class="number">10</span>,</div><div class="line">    South = North,</div><div class="line">    East,</div><div class="line">    West</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>此时 North 和 South 的值都为 10 。没有赋值的枚举会根据上一个明确声明的值来依次往下赋值，如这里 East 的值为 11，West 的值为 12。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">namespace</span> <span class="title">ConsoleApplicationTest</span> &#123;</div><div class="line">    <span class="keyword">enum</span> Orientation:<span class="keyword">byte</span> &#123;</div><div class="line">        North,</div><div class="line">        South,</div><div class="line">        East,</div><div class="line">        West</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">class</span> <span class="title">Program</span> &#123;</div><div class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>) </span>&#123;</div><div class="line">            Orientation myDirection = Orientation.East;</div><div class="line">            <span class="keyword">byte</span> directionByte = (<span class="keyword">byte</span>) myDirection;</div><div class="line">            <span class="keyword">string</span> directionString = Convert.ToString(myDirection);</div><div class="line">            Console.WriteLine(<span class="string">"&#123;0&#125;,&#123;1&#125;,&#123;2&#125;"</span>, myDirection,directionByte,directionString);</div><div class="line">            Console.ReadKey();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>虽然此枚举类型的基本类型是 byte，但仍然需要使用 <code>(byte)</code> 强制转换。</p>
+<p><code>myDireciton = (direciton)myByte</code>，可以将 byte 转换为此枚举类型。</p>
+<p>要把枚举类型转换为 String 类型，不能使用 <code>(string)</code> ，因为这种转换也复杂一些，所以使用 <code>Convert.ToString()</code> ，或者使用变量本身的命令 <code>myDirection.ToString()</code> 。</p>
+<p>也可以把 string 转换为枚举值，使用 <code>Enum.Parse()</code> 。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span> myStr = <span class="string">"North"</span>;</div><div class="line">myDirection = (Orientation)Enum.Parse(<span class="keyword">typeof</span>(Orientation), myStr);</div></pre></td></tr></table></figure>
+<p><code>typeof</code> 可以得到操作数的类型。</p>
+<p>如果传入的值不能映射为枚举值中的一个，例如传入 <code>Center</code> ，那么就会出现错误。并且值区分大小写。</p>
+<ul>
+<li>枚举使得数据更加规范，因为只能使用枚举中给定的值。</li>
+<li>使得代码更加清晰，因为可以使用描述性的名称表示整数值。</li>
+<li>通过VS智能提示的帮助，使得代码更易输入。</li>
+</ul>
+<h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a><em>结构</em></h3><p>结构就是由几个数据组成的数据结构，这些数据可能具有不同的类型。根据这个结构，可以定义自己想要的结构类型。</p>
+<p>例如希望定义一种变量存储一个位置信息，包含到该位置的距离和方向</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Orientation myDirection;</div><div class="line"><span class="keyword">double</span> myDistance;</div></pre></td></tr></table></figure>
+<p>可以定义两个变量来存储这些信息，但使用结构使用起来会更加清晰和简单</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> route &#123;</div><div class="line">    <span class="keyword">public</span> Orientation Direction;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">double</span> Distance;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过该结构类型定义变量，同时使用该变量</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">route myRoute;</div><div class="line">myRoute.Direction = Orientation.South;</div><div class="line">myRoute.Distance = <span class="number">12.3</span>;</div></pre></td></tr></table></figure>
+<p>下面的示例演示了<strong>结构</strong>和<strong>枚举</strong>的使用场景</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">namespace</span> <span class="title">ConsoleApplicationTest</span> &#123;</div><div class="line">    <span class="keyword">enum</span> Orientation : <span class="keyword">byte</span> &#123;</div><div class="line">        东 = <span class="number">1</span>,</div><div class="line">        西 = <span class="number">2</span>,</div><div class="line">        南 = <span class="number">3</span>,</div><div class="line">        北 = <span class="number">4</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">struct</span> Route &#123;</div><div class="line">        <span class="keyword">public</span> Orientation Direction;</div><div class="line">        <span class="keyword">public</span> <span class="keyword">double</span> Distance;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">class</span> <span class="title">Program</span> &#123;</div><div class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>) </span>&#123;</div><div class="line">            Route myRoute;</div><div class="line">            Console.WriteLine(<span class="string">"请输入方向（1.东 2.西 3.南 4.北）"</span>);</div><div class="line">            myRoute.Direction = (Orientation) Convert.ToInt32(Console.ReadLine());</div><div class="line">            Console.WriteLine(<span class="string">"请输入距离"</span>);</div><div class="line">            myRoute.Distance = Convert.ToDouble(Console.ReadLine());</div><div class="line">            Console.WriteLine(<span class="string">"方向：&#123;0&#125;，距离：&#123;1&#125;"</span>, myRoute.Direction, myRoute.Distance);</div><div class="line">            Console.ReadKey();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>结构</strong>的声明位置和<strong>枚举</strong>相同。</p>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a><em>数组</em></h3><p>数组可以方便的存放多个相同类型的值，并且很容易对这些值进行操作。</p>
+<p>例如存储多个姓名</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span> name1 = <span class="string">"name_a"</span>;</div><div class="line"><span class="keyword">string</span> name2 = <span class="string">"name_b"</span>;</div><div class="line"><span class="keyword">string</span> name3 = <span class="string">"name_c"</span>;</div></pre></td></tr></table></figure>
+<p>可以定义多个字符串变量存储，但是这样批量操作起来很不方便，所以可以把多个相同变量合成一个变量，就是数组。</p>
+<p>声明数组有两种方式</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span>[] myIntArray = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</div></pre></td></tr></table></figure>
+<p>第一种是在声明时就给出字面值指定数组中的值。第二种是先指定数组大小，再使用 <code>new</code> 关键字初始化数组元素</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span>[] myIntArray = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];</div></pre></td></tr></table></figure>
+<p>这种方式初始化会把所有数组元素初始化为默认值，对于数值类型，默认值是 0 。这里 5 即数组长度，可以是一个变量。</p>
+<p>也可以组合两种方式</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span>[] myIntArray = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>] &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</div></pre></td></tr></table></figure>
+<p>这种方式有几点需要注意</p>
+<ul>
+<li>数组长度必须与元素个数匹配。</li>
+<li>因为需要匹配所以这里数组长度要么是字面值，要么是常量。</li>
+</ul>
+<p>另外，数组也可以声明和初始化分开</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span>[] myIntArray;</div><div class="line">myIntArray = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];</div></pre></td></tr></table></figure>
+<p>但不可以这样</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span>[] myIntArray;</div><div class="line">myIntArray = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</div></pre></td></tr></table></figure>
+<p>操作数组常常用到循环遍历数组内容</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span>[] nameArray = &#123; <span class="string">"小明"</span>, <span class="string">"小红"</span>, <span class="string">"小刚"</span>, <span class="string">"小军"</span>&#125;;</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nameArray.Length; i++) &#123;</div><div class="line">    Console.WriteLine(nameArray[i]);</div><div class="line">&#125;</div><div class="line">Console.ReadKey();</div></pre></td></tr></table></figure>
+<p>这里使用 <code>nameArray.Length</code> 来表示数组长度。</p>
+<p>注意因为数组下标是从 0 开始的，即数组长度为 5 的数组，下标范围是 [0, 4] ，所以这里使用 <code>&lt;</code> 而不是 <code>&lt;=</code>。</p>
+<p>如果使用 <code>&lt;=</code> 就是在尝试访问不存在的数组元素。这样很容易出问题，使用 <code>foreach</code> 循环访问数组元素，更方便也更安全。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span>[] nameArray = &#123; <span class="string">"小明"</span>, <span class="string">"小红"</span>, <span class="string">"小刚"</span>, <span class="string">"小军"</span>&#125;;</div><div class="line"><span class="keyword">foreach</span> (<span class="keyword">string</span> name <span class="keyword">in</span> nameArray) &#123;</div><div class="line">    Console.WriteLine(name);</div><div class="line">&#125;</div><div class="line">Console.ReadKey();</div></pre></td></tr></table></figure>
+<p>使用 <code>foreach</code> 循环不必考虑数组的长度，相对安全，但是<strong> <code>foreach</code> 循环只能对数组元素进行只读访问</strong>，也就是只能读取，不能修改。想修改数组内元素的值，还要用 <code>for</code> 循环。</p>
+<p>假如我们希望存储姓名的同时存储该姓名对应的性别，这时候就可以使用多维数组</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span>[,] person = <span class="keyword">new</span> <span class="keyword">string</span>[<span class="number">2</span>,<span class="number">4</span>];</div></pre></td></tr></table></figure>
+<p>也可以使用字面值初始化</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span>[,] person = &#123;&#123; <span class="string">"小明"</span>, <span class="string">"小红"</span>, <span class="string">"小刚"</span>, <span class="string">"小军"</span>&#125;, &#123;<span class="string">"男"</span>, <span class="string">"女"</span>, <span class="string">"男"</span>, <span class="string">"男"</span>&#125;&#125;;</div></pre></td></tr></table></figure>
+<p>要访问其中元素，只要给定其索引。如 <code>person[0,1]</code> 。</p>
+<p>更多维的数组的数组初始化</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span>[,,] arr = <span class="keyword">new</span> <span class="keyword">string</span>[<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>];</div></pre></td></tr></table></figure>
+<p>for 循环和 foreach 循环同样可以遍历数组元素。</p>
+<p>需要注意的是，arr.Length 获取的是整个数组的长度，例如上述 <code>person</code> 数组的长度则为 8 ，这显然不合适遍历数组。所以这里需要多层 for 循环和另一个获取数组长度的命令</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; person.GetLength(<span class="number">0</span>); i++) &#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; person.GetLength(<span class="number">1</span>); j++) &#123;</div><div class="line">        Console.WriteLine(person[i,j]);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">Console.ReadKey();</div></pre></td></tr></table></figure>
+<p>多维数组可称为矩形数组，因为每一行的数组元素个数都相同。上面的例子也可以使用锯齿数组。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span>[][] person = &#123;</div><div class="line">    <span class="keyword">new</span>[] &#123;<span class="string">"小明"</span>, <span class="string">"小红"</span>, <span class="string">"小刚"</span>, <span class="string">"小军"</span>&#125;,</div><div class="line">    <span class="keyword">new</span>[] &#123;<span class="string">"男"</span>, <span class="string">"女"</span>, <span class="string">"男"</span>, <span class="string">"男"</span>&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p><strong>锯齿</strong>的含义是允许每行的数组长度不相同。</p>
+<p>数组中可以包含数组，也可以有数组的数组的数组，等等。要注意的是，不论是多少数组嵌套，它们的基本类型都必须是相同的。</p>
+<p>声明一个数组的数组<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span>[][] person;</div></pre></td></tr></table></figure></p>
+<p>但是初始化却不能采用之前的方式</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">person = <span class="keyword">new</span> <span class="keyword">string</span>[<span class="number">2</span>][<span class="number">4</span>];</div><div class="line"><span class="comment">//或</span></div><div class="line">person = &#123;&#123;<span class="string">"小明"</span>, <span class="string">"小红"</span>, <span class="string">"小刚"</span>, <span class="string">"小军"</span>&#125;,&#123;<span class="string">"男"</span>, <span class="string">"女"</span>, <span class="string">"男"</span>, <span class="string">"男"</span>&#125;&#125;;</div></pre></td></tr></table></figure>
+<p>可以先初始化外层数组，再依次初始化内层数组</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">person = <span class="keyword">new</span> <span class="keyword">string</span>[<span class="number">2</span>][];</div><div class="line">person[<span class="number">0</span>] = <span class="keyword">new</span> <span class="keyword">string</span>[<span class="number">4</span>];</div><div class="line">person[<span class="number">1</span>] = <span class="keyword">new</span> <span class="keyword">string</span>[<span class="number">4</span>];</div><div class="line"></div><div class="line"><span class="comment">//或者另种改进形式</span></div><div class="line"></div><div class="line">person = <span class="keyword">new</span> <span class="keyword">string</span>[<span class="number">2</span>][] &#123;</div><div class="line">    <span class="keyword">new</span> <span class="keyword">string</span>[<span class="number">4</span>]&#123;<span class="string">"小明"</span>, <span class="string">"小红"</span>, <span class="string">"小刚"</span>, <span class="string">"小军"</span>&#125;,</div><div class="line">    <span class="keyword">new</span> <span class="keyword">string</span>[<span class="number">4</span>]&#123;<span class="string">"男"</span>, <span class="string">"女"</span>, <span class="string">"男"</span>, <span class="string">"男"</span>&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//另一种简化的形式</span></div><div class="line"></div><div class="line"><span class="keyword">string</span>[][] person = &#123;</div><div class="line">    <span class="keyword">new</span> <span class="keyword">string</span>[<span class="number">4</span>]&#123;<span class="string">"小明"</span>, <span class="string">"小红"</span>, <span class="string">"小刚"</span>, <span class="string">"小军"</span>&#125;,</div><div class="line">    <span class="keyword">new</span> <span class="keyword">string</span>[<span class="number">4</span>]&#123;<span class="string">"男"</span>, <span class="string">"女"</span>, <span class="string">"男"</span>, <span class="string">"男"</span>&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>使用 for 循环 和 foreach 循环遍历锯齿数组的示例</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; person.Length; i++) &#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; person[i].Length; j++) &#123;</div><div class="line">        Console.WriteLine(person[i][j]);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">foreach</span> (<span class="keyword">string</span>[] i <span class="keyword">in</span> person) &#123;</div><div class="line">    <span class="keyword">foreach</span> (<span class="keyword">string</span> j <span class="keyword">in</span> i) &#123;</div><div class="line">        Console.WriteLine(j);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>因为锯齿数组是的元素还是数组，所以 for 循环 和 foreach 循环都需要嵌套才能得到希望的效果。</p>
+<p>锯齿数组和矩形数组都能完成需求的情况下，使用矩形数组，只有锯齿数组才能完成需求的形况下，用锯齿数组。因为锯齿数组语法相对复杂。</p>
+<h2 id="字符串的处理"><a href="#字符串的处理" class="headerlink" title="字符串的处理"></a>字符串的处理</h2><p>string 类型可以看作是 char 变量的只读数组，例如</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span> myStr = <span class="string">"A string"</span>;</div><div class="line"><span class="keyword">char</span> myChar = myStr[<span class="number">2</span>];</div><div class="line"><span class="comment">//myChar 的值为 's'</span></div></pre></td></tr></table></figure>
+<p>获得一个可写的 char 数组</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span> myStr = <span class="string">"A string"</span>;</div><div class="line"><span class="keyword">char</span>[] myChars = myStr.ToCharArray();</div></pre></td></tr></table></figure>
+<p><code>myStr.Length</code> 可以获得字符串的长度。</p>
+<p><code>myStr.Trim()</code> 可以删除字符串头尾的空格(因为用户可能无意间在头尾添加了无用的空格)。</p>
+<p>也可以使用该命令删除指定的头尾字符串</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span>[] trimChars = &#123;<span class="string">'A'</span>,<span class="string">' '</span>&#125;;</div><div class="line"><span class="keyword">string</span> myStr = <span class="string">"A string"</span>;</div><div class="line">Console.WriteLine(myStr.Trim(trimChars));</div><div class="line">Console.ReadKey();</div><div class="line"><span class="comment">// 输出字符串 "string"</span></div></pre></td></tr></table></figure>
+<p><code>myStr.TrimStrat()</code> 或 <code>myStr.TrimEnd()</code> 可以只删除前面或后面的空格，同样也可以指定 char 数组。</p>
+<p><code>myStr.PadLeft(n)</code> 或 <code>myStr.PadRight(n)</code> 可以在字符串左边或右边添加 n 个空格。</p>
+<p>可以给定一个 char 变量指定添加的字符，例如 <code>myStr.PadLeft(3,&#39;_&#39;)</code> 向 <code>myStr</code> 左边添加 3 个下划线。</p>
+<p>这里注意类似 <code>Trim()</code> 、<code>ToLower()</code> 、 <code>ToUpper()</code> 并未改变该字符串本身的值，而是产生一个新的字符串。可以与其他的字符串进行比较或者赋值给其他的变量。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span> myStr = <span class="string">"a,b,c,d"</span>;</div><div class="line"><span class="keyword">string</span>[] myStrArray = myStr.Split(<span class="string">','</span>);</div><div class="line">myStr = String.Join(<span class="string">"-"</span>, myStrArray);</div><div class="line"><span class="keyword">foreach</span> (<span class="keyword">string</span> str <span class="keyword">in</span> myStrArray) &#123;</div><div class="line">    Console.WriteLine(str);</div><div class="line">&#125;</div><div class="line">Console.WriteLine(myStr);</div><div class="line">Console.ReadKey();</div></pre></td></tr></table></figure>
+<p><code>myStr.Split(&#39;,&#39;)</code> 可以通过给出的字符分割字符串为字符数组。这里可以给出一个 char 数组，来指定多个分割字符。<br>同样可以使用 String 类的 Join 方法将字符串数组使用指定的字符串拼接为新的字符串。</p>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p><strong>Q: 下面哪些转换不是隐式转换。</strong></p>
+<ul>
+<li>int -&gt; short</li>
+<li>short -&gt; int</li>
+<li>bool -&gt; string</li>
+<li>byte -&gt; float</li>
+</ul>
+<p>A: <em>int -&gt; short</em> 和 <em>bool -&gt; string</em></p>
+<p><strong>Q: 以 short 为基本类型编写一个 color 枚举，使其包含彩虹的颜色加上黑色和白色。这个枚举可以使用 byte 类型作为基本类型吗？</strong></p>
+<p>A:</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">enum</span> color : <span class="keyword">short</span> &#123;</div><div class="line">    Red,</div><div class="line">    Orange,</div><div class="line">    Yellow,</div><div class="line">    Green,</div><div class="line">    Cyan,</div><div class="line">    Blue,</div><div class="line">    Purple,</div><div class="line">    White,</div><div class="line">    Black</div><div class="line">&#125;</div><div class="line"><span class="comment">//可以，byte 的最大值可以是 255</span></div></pre></td></tr></table></figure>
+<p><strong>Q: 下面的代码可以成功编译吗？为什么？</strong></p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span> blab = <span class="keyword">new</span> <span class="keyword">string</span>[<span class="number">5</span>]</div><div class="line">blab = <span class="number">5</span>th <span class="keyword">string</span>.</div></pre></td></tr></table></figure>
+<p>A: 不能，<code>blab</code> 的下标范围是 [0, 4] ，并且句尾没加分号，字符串值也应该用双引号括起来。</p>
+<p><strong>Q: 编写一个控制台应用程序，接受用户输入的一个字符串，将其中的字符串反向输出。</strong></p>
+<p>A:</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span> str = Convert.ToString(Console.ReadLine());</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = str.Length<span class="number">-1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</div><div class="line">    Console.Write(str[i]);</div><div class="line">&#125;</div><div class="line">Console.ReadKey();</div></pre></td></tr></table></figure>
+<p><strong>Q: 编写一个控制台应用程序，用 yes 替换字符串中所有的 no 。</strong></p>
+<p>A:</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span> str = Convert.ToString(Console.ReadLine());</div><div class="line">Console.WriteLine(str.Replace(<span class="string">"no"</span>,<span class="string">"yes"</span>));</div><div class="line">Console.ReadKey();</div></pre></td></tr></table></figure>
+<p><strong>Q: 编写一个控制台应用程序，给字符串中的每个单词加上双引号。</strong></p>
+<p>A:</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span> str = Convert.ToString(Console.ReadLine());</div><div class="line">str = str.Trim().PadLeft(<span class="number">1</span>, <span class="string">'\"'</span>).PadRight(<span class="number">1</span>, <span class="string">'\"'</span>).Replace(<span class="string">" "</span>, <span class="string">"\" \""</span>);</div><div class="line">Console.WriteLine(str);</div><div class="line">Console.ReadKey();</div><div class="line"></div><div class="line"><span class="comment">//或</span></div><div class="line"></div><div class="line"><span class="keyword">string</span> str = Convert.ToString(Console.ReadLine());</div><div class="line"><span class="keyword">foreach</span> (<span class="keyword">string</span> s <span class="keyword">in</span> str.Trim().Split(<span class="string">' '</span>)) &#123;</div><div class="line">    Console.Write(<span class="string">"\""</span> + s + <span class="string">"\""</span>);</div><div class="line">&#125;</div><div class="line">Console.ReadKey();</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C#</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/16/C-入门经典-读书笔记-第四章-流程控制/" rel="next" title="[C#入门经典]读书笔记-第四章-流程控制">
+                <i class="fa fa-chevron-left"></i> [C#入门经典]读书笔记-第四章-流程控制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="可啦思刻" />
+          <p class="site-author-name" itemprop="name">可啦思刻</p>
+           
+              <p class="site-description motion-element" itemprop="description">你好，很高兴认识你。</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#类型转换"><span class="nav-number">1.</span> <span class="nav-text">类型转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#隐式转换"><span class="nav-number">1.1.</span> <span class="nav-text">隐式转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显式转换"><span class="nav-number">1.2.</span> <span class="nav-text">显式转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-Convert-命令进行显式转换"><span class="nav-number">1.3.</span> <span class="nav-text">使用 Convert 命令进行显式转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复杂的变量类型"><span class="nav-number">2.</span> <span class="nav-text">复杂的变量类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#枚举"><span class="nav-number">2.1.</span> <span class="nav-text">枚举</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构"><span class="nav-number">2.2.</span> <span class="nav-text">结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组"><span class="nav-number">2.3.</span> <span class="nav-text">数组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串的处理"><span class="nav-number">3.</span> <span class="nav-text">字符串的处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习"><span class="nav-number">4.</span> <span class="nav-text">练习</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">可啦思刻</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+</body>
+</html>
