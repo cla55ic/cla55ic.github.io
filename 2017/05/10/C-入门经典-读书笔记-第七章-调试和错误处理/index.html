@@ -95,7 +95,7 @@ Visual Studio 中的调试在 VS 中运行应用程序分为调试模式(F5)和�
 <meta property="og:site_name" content="可啦思刻的博客">
 <meta property="og:description" content="编写应用程序时，有时会犯一些简单的语法错误，当错误发生时 VS 就会提示错误。但有时一些错误只有在运行时才能被发现，此时就可以依靠 VS 的调试功能。另外 C# 中的错误处理技术可以对可能发生错误的地方采取预防措施。
 Visual Studio 中的调试在 VS 中运行应用程序分为调试模式(F5)和非调试模式(Ctrl + F5)，非调试模式仅仅是运行编写好的代码，而调试模式不仅运行代码，还包含了">
-<meta property="og:updated_time" content="2017-05-10T17:08:01.690Z">
+<meta property="og:updated_time" content="2017-05-11T16:43:47.760Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[C#入门经典]读书笔记-第七章-调试和错误处理">
 <meta name="twitter:description" content="编写应用程序时，有时会犯一些简单的语法错误，当错误发生时 VS 就会提示错误。但有时一些错误只有在运行时才能被发现，此时就可以依靠 VS 的调试功能。另外 C# 中的错误处理技术可以对可能发生错误的地方采取预防措施。
@@ -349,14 +349,75 @@ Visual Studio 中的调试在 VS 中运行应用程序分为调试模式(F5)和�
 <p>调试模式对应调试配置，非调试模式对应发布配置。发布配置不能做以上操作，但是发布版本运行速度较快，容量较小。所以在应用程序完成开发时应给用户提供发布版本。</p>
 <h3 id="非中断-正常-模式下的调试"><a href="#非中断-正常-模式下的调试" class="headerlink" title="非中断(正常)模式下的调试"></a><em>非中断(正常)模式下的调试</em></h3><p><code>Console.WriteLine()</code> 函数可以输出信息，利用它可以进行简单的调试，例如输出变量，或在指定位置输出信息以确定程序执行是否按预期执行。</p>
 <p>但是打印在控制台上会比较混乱，而且其他类型的程序可能没有控制台，例如桌面应用程序。这事就可以利用其他函数将信息输出在输出窗口。</p>
-<p>若找不到输出窗口，可在 菜单 | 试图 | 输出 打开。</p>
+<p>若找不到输出窗口，可在 菜单 | 视图 | 输出 打开。</p>
 <ul>
 <li><code>Debug.WriteLine()</code></li>
 <li><code>Trace.WriteLine()</code></li>
 </ul>
 <p>以上两个命令会把信息输出在输出窗口上，<code>Debug.WriteLine()</code> 仅在调试模式下运行，在发布时，该命令会消失。 <code>Trace.WriteLine()</code> 还可用于发布程序。</p>
 <p>这两个命令不像 <code>Console.WriteLine()</code> 一样可以使用 <code>{x}</code> 的形式插入变量值，只能使用 <code>+</code> 进行拼接。另外它们还可以接收第二个字符串参数，作用是显示输出的类别。</p>
-<center>未完待续…</center>
+<p>还有两种和 <code>Console.Write()</code> 对应的函数</p>
+<ul>
+<li><code>Debug.Write()</code></li>
+<li><code>Trace.Write()</code></li>
+</ul>
+<p>还有下列函数</p>
+<ul>
+<li><code>Debug.WriteLineIf()</code></li>
+<li><code>Trace.WriteLineIf()</code></li>
+<li><code>Debug.WriteIf()</code></li>
+<li><code>Trace.WriteIf()</code></li>
+</ul>
+<p>这些函数比之前的函数增加了一个必选参数，且该必选参数需要放在参数列表的最前面。这个参数的值为布尔值，只有为 <code>true</code> 时才执行该函数。通常我们传为一个表达式，当表达式为 <code>true</code> 时，执行该函数。</p>
+<p><strong>跟踪点</strong>也可以把信息输出到输出窗口中，这时 VS 的功能而非 C# 的功能，他可以在不修改代码的情况下输出调试信息。</p>
+<p>再要插入跟踪点的行上右击选择 断点 | 跟踪点 ，可以在对话框中键入要输入的消息，变量使用花括号括起来。创建完成后该行的左侧便会显示一个菱形。</p>
+<p>跟踪点属于断点的一种，跟踪点比较之前介绍的函数可以键入一些关键字输出跟上下文有关的其他信息。</p>
+<p>点击菜单中的 调试 | 窗口 | 断点，可方便地管理跟踪点。</p>
+<p>跟踪点类似 <code>Debug.WriteLine()</code> ，并不存在于发布版本中。</p>
+<p>但是使用跟踪点的关键字可以方便的完成 <code>Debug</code> 和 <code>Trace</code> 难以完成的功能。</p>
+<h3 id="中断模式下的调试"><a href="#中断模式下的调试" class="headerlink" title="中断模式下的调试"></a><em>中断模式下的调试</em></h3><h4 id="进入中断模式"><a href="#进入中断模式" class="headerlink" title="进入中断模式"></a><em>进入中断模式</em></h4><p>进入中断模式的最简单的方式就是在应用程序执行时，点击暂停按钮。但是这不能停在指定的位置，所以通常情况下，最好使用断点。</p>
+<p>断点可配置为以下功能</p>
+<ul>
+<li>在遇到断点时，立即进入中断模式</li>
+<li>在遇到断点时，如果布尔表达式为 true ，就进入中断模式</li>
+<li>遇到某断点一定次数后，进入中断模式</li>
+<li>在遇到断点时，如果自从上次遇到断点以来变量的值发生了变化，进入中断模式</li>
+<li>把文本输出到输出窗口中，或执行一个宏。</li>
+</ul>
+<p>断点也不存在于发布版本。</p>
+<p>点击某行代码的左侧，出现红色原点，即可添加一个简单的断点。即是遇到断点立即进入中断模式功能的断点。</p>
+<p>断点窗口也可以方便的管理断点，例如禁用、删除、编辑属性和加标签等，加上标签即可分组管理断点。</p>
+<p>在断点窗口右击断点，其中的<strong>条件</strong>和<strong>命中次数</strong>可配置以上功能。另外断点还有更多的属性可配置。</p>
+<p>有附加属性的断点与普通断点的显示方式稍有不同，普通断点仅显示一个圆点，而有附加属性的断点会在其中有一个加号。</p>
+<p>使用 <code>Debug.Assert()</code> 或 <code>Trace.Assert()</code> 也可以进入中断模式，这两个函数带 3 个参数，第一个参数为布尔值，当为 false 时触发判定语句，第二和第三个参数均为字符串，分别为显示到对话框和输出窗口的消息。</p>
+<p>该对话框有三个选项，<code>Abort</code> 为终止程序，<code>Retry</code> 为进入中断模式，<code>Ignore</code> 为忽略。</p>
+<h4 id="监视变量内容"><a href="#监视变量内容" class="headerlink" title="监视变量内容"></a><em>监视变量内容</em></h4><p>在中断模式下，光标停留在变量名上，即可看到该变量的内容。</p>
+<p>在程序运行时，IDE 窗口会变化，其中增加了几个窗口，自动窗口、局部变量和监视，这些窗口可以方便的在运行时监视变量，甚至可以不修改代码的情况下改变变量的值。</p>
+<ul>
+<li>自动窗口：当前和前面语句使用的变量</li>
+<li>局部变量：在作用域内所有的变量</li>
+<li>监视：可定制的变量，可在名称列键入变量名称即可监视</li>
+</ul>
+<p>另外选中变量或表达式，右击选择<strong>快速监视</strong>，也可方便的显示变量信息。</p>
+<h4 id="单步执行代码"><a href="#单步执行代码" class="headerlink" title="单步执行代码"></a><em>单步执行代码</em></h4><p>单步执行代码在中断模式下，可以控制应用程序执行的步骤。</p>
+<ul>
+<li>F11: 逐条执行语句</li>
+<li>F10: 逐过程执行语句，不会进入嵌套的代码块，包括函数。</li>
+<li>Shiift+F11 或 F5: 跳出中断</li>
+</ul>
+<h4 id="命令窗口和即时窗口"><a href="#命令窗口和即时窗口" class="headerlink" title="命令窗口和即时窗口"></a><em>命令窗口和即时窗口</em></h4><p>命令窗口可以手动执行 VS 操作。即时窗口可以执行与当前正在执行的源代码不同的额外代码，以及算术表达式。</p>
+<p>例如正在执行的源代码中有一个长度为 10 数组 arr，其下标为 3 的值为 10，在即时窗口中键入 <code>arr[3] * 10</code> 即可得到结果 100 。</p>
+<h4 id="调用堆栈窗口"><a href="#调用堆栈窗口" class="headerlink" title="调用堆栈窗口"></a><em>调用堆栈窗口</em></h4><p>该窗口描述了程序是如何执行到当前位置的，它显示了当前函数，调用它的函数以及调用该函数的函数。</p>
+<h2 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h2><p>之前讲述了如何查找应用程序的错误以便改正，但是有的错误是我们无法掌控的，例如将用户的输入转换为 double 类型，我们无法控制用户的输入，但是我们可以预先考虑到这种情况，并用一些方式应对这些错误。</p>
+<h3 id="try…catch…finally"><a href="#try…catch…finally" class="headerlink" title="try…catch…finally"></a><em>try…catch…finally</em></h3><p>C# 语言包含结构化异常处理，用 3 个关键字可以标记出能处理异常的代码和指令，如果发生异常，就是用这些指令处理异常。结构如下</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">     </div><div class="line">&#125; <span class="keyword">catch</span>(&lt;exceptionType&gt; e) &#123;</div><div class="line"></div><div class="line">&#125; <span class="keyword">finally</span> &#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以只有 try 和 finally，或者有一个 try 和 多个 catch，如果有一个 catch，finally 就是可选的，否则就是必须的。</p>
+<ul>
+<li>try: 包含抛出异常的代码。</li>
+<li>catch: 包含抛出异常时要执行的代码，catch 可以使用 &#60;exceptionType&#62; ，设置只响应特定类型的异常。也可以省略，让其响应所有异常。</li>
+<li>finally: 包含始终会执行的代码，如果没有异常，则在 try 之后执行，如果处理了异常，则在 catch 后执行。<center>未完待续…</center></li>
+</ul>
+
       
     </div>
 
@@ -526,7 +587,7 @@ Visual Studio 中的调试在 VS 中运行应用程序分为调试模式(F5)和�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Visual-Studio-中的调试"><span class="nav-number">1.</span> <span class="nav-text">Visual Studio 中的调试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#非中断-正常-模式下的调试"><span class="nav-number">1.1.</span> <span class="nav-text">非中断(正常)模式下的调试</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Visual-Studio-中的调试"><span class="nav-number">1.</span> <span class="nav-text">Visual Studio 中的调试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#非中断-正常-模式下的调试"><span class="nav-number">1.1.</span> <span class="nav-text">非中断(正常)模式下的调试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中断模式下的调试"><span class="nav-number">1.2.</span> <span class="nav-text">中断模式下的调试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#进入中断模式"><span class="nav-number">1.2.1.</span> <span class="nav-text">进入中断模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#监视变量内容"><span class="nav-number">1.2.2.</span> <span class="nav-text">监视变量内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单步执行代码"><span class="nav-number">1.2.3.</span> <span class="nav-text">单步执行代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命令窗口和即时窗口"><span class="nav-number">1.2.4.</span> <span class="nav-text">命令窗口和即时窗口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调用堆栈窗口"><span class="nav-number">1.2.5.</span> <span class="nav-text">调用堆栈窗口</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误处理"><span class="nav-number">2.</span> <span class="nav-text">错误处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#try…catch…finally"><span class="nav-number">2.1.</span> <span class="nav-text">try…catch…finally</span></a></li></ol></li></ol></div>
             
 
           </div>
