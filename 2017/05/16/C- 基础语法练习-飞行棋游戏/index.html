@@ -1,0 +1,924 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C#语法练习, C#飞行棋源码, C#" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="玩法描述
+先后输入两个玩家的姓名
+打印出棋盘，开始游戏
+双方掷骰子，按掷得的点数向前走相应的步数
+走完后按棋子落在棋盘上的位置，做出相应的动作，如下
+□ 什么都不发生
+◎ 幸运轮盘，与对方交换位置，或轰炸对方使其后退 6 格
+☆ 地雷，玩家后退 6 格
+▲ 暂停，玩家跳过下一回合
+卐 时空隧道，玩家前进 10 格
+
+
+先走出棋盘的玩家获得胜利
+
+思路可通过数组来存储棋盘和玩家，通过枚举来存储棋盘上">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C# 基础语法练习-飞行棋游戏">
+<meta property="og:url" content="https://cla55ic.github.io/2017/05/16/C- 基础语法练习-飞行棋游戏/index.html">
+<meta property="og:site_name" content="可啦思刻的博客">
+<meta property="og:description" content="玩法描述
+先后输入两个玩家的姓名
+打印出棋盘，开始游戏
+双方掷骰子，按掷得的点数向前走相应的步数
+走完后按棋子落在棋盘上的位置，做出相应的动作，如下
+□ 什么都不发生
+◎ 幸运轮盘，与对方交换位置，或轰炸对方使其后退 6 格
+☆ 地雷，玩家后退 6 格
+▲ 暂停，玩家跳过下一回合
+卐 时空隧道，玩家前进 10 格
+
+
+先走出棋盘的玩家获得胜利
+
+思路可通过数组来存储棋盘和玩家，通过枚举来存储棋盘上">
+<meta property="og:updated_time" content="2017-05-20T15:20:15.219Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C# 基础语法练习-飞行棋游戏">
+<meta name="twitter:description" content="玩法描述
+先后输入两个玩家的姓名
+打印出棋盘，开始游戏
+双方掷骰子，按掷得的点数向前走相应的步数
+走完后按棋子落在棋盘上的位置，做出相应的动作，如下
+□ 什么都不发生
+◎ 幸运轮盘，与对方交换位置，或轰炸对方使其后退 6 格
+☆ 地雷，玩家后退 6 格
+▲ 暂停，玩家跳过下一回合
+卐 时空隧道，玩家前进 10 格
+
+
+先走出棋盘的玩家获得胜利
+
+思路可通过数组来存储棋盘和玩家，通过枚举来存储棋盘上">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://cla55ic.github.io/2017/05/16/C- 基础语法练习-飞行棋游戏/"/>
+
+
+
+
+
+  <title> C# 基础语法练习-飞行棋游戏 | 可啦思刻的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2385a75ec51281bae03b58fccb06fb1c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">可啦思刻的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://cla55ic.github.io/2017/05/16/C- 基础语法练习-飞行棋游戏/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="可啦思刻">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="可啦思刻的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                C# 基础语法练习-飞行棋游戏
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-16T00:00:28+08:00">
+                2017-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="玩法描述"><a href="#玩法描述" class="headerlink" title="玩法描述"></a>玩法描述</h2><ol>
+<li>先后输入两个玩家的姓名</li>
+<li>打印出棋盘，开始游戏</li>
+<li>双方掷骰子，按掷得的点数向前走相应的步数</li>
+<li>走完后按棋子落在棋盘上的位置，做出相应的动作，如下<ul>
+<li><code>□</code> 什么都不发生</li>
+<li><code>◎</code> 幸运轮盘，与对方交换位置，或轰炸对方使其后退 6 格</li>
+<li><code>☆</code> 地雷，玩家后退 6 格</li>
+<li><code>▲</code> 暂停，玩家跳过下一回合</li>
+<li><code>卐</code> 时空隧道，玩家前进 10 格</li>
+</ul>
+</li>
+<li>先走出棋盘的玩家获得胜利</li>
+</ol>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>可通过数组来存储棋盘和玩家，<del>通过枚举来存储棋盘上各个位置的符号</del>(特殊符号不可作为枚举值)，轮流掷骰子、改变棋子位置等步骤通过 while 循环实现，跳出条件是，其中一方走出了棋盘。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>除主函数外，一共分为 6 个函数，各个函数的作用在文档注释中有解释。<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></div><div class="line"><span class="comment"><span class="doctag">///</span> 欢迎界面或结束界面</span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name="printString"&gt;</span>要打印的字符串<span class="doctag">&lt;/param&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">StartOrFinish</span>(<span class="params"><span class="keyword">string</span> printString</span>)</span></div><div class="line"></div><div class="line"><span class="comment">/// &lt;summary&gt;</span></div><div class="line"><span class="comment">/// 设置玩家</span></div><div class="line"><span class="comment">/// &lt;/summary&gt;</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">SetPlayer</span>(<span class="params"></span>)</div><div class="line"></div><div class="line"><span class="comment">/// &lt;summary&gt;</span></div><div class="line"><span class="comment">/// 玩法说明</span></div><div class="line"><span class="comment">/// &lt;/summary&gt;</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">HowToPlay</span>(<span class="params"></span>)</div><div class="line"></div><div class="line"><span class="comment">/// &lt;summary&gt;</span></div><div class="line"><span class="comment">/// 初始化地图</span></div><div class="line"><span class="comment">/// &lt;/summary&gt;</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">InitMaps</span>(<span class="params"></span>)</div><div class="line"></div><div class="line"><span class="comment">/// &lt;summary&gt;</span></div><div class="line"><span class="comment">/// 画地图</span></div><div class="line"><span class="comment">/// &lt;/summary&gt;</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">DrawMaps</span>(<span class="params"></span>)</div><div class="line"></div><div class="line"><span class="comment">/// &lt;summary&gt;</span></div><div class="line"><span class="comment">/// 判断要画的符号</span></div><div class="line"><span class="comment">/// &lt;/summary&gt;</span></div><div class="line"><span class="comment">/// &lt;param name="i"&gt;地图坐标&lt;/param&gt;</span></div><div class="line"><span class="comment">/// &lt;returns&gt;要画的符号&lt;/returns&gt;</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">string</span> <span class="title">JudgeDrawString</span>(<span class="params"><span class="keyword">int</span> i</span>)</div><div class="line"></div><div class="line"><span class="comment">/// &lt;summary&gt;</span></div><div class="line"><span class="comment">/// 游戏流程</span></div><div class="line"><span class="comment">/// &lt;/summary&gt;</span></div><div class="line"><span class="comment">/// &lt;param name="i"&gt;玩家下标&lt;/param&gt;</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">PlayGame</span>(<span class="params"><span class="keyword">int</span> i</span>)</div><div class="line"></div><div class="line"><span class="comment">/// &lt;summary&gt;</span></div><div class="line"><span class="comment">/// 检查玩家是否处于地图内</span></div><div class="line"><span class="comment">/// &lt;/summary&gt;</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">SecurityCheck</span>(<span class="params"></span>)</div></pre></td></tr></table></figure></p>
+<p>另外有四个全局变量用于存储游戏中的数据。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//地图</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">readonly</span> <span class="keyword">int</span>[] Maps = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100</span>];</div><div class="line"><span class="comment">//玩家的名称</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">readonly</span> <span class="keyword">string</span>[] PlayerName = <span class="keyword">new</span> <span class="keyword">string</span>[<span class="number">2</span>];</div><div class="line"><span class="comment">//玩家在棋盘上的位置</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">readonly</span> <span class="keyword">int</span>[] PlayerPos = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</div><div class="line"><span class="comment">//地图数组中的数值所代表的符号</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">readonly</span> <span class="keyword">string</span>[] DrawHelper = &#123; <span class="string">"□"</span>, <span class="string">"◎"</span>, <span class="string">"☆"</span>, <span class="string">"▲"</span>, <span class="string">"卐"</span> &#125;;</div><div class="line"><span class="comment">//玩家是否踩到暂停</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">readonly</span> <span class="keyword">bool</span>[] Pause = <span class="keyword">new</span> <span class="keyword">bool</span>[<span class="number">2</span>];</div></pre></td></tr></table></figure>
+<p><code>SetPlayer</code> 函数中，使用循环判断玩家输入的名称，防止其值为空。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Console.WriteLine(<span class="string">"请输入玩家 A 的姓名"</span>);</div><div class="line">PlayerName[<span class="number">0</span>] = Console.ReadLine();</div><div class="line"><span class="keyword">while</span> (String.IsNullOrEmpty(PlayerName[<span class="number">0</span>]))</div><div class="line">&#123;</div><div class="line">    Console.WriteLine(<span class="string">"输入错误，请重新输入"</span>);</div><div class="line">    PlayerName[<span class="number">0</span>] = Console.ReadLine();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>若输入为空，则进入循环，直到输入不为空，跳出循环。</p>
+<p><code>InitMaps</code> 函数中，先定义特殊符号在地图数组中的下标的数组，然后使用该数组循环用于给空地图赋值。例如，定义幸运轮盘下标的数组，并使用循环赋值。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span>[] luckyturn = &#123; <span class="number">6</span>, <span class="number">23</span>, <span class="number">40</span>, <span class="number">55</span>, <span class="number">69</span>, <span class="number">83</span> &#125;;</div><div class="line"><span class="keyword">foreach</span> (<span class="keyword">int</span> chess <span class="keyword">in</span> luckyturn)</div><div class="line">&#123;</div><div class="line">    Maps[chess] = <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>初始化地图数组后，在<code>JudgeDrawString</code> 函数中，通过传入地图下标来确定要画的符号，除特殊符号外还要考虑特殊情况，也就是玩家 A 或 B 是否在该坐标上。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span> symbol;</div><div class="line">Console.ForegroundColor = ConsoleColor.Blue;</div><div class="line"><span class="keyword">if</span> (i.Equals(PlayerPos[<span class="number">0</span>]) &amp;&amp; i.Equals(PlayerPos[<span class="number">1</span>]))</div><div class="line">    symbol = <span class="string">"AB"</span>;</div><div class="line"><span class="function"><span class="keyword">else</span> <span class="title">if</span> (<span class="params">i.Equals(PlayerPos[<span class="number">0</span>]</span>))</span></div><div class="line">    symbol = <span class="string">"Ａ"</span>;</div><div class="line"><span class="function"><span class="keyword">else</span> <span class="title">if</span> (<span class="params">i.Equals(PlayerPos[<span class="number">1</span>]</span>))</span></div><div class="line">    symbol = <span class="string">"Ｂ"</span>;</div><div class="line"><span class="keyword">else</span></div><div class="line">&#123;</div><div class="line">    Console.ForegroundColor = ConsoleColor.White;</div><div class="line">    symbol = DrawHelper[Maps[i]];</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> symbol;</div></pre></td></tr></table></figure>
+<p>然后在 <code>DrawMaps</code> 数组中循环调用 <code>JudgeDrawString</code> 便可画出地图。</p>
+<p>在 <code>PlayGame</code> 函数中生成随机数，然后根据传入的玩家下标（0 或 1）使玩家做出相应的动作，并使用 switch 语法判断玩家前进后踩到棋盘指定位置的相应动作。有时有需要改变对方玩家位置的情况，例如 <em>轰炸对方使其后退 6 格</em>，可以使用 <code>1 - i</code> 得到对方玩家的下标。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Random random = <span class="keyword">new</span> Random();</div><div class="line"><span class="keyword">int</span> step = random.Next(<span class="number">1</span>, <span class="number">7</span>);</div><div class="line">PlayerPos[i] += step;</div><div class="line">Console.WriteLine(<span class="string">"玩家 &#123;0&#125; 掷到了 &#123;1&#125; ，踩到了&#123;2&#125;"</span>, PlayerName[i], step, DrawHelper[Maps[PlayerPos[i]]]);</div><div class="line"><span class="keyword">switch</span>(Maps[PlayerPos[i]])</div><div class="line">&#123;</div><div class="line">    <span class="comment">//...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>另外有一点值得注意，<code>SecurityCheck</code> 函数在每次玩家坐标发生变化后执行一次，用来防止玩家跑出地图的情况发生，除此之外还为了防止数组越界，如果不执行安全检查，则当玩家坐标在 [0, 99] 之外时，<code>Maps[PlayerPos[i]]</code> 就会发生数组越界。</p>
+<p>检查数组越界的一种情况，其余情况与之类似。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (PlayerPos[<span class="number">0</span>] &gt; <span class="number">99</span>) &#123;</div><div class="line">    PlayerPos[<span class="number">0</span>] = <span class="number">99</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在主函数中，完成打印欢迎界面、设置玩家、玩法说明等操作后，使用循环调用 <code>PlayGame</code> 函数，并传入当前玩家的下标，当 <code>!(PlayerPos[0] &lt; 99 &amp;&amp; PlayerPos[1] &lt; 99)</code> ，即任意玩家走到地图最后时，循环跳出，游戏结束。<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line"><span class="keyword">while</span> (PlayerPos[<span class="number">0</span>] &lt; <span class="number">99</span> &amp;&amp; PlayerPos[<span class="number">1</span>] &lt; <span class="number">99</span>)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (Pause[i])</div><div class="line">    &#123;</div><div class="line">        Pause[i] = <span class="literal">false</span>;</div><div class="line">        i = <span class="number">1</span> - i;</div><div class="line">    &#125;</div><div class="line">    PlayGame(i);</div><div class="line">    i = <span class="number">1</span> - i;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在 <code>PlayGame</code> 中的 switch 语句中，有一种玩家踩到暂停的情况，这时会将该玩家对应的 <code>Pause</code> 数组中的值改为 false。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">case</span> <span class="number">3</span>:</div><div class="line">    Console.WriteLine(<span class="string">"玩家 &#123;0&#125; 暂停一回合"</span>, PlayerName[i]);</div><div class="line">    Pause[i] = <span class="literal">true</span>;</div><div class="line">    <span class="keyword">break</span>;</div></pre></td></tr></table></figure>
+<p>而主函数中的 while 语句每次执行 <code>PlayGame</code> 前会判断，如果当前玩家被暂停，那么先将数组中的值改为 <code>false</code> (防止永久暂停)，然后将 i 改变为对方玩家对应的值传入函数，就完成了玩家暂停一回合的效果。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (Pause[i])</div><div class="line">&#123;</div><div class="line">    Pause[i] = <span class="literal">false</span>;</div><div class="line">    i = <span class="number">1</span> - i;</div><div class="line">&#125;</div><div class="line">PlayGame(i);</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C#</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/10/C-入门经典-读书笔记-第七章-调试和错误处理/" rel="next" title="[C#入门经典]读书笔记-第七章-调试和错误处理">
+                <i class="fa fa-chevron-left"></i> [C#入门经典]读书笔记-第七章-调试和错误处理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="可啦思刻" />
+          <p class="site-author-name" itemprop="name">可啦思刻</p>
+           
+              <p class="site-description motion-element" itemprop="description">你好，很高兴认识你。</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#玩法描述"><span class="nav-number">1.</span> <span class="nav-text">玩法描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">可啦思刻</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+</body>
+</html>
