@@ -90,15 +90,15 @@
 <meta name="description" content="类的实例化、字段、方法类的简单示例
 12345678910111213141516171819202122//Programs.csclass Program &amp;#123;    static void Main(string[] args) &amp;#123;        Person person = new Person();        person._name = &quot;张三&quot;;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C#学习笔记-类、对象和字符串">
-<meta property="og:url" content="https://cla55ic.github.io/2017/05/22/C-学习笔记-类、对象和字符串/index.html">
+<meta property="og:title" content="C# 学习笔记-类、对象和字符串">
+<meta property="og:url" content="https://cla55ic.github.io/2017/05/22/C- 学习笔记-类、对象和字符串/index.html">
 <meta property="og:site_name" content="可啦思刻的博客">
 <meta property="og:description" content="类的实例化、字段、方法类的简单示例
 12345678910111213141516171819202122//Programs.csclass Program &amp;#123;    static void Main(string[] args) &amp;#123;        Person person = new Person();        person._name = &quot;张三&quot;;">
 <meta property="og:image" content="http://ondaqbq0q.bkt.clouddn.com/%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC%E7%B1%BB%E5%9E%8B%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AD%98%E5%82%A8.png">
-<meta property="og:updated_time" content="2017-05-24T15:53:58.441Z">
+<meta property="og:updated_time" content="2017-05-25T15:51:02.813Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C#学习笔记-类、对象和字符串">
+<meta name="twitter:title" content="C# 学习笔记-类、对象和字符串">
 <meta name="twitter:description" content="类的实例化、字段、方法类的简单示例
 12345678910111213141516171819202122//Programs.csclass Program &amp;#123;    static void Main(string[] args) &amp;#123;        Person person = new Person();        person._name = &quot;张三&quot;;">
 <meta name="twitter:image" content="http://ondaqbq0q.bkt.clouddn.com/%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%80%BC%E7%B1%BB%E5%9E%8B%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%AD%98%E5%82%A8.png">
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="https://cla55ic.github.io/2017/05/22/C-学习笔记-类、对象和字符串/"/>
+  <link rel="canonical" href="https://cla55ic.github.io/2017/05/22/C- 学习笔记-类、对象和字符串/"/>
 
 
 
 
 
-  <title> C#学习笔记-类、对象和字符串 | 可啦思刻的博客 </title>
+  <title> C# 学习笔记-类、对象和字符串 | 可啦思刻的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -298,7 +298,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://cla55ic.github.io/2017/05/22/C-学习笔记-类、对象和字符串/">
+    <link itemprop="mainEntityOfPage" href="https://cla55ic.github.io/2017/05/22/C- 学习笔记-类、对象和字符串/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="可啦思刻">
@@ -319,7 +319,7 @@
             
             
               
-                C#学习笔记-类、对象和字符串
+                C# 学习笔记-类、对象和字符串
               
             
           </h1>
@@ -403,6 +403,8 @@
 <li>可写属性：只拥有 set 方法</li>
 <li>可读属性：只拥有 get 方法</li>
 </ul>
+<h2 id="自动属性"><a href="#自动属性" class="headerlink" title="自动属性"></a>自动属性</h2><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Person</span> &#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">string</span> Name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> Age &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">char</span> Gender &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这种属性叫做自动属性，这样就需要写字段了，编译器会根据属性自动生成字段。因为我们不会直接去访问字段，所以也无需关心编译器生成的字段的名称，只要能存储数据就是可以的。但是这样的写法就不能在属性里对字段的值进行限制，只能在构造函数中限制。</p>
 <h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><p>构造函数：对对象进行初始化。</p>
 <p>之前对对象的初始化，需要挨个对每个字段去赋值，十分的麻烦，构造函数可以简单的完成这个工作。</p>
 <p>构造函数其实就是一个函数，只不过是一个特殊的函数。</p>
@@ -521,8 +523,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/21/C-学习笔记-面向对象简介/" rel="next" title="C#学习笔记-面向对象简介">
-                <i class="fa fa-chevron-left"></i> C#学习笔记-面向对象简介
+              <a href="/2017/05/21/C- 学习笔记-面向对象简介/" rel="next" title="C# 学习笔记-面向对象简介">
+                <i class="fa fa-chevron-left"></i> C# 学习笔记-面向对象简介
               </a>
             
           </div>
@@ -531,8 +533,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/24/xxx/" rel="prev" title="xxx">
-                xxx <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/24/C- 学习笔记-继承、new、this、里氏转换、File类/" rel="prev" title="C# 学习笔记-继承、new、this、里氏转换、File类">
+                C# 学习笔记-继承、new、this、里氏转换、File类 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -653,7 +655,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#类的实例化、字段、方法"><span class="nav-number">1.</span> <span class="nav-text">类的实例化、字段、方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性的介绍"><span class="nav-number">2.</span> <span class="nav-text">属性的介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性的作用"><span class="nav-number">3.</span> <span class="nav-text">属性的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造函数"><span class="nav-number">4.</span> <span class="nav-text">构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#值类型和引用类型"><span class="nav-number">5.</span> <span class="nav-text">值类型和引用类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态类和非静态类的区别"><span class="nav-number">6.</span> <span class="nav-text">静态类和非静态类的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾回收和析构函数"><span class="nav-number">7.</span> <span class="nav-text">垃圾回收和析构函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向对象练习"><span class="nav-number">8.</span> <span class="nav-text">面向对象练习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不同项目间的类的引用"><span class="nav-number">9.</span> <span class="nav-text">不同项目间的类的引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串到字符数组的转换以及高效的-StringBuilder"><span class="nav-number">10.</span> <span class="nav-text">字符串到字符数组的转换以及高效的 StringBuilder</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串的一些方法"><span class="nav-number">11.</span> <span class="nav-text">字符串的一些方法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#类的实例化、字段、方法"><span class="nav-number">1.</span> <span class="nav-text">类的实例化、字段、方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性的介绍"><span class="nav-number">2.</span> <span class="nav-text">属性的介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性的作用"><span class="nav-number">3.</span> <span class="nav-text">属性的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动属性"><span class="nav-number">4.</span> <span class="nav-text">自动属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造函数"><span class="nav-number">5.</span> <span class="nav-text">构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#值类型和引用类型"><span class="nav-number">6.</span> <span class="nav-text">值类型和引用类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态类和非静态类的区别"><span class="nav-number">7.</span> <span class="nav-text">静态类和非静态类的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾回收和析构函数"><span class="nav-number">8.</span> <span class="nav-text">垃圾回收和析构函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向对象练习"><span class="nav-number">9.</span> <span class="nav-text">面向对象练习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不同项目间的类的引用"><span class="nav-number">10.</span> <span class="nav-text">不同项目间的类的引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串到字符数组的转换以及高效的-StringBuilder"><span class="nav-number">11.</span> <span class="nav-text">字符串到字符数组的转换以及高效的 StringBuilder</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串的一些方法"><span class="nav-number">12.</span> <span class="nav-text">字符串的一些方法</span></a></li></ol></div>
             
 
           </div>

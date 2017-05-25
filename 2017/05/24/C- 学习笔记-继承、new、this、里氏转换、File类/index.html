@@ -1,0 +1,893 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C#," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="继承在编写类的过程中，有可能出现多个类具有相同的属性或方法，例如学生类和老师类，都具有姓名、年龄和性别属性，都具有打招呼的方法，同时他们也具有自己独有的属性和方法，例如学生类具有学习方法，老师类具有教学方法。这时我们可以进一步抽象出人类。使人类具有姓名、年龄和性别属性，具有打招呼的方法，然后我们将学生类和老师类继承人类，就可以继承到人类所具有的成员，而只需要在自己的类当中编写自己所独有的成员就可以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C# 学习笔记-继承、new、this、里氏转换、File类">
+<meta property="og:url" content="https://cla55ic.github.io/2017/05/24/C- 学习笔记-继承、new、this、里氏转换、File类/index.html">
+<meta property="og:site_name" content="可啦思刻的博客">
+<meta property="og:description" content="继承在编写类的过程中，有可能出现多个类具有相同的属性或方法，例如学生类和老师类，都具有姓名、年龄和性别属性，都具有打招呼的方法，同时他们也具有自己独有的属性和方法，例如学生类具有学习方法，老师类具有教学方法。这时我们可以进一步抽象出人类。使人类具有姓名、年龄和性别属性，具有打招呼的方法，然后我们将学生类和老师类继承人类，就可以继承到人类所具有的成员，而只需要在自己的类当中编写自己所独有的成员就可以">
+<meta property="og:updated_time" content="2017-05-25T16:05:53.066Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C# 学习笔记-继承、new、this、里氏转换、File类">
+<meta name="twitter:description" content="继承在编写类的过程中，有可能出现多个类具有相同的属性或方法，例如学生类和老师类，都具有姓名、年龄和性别属性，都具有打招呼的方法，同时他们也具有自己独有的属性和方法，例如学生类具有学习方法，老师类具有教学方法。这时我们可以进一步抽象出人类。使人类具有姓名、年龄和性别属性，具有打招呼的方法，然后我们将学生类和老师类继承人类，就可以继承到人类所具有的成员，而只需要在自己的类当中编写自己所独有的成员就可以">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://cla55ic.github.io/2017/05/24/C- 学习笔记-继承、new、this、里氏转换、File类/"/>
+
+
+
+
+
+  <title> C# 学习笔记-继承、new、this、里氏转换、File类 | 可啦思刻的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2385a75ec51281bae03b58fccb06fb1c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">可啦思刻的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://cla55ic.github.io/2017/05/24/C- 学习笔记-继承、new、this、里氏转换、File类/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="可啦思刻">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="可啦思刻的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                C# 学习笔记-继承、new、this、里氏转换、File类
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-24T23:17:40+08:00">
+                2017-05-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>在编写类的过程中，有可能出现多个类具有相同的属性或方法，例如学生类和老师类，都具有姓名、年龄和性别属性，都具有打招呼的方法，同时他们也具有自己独有的属性和方法，例如学生类具有学习方法，老师类具有教学方法。这时我们可以进一步抽象出人类。使人类具有姓名、年龄和性别属性，具有打招呼的方法，然后我们将学生类和老师类继承人类，就可以继承到人类所具有的成员，而只需要在自己的类当中编写自己所独有的成员就可以了。</p>
+<p>可以看出，这样我们也不必去编写重复的代码，所以继承可以有效的解决代码冗余的问题。</p>
+<p>我们称学生类继承了人类，人类为父类，学生类为子类。或者说人类派生了学生类，人类为基类，学生类为派生类。</p>
+<p>继承的简单实例和语法如下</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="keyword">string</span>[] args</span>) </span>&#123;</div><div class="line">    Student student = <span class="keyword">new</span> Student(<span class="string">"学生"</span>, <span class="number">18</span>, <span class="string">'男'</span>, <span class="number">101010</span>);</div><div class="line">    student.SayHello();</div><div class="line">    student.Study();</div><div class="line"></div><div class="line">    Teacher teacher = <span class="keyword">new</span> Teacher(<span class="string">"老师"</span>, <span class="number">25</span>, <span class="string">'女'</span>, <span class="number">8000</span>);</div><div class="line">    teacher.SayHello();</div><div class="line">    teacher.Teach();</div><div class="line"></div><div class="line">    Console.ReadKey();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Person</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">string</span> Name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> Age &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">char</span> Gender &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SayHello</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        Console.WriteLine(<span class="string">"我叫&#123;0&#125;，我是&#123;1&#125;生，我今年 &#123;2&#125; 岁。"</span>, <span class="keyword">this</span>.Name, <span class="keyword">this</span>.Gender, <span class="keyword">this</span>.Age);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Student</span> : <span class="title">Person</span> &#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> Id;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Study</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        Console.WriteLine(<span class="string">"我正在学习。"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student</span>(<span class="params"><span class="keyword">string</span> name,<span class="keyword">int</span> age, <span class="keyword">char</span> gender,<span class="keyword">int</span> id</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.Name = name;</div><div class="line">        <span class="keyword">this</span>.Age = age;</div><div class="line">        <span class="keyword">this</span>.Gender = gender;</div><div class="line">        <span class="keyword">this</span>.Id = id;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Teacher</span> : <span class="title">Person</span> &#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">decimal</span> Salary;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Teach</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        Console.WriteLine(<span class="string">"我正在教学。"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Teacher</span>(<span class="params"><span class="keyword">string</span> name, <span class="keyword">int</span> age, <span class="keyword">char</span> gender, <span class="keyword">decimal</span> salary</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.Name = name;</div><div class="line">        <span class="keyword">this</span>.Age = age;</div><div class="line">        <span class="keyword">this</span>.Gender = gender;</div><div class="line">        <span class="keyword">this</span>.Salary = salary;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出</p>
+<blockquote>
+<p>我叫学生，我是男生，我今年 18 岁。<br>我正在学习。<br>我叫老师，我是女生，我今年 25 岁。<br>我正在教学。</p>
+</blockquote>
+<p>子类继承了父类的属性和方法。但是因为字段一般是私有的，所以一般情况下子类不能继承父类的字段。除非字段不是私有的。子类也没有继承父类的构造函数。</p>
+<p>子类虽然没有继承父类的构造函数，但是子类的构造函数会调用父类的默认无参构造函数。</p>
+<p>假如父类 Person 类中只有一个有参构造函数</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">Person</span>(<span class="params"><span class="keyword">string</span> name, <span class="keyword">int</span> age, <span class="keyword">char</span> gender</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">this</span>.Name = name;</div><div class="line">    <span class="keyword">this</span>.Age = age;</div><div class="line">    <span class="keyword">this</span>.Gender = gender;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这时子类就无法调用到父类的无参构造函数，因为该函数已经被替换掉，这时就会报错。</p>
+<p>此时有两个解决办法，一是给父类加一个无参构造函数，第二是使子类的构造函数调用父类的有参构造函数，我们通常使用第二种方法，示例如下</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">Student</span>(<span class="params"><span class="keyword">string</span> name, <span class="keyword">int</span> age, <span class="keyword">char</span> gender, <span class="keyword">int</span> id</span>)</span></div><div class="line">    : <span class="title">base</span>(<span class="params">name, age, gender</span>)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">this</span>.Id = id;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>继承的特点</p>
+<ol>
+<li>单根性，一个类只能有一个父类</li>
+<li>传递性，子类拥有父类的成员，也拥有父类的父类的成员，以此类推。成员之间通过继承是向下传递的。</li>
+</ol>
+<p>我们可以通过右击项目，查看类图，可以方便的看出各个类之间的关系。</p>
+<p>在 C# 中，所有的类都直接或间接的继承了 Object 类，如果我们编写的类没有指明父类，会默认继承 Object 类。所以 Object 类是一切类型的父类。</p>
+<h2 id="new-的用法"><a href="#new-的用法" class="headerlink" title="new 的用法"></a>new 的用法</h2><p>new 可以创建对象，它还有另外一个作用。</p>
+<p>当子类中有与父类相同的成员，例如名称相同的属性，名称和参数相同的方法时，会覆盖掉父类中的成员。这时可以在子类中的那个成员上加上 new 关键字已确认覆盖。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Person</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">string</span> Name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> Age &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">char</span> Gender &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span>(<span class="params"><span class="keyword">string</span> name, <span class="keyword">int</span> age, <span class="keyword">char</span> gender</span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">this</span>.Name = name;</div><div class="line">        <span class="keyword">this</span>.Age = age;</div><div class="line">        <span class="keyword">this</span>.Gender = gender;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">SayHello</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">10</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Programmer</span> : <span class="title">Person</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> WorkYear &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Programmer</span>(<span class="params"><span class="keyword">string</span> name, <span class="keyword">int</span> age, <span class="keyword">char</span> gender, <span class="keyword">int</span> workYear</span>)</span></div><div class="line">        : <span class="title">base</span>(<span class="params">name, age, gender</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">this</span>.WorkYear = workYear;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> new <span class="keyword">void</span> <span class="title">SayHello</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        Console.WriteLine(<span class="string">"大家好，我叫&#123;0&#125;，&#123;1&#125;岁，我是&#123;2&#125;生，我已经工作&#123;3&#125;年了。"</span>, <span class="keyword">this</span>.Name, <span class="keyword">this</span>.Age, <span class="keyword">this</span>.Gender, <span class="keyword">this</span>.WorkYear);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>所以除了创建对象外，new 关键字还可以用来确认隐藏或者说覆盖从父类中继承的成员。</p>
+<h2 id="this-的用法"><a href="#this-的用法" class="headerlink" title="this 的用法"></a>this 的用法</h2><p>this 代表当前类的对象。另外一个作用是显式的调用自己的构造函数。</p>
+<p>Student 类有两个构造函数</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">Student</span>(<span class="params"><span class="keyword">string</span> name, <span class="keyword">int</span> age, <span class="keyword">char</span> gender, <span class="keyword">int</span> ID</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.Name = name;</div><div class="line">    <span class="keyword">this</span>.Age = age;</div><div class="line">    <span class="keyword">this</span>.Gender = gender;</div><div class="line">    <span class="keyword">this</span>.ID = ID;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">Student</span>(<span class="params"><span class="keyword">string</span> name, <span class="keyword">int</span> age, <span class="keyword">char</span> gender</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">this</span>.Name = name;</div><div class="line">    <span class="keyword">this</span>.Age = age;</div><div class="line">    <span class="keyword">this</span>.Gender = gender;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>两个构造函数中含有部分相同的赋值代码，属于冗余代码。这时就可以使用 this 关键字，使其在构造函数中显式的调用另一个构造函数。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">Student</span>(<span class="params"><span class="keyword">string</span> name, <span class="keyword">int</span> age, <span class="keyword">char</span> gender, <span class="keyword">int</span> ID</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.Name = name;</div><div class="line">    <span class="keyword">this</span>.Age = age;</div><div class="line">    <span class="keyword">this</span>.Gender = gender;</div><div class="line">    <span class="keyword">this</span>.ID = ID;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">Student</span>(<span class="params"><span class="keyword">string</span> name, <span class="keyword">int</span> age, <span class="keyword">char</span> gender</span>):<span class="title">this</span>(<span class="params">name,age,gender,<span class="number">0</span></span>)</span>&#123;&#125;</div></pre></td></tr></table></figure>
+<p>只能从少参数的构造函数调用多参数的构造函数，有于少参的构造函数不含有部分多参构造函数的参数，所以这里需要给该参数一个默认值，例如少参数的构造函数不含有多参数构造函数中的 ID 参数，所以这里传入一个 int 类型变量的默认值 0 。</p>
+<h2 id="里氏转换以及-as-和-is-的用法"><a href="#里氏转换以及-as-和-is-的用法" class="headerlink" title="里氏转换以及 as 和 is 的用法"></a>里氏转换以及 as 和 is 的用法</h2><p>里氏转换</p>
+<ol>
+<li>子类对象可以赋值给父类(如果有一个地方需要一个父类作为参数，可以传入一个子类代替)。</li>
+<li>如果这个父类当中装的是子类对象，那么可以将这个父类强转为子类对象。</li>
+</ol>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//子类对象可以赋值给父类(如果有一个地方需要一个父类作为参数，可以传入一个子类代替)。</span></div><div class="line">Student s = <span class="keyword">new</span> Student() ;</div><div class="line">Person p = s;</div><div class="line"><span class="comment">//如果这个父类当中装的是子类对象，那么可以将这个父类强转为对应子类对象</span></div><div class="line">Person p = <span class="keyword">new</span> Student();</div><div class="line">Student s = (Student) p;</div><div class="line"><span class="comment">//但是只能转换为对象的子类对象</span></div><div class="line">Teahcer s = (Teahcer) p;<span class="comment">//error</span></div></pre></td></tr></table></figure>
+<p>String.Join(string separator, params object[] values)</p>
+<p>该方法需要一个 可选的 object 数组，根据里氏转换，我们可以传入一个 object 的子类 string 类型的数组。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span> str = <span class="keyword">string</span>.Join(<span class="string">","</span>, <span class="keyword">new</span> <span class="keyword">string</span>[] &#123;<span class="string">"a"</span>,<span class="string">"b"</span>,<span class="string">"c"</span>&#125;);</div></pre></td></tr></table></figure>
+<p>因为该方法需要一个 可变参数数组，意味着既可以放入数组，也可以放入单个的元素，又因为该数组是 object 类型数组，object 是一切类型的父类，所以可以放任意类型、任意个数的单个元素</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span> str = <span class="keyword">string</span>.Join(<span class="string">","</span>, <span class="number">1</span>, <span class="string">"b"</span>, <span class="literal">false</span>);</div></pre></td></tr></table></figure>
+<p>假如父类 Person 中装的是 Student 对象，我们尝试转换为 Teacher 对象，(虽然父类中装的是子类对象，可以强制转换为子类，但也应该是对应的子类)，就会抛出异常。为了避免这种情况，应在转换前进行检查。</p>
+<p>is：类型转换，如果转换成功，返回 true，失败，返回 false 。<br>as：类型转换，如果转换成功，返回相应对象，失败，返回 null 。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//is</span></div><div class="line">Person p = <span class="keyword">new</span> Student();</div><div class="line"><span class="keyword">if</span>(p <span class="keyword">is</span> Teacher)<span class="comment">//返回 false，跳过</span></div><div class="line">&#123;</div><div class="line">    Teacher t = p;</div><div class="line">&#125;</div><div class="line"><span class="comment">//as</span></div><div class="line">Teacher t = p <span class="keyword">as</span> Teacher;<span class="comment">// t 为 null</span></div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C#</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/22/C- 学习笔记-类、对象和字符串/" rel="next" title="C# 学习笔记-类、对象和字符串">
+                <i class="fa fa-chevron-left"></i> C# 学习笔记-类、对象和字符串
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="可啦思刻" />
+          <p class="site-author-name" itemprop="name">可啦思刻</p>
+           
+              <p class="site-description motion-element" itemprop="description">你好，很高兴认识你。</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#继承"><span class="nav-number">1.</span> <span class="nav-text">继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#new-的用法"><span class="nav-number">2.</span> <span class="nav-text">new 的用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#this-的用法"><span class="nav-number">3.</span> <span class="nav-text">this 的用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#里氏转换以及-as-和-is-的用法"><span class="nav-number">4.</span> <span class="nav-text">里氏转换以及 as 和 is 的用法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">可啦思刻</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+</body>
+</html>
