@@ -1,0 +1,915 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C#," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="ArrayList数组长度固定，而集合的特点就是长度不固定，会随着集合内的元素个数而成 2 的 n(n&amp;gt;=2) 次方倍增。ArrayList 就是集合的一种类型。
+12345ArrayList list = new ArrayList();list.Add(&apos;a&apos;);list.Add(&quot;abc&quot;);list.Add(1);list.Add(true);
+ArrayList 类不是静态类，所以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C# 学习笔记-ArrayLsit、Hashtable、File、Direcotry、Path">
+<meta property="og:url" content="https://cla55ic.github.io/2017/05/26/C- 学习笔记-ArrayLsit、Hashtable、File、Direcotry、Path/index.html">
+<meta property="og:site_name" content="可啦思刻的博客">
+<meta property="og:description" content="ArrayList数组长度固定，而集合的特点就是长度不固定，会随着集合内的元素个数而成 2 的 n(n&amp;gt;=2) 次方倍增。ArrayList 就是集合的一种类型。
+12345ArrayList list = new ArrayList();list.Add(&apos;a&apos;);list.Add(&quot;abc&quot;);list.Add(1);list.Add(true);
+ArrayList 类不是静态类，所以">
+<meta property="og:updated_time" content="2017-05-26T16:57:59.423Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C# 学习笔记-ArrayLsit、Hashtable、File、Direcotry、Path">
+<meta name="twitter:description" content="ArrayList数组长度固定，而集合的特点就是长度不固定，会随着集合内的元素个数而成 2 的 n(n&amp;gt;=2) 次方倍增。ArrayList 就是集合的一种类型。
+12345ArrayList list = new ArrayList();list.Add(&apos;a&apos;);list.Add(&quot;abc&quot;);list.Add(1);list.Add(true);
+ArrayList 类不是静态类，所以">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://cla55ic.github.io/2017/05/26/C- 学习笔记-ArrayLsit、Hashtable、File、Direcotry、Path/"/>
+
+
+
+
+
+  <title> C# 学习笔记-ArrayLsit、Hashtable、File、Direcotry、Path | 可啦思刻的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2385a75ec51281bae03b58fccb06fb1c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">可啦思刻的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://cla55ic.github.io/2017/05/26/C- 学习笔记-ArrayLsit、Hashtable、File、Direcotry、Path/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="可啦思刻">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="可啦思刻的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                C# 学习笔记-ArrayLsit、Hashtable、File、Direcotry、Path
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-26T19:51:42+08:00">
+                2017-05-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2><p>数组长度固定，而集合的特点就是长度不固定，会随着集合内的元素个数而成 2 的 n(n&gt;=2) 次方倍增。ArrayList 就是集合的一种类型。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ArrayList list = <span class="keyword">new</span> ArrayList();</div><div class="line">list.Add(<span class="string">'a'</span>);</div><div class="line">list.Add(<span class="string">"abc"</span>);</div><div class="line">list.Add(<span class="number">1</span>);</div><div class="line">list.Add(<span class="literal">true</span>);</div></pre></td></tr></table></figure>
+<p>ArrayList 类不是静态类，所以想要使用该集合，要先实例化一个对象。ArrayList 类的 <code>Add</code> 方法需要一个 object 类型的值，根据里氏转换，我们可以传入任意类型的值。ArrayList 需要传入 object 类型是为了通用性。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.Count; i++) &#123;</div><div class="line">    Console.WriteLine(list[i]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>向数组一样，集合也可以使用 for 循环通过下标来遍历</p>
+<p>使用 <code>AddRange</code> 添加集合<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">list.AddRange(<span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;);</div><div class="line">list.AddRange(list);</div></pre></td></tr></table></figure></p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//清空集合</span></div><div class="line">list.Clear();</div><div class="line"><span class="comment">//移除指定元素，若没有该元素，也不产生错误</span></div><div class="line">list.Remove(<span class="literal">true</span>);</div><div class="line"><span class="comment">//根据索引删除元素，从 0 开始</span></div><div class="line">list.RemoveAt(<span class="number">1</span>);</div><div class="line"><span class="comment">//RemoveAt 方法不能直接删除集合，他只是对单个元素进行处理</span></div><div class="line"><span class="comment">//删除集合使用 RemoveRange 方法，</span></div><div class="line"><span class="comment">//第一个参数为开始的下标，第二个参数为删除元素的个数</span></div><div class="line">list.RemoveRange(<span class="number">4</span>,<span class="number">3</span>);</div><div class="line"><span class="comment">//插入单个元素</span></div><div class="line"><span class="comment">//第一个参数指定插入位置，第二个参数指定插入元素</span></div><div class="line">list.Insert(<span class="number">1</span>,<span class="string">"新元素"</span>);</div><div class="line"><span class="comment">//插入集合</span></div><div class="line"><span class="comment">//第一个参数指定插入位置，第二个参数指定插入集合</span></div><div class="line">list.InsertRange(<span class="number">2</span>,<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;);</div><div class="line"><span class="comment">//Contains 方法判断元素内是否含有指定元素，返回布尔值</span></div><div class="line"><span class="keyword">if</span> (list.Contains(<span class="number">1</span>)) &#123;</div><div class="line">    Console.WriteLine(<span class="string">"此集合中包含元素 1 "</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">//Sort 方法对集合内元素进行排序，要求集合内元素的类型一致</span></div><div class="line">list.Sort();</div></pre></td></tr></table></figure>
+<p>因为 ArrayList 传入的 object 类型的参数，所以插入数据十分方便，但是如果我们插入了多个类型的值，在取数的时候就会变得困难，因为我们取出的也是 object 类型的值。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//例如我们向 ArrayList 中添加一个具有 SayHello 方法的 Person 对象</span></div><div class="line">list.Add(<span class="keyword">new</span> Person());</div><div class="line"><span class="comment">//在循环取数的时候我们希望执行它的 SayHello 方法</span></div><div class="line"><span class="comment">//就需要在循环内判断当前元素是否为 Person 对象</span></div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.Count; i++) &#123;</div><div class="line">    <span class="keyword">if</span> (list[i] <span class="keyword">is</span> Person) &#123;</div><div class="line">        ((Person)list[i]).SayHello();</div><div class="line">        <span class="keyword">continue</span>;</div><div class="line">    &#125;</div><div class="line">    Console.WriteLine(list[i]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>ArrayList 的两个练习</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//向 ArrayList 集合中添加一个整数类型的数组</span></div><div class="line"><span class="comment">//求最大、最小、总和、平均值</span></div><div class="line">ArrayList list = <span class="keyword">new</span> ArrayList();</div><div class="line">list.AddRange(<span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">3</span>,<span class="number">5</span>,<span class="number">8</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">0</span>,<span class="number">12</span>,<span class="number">4</span>,<span class="number">7</span>&#125;);</div><div class="line"></div><div class="line"><span class="keyword">int</span> max = (<span class="keyword">int</span>) list[<span class="number">0</span>];<span class="comment">//因为 list 中存储的是 object 类型，所以需要显式转换再赋值</span></div><div class="line"><span class="keyword">int</span> min = (<span class="keyword">int</span>) list[<span class="number">0</span>];</div><div class="line"><span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.Count; i++) &#123;</div><div class="line">    max = max &lt; (<span class="keyword">int</span>)list[i] ? (<span class="keyword">int</span>)list[i] : max;</div><div class="line">    min = min &gt; (<span class="keyword">int</span>)list[i] ? (<span class="keyword">int</span>)list[i] : min;</div><div class="line">    sum += (<span class="keyword">int</span>) list[i];</div><div class="line">&#125;</div><div class="line"><span class="keyword">double</span> avg = sum / list.Count;</div><div class="line"></div><div class="line">Console.WriteLine(<span class="string">"&#123;0&#125;,&#123;1&#125;,&#123;2&#125;,&#123;3&#125;,"</span>,max,min,sum,avg);</div><div class="line">Console.ReadKey();</div><div class="line"></div><div class="line"><span class="comment">//写一个长度为 10 的集合，要求随机的存放 [0,9] 的 10 个数字。</span></div><div class="line"><span class="comment">//且不能重复。</span></div><div class="line">ArrayList list = <span class="keyword">new</span> ArrayList();</div><div class="line">Random random = <span class="keyword">new</span> Random();</div><div class="line"><span class="keyword">int</span> num = random.Next(<span class="number">1</span>, <span class="number">10</span>);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</div><div class="line">&#123; <span class="comment">//由于集合长度不固定，所以不能使用 list.Count</span></div><div class="line">    <span class="keyword">if</span> (!list.Contains(num))</div><div class="line">        list.Add(num);</div><div class="line">    <span class="keyword">else</span></div><div class="line">        i--;</div><div class="line">    num = random.Next(<span class="number">0</span>, <span class="number">10</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>关于集合的长度可变性<br>Count 表示集合当前包含的元素个数<br>Capcity 表示集合当前可存储的元素个数<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">ArrayList list = <span class="keyword">new</span> ArrayList();</div><div class="line">Console.WriteLine(<span class="string">"&#123;0&#125;_&#123;1&#125;"</span>,list.Count,list.Capacity);</div><div class="line">list.Add(<span class="number">1</span>);</div><div class="line">Console.WriteLine(<span class="string">"&#123;0&#125;_&#123;1&#125;"</span>, list.Count, list.Capacity);</div><div class="line">list.AddRange(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;);</div><div class="line">Console.WriteLine(<span class="string">"&#123;0&#125;_&#123;1&#125;"</span>, list.Count, list.Capacity);</div><div class="line">list.Add(<span class="number">5</span>);</div><div class="line">Console.WriteLine(<span class="string">"&#123;0&#125;_&#123;1&#125;"</span>, list.Count, list.Capacity);</div><div class="line">list.AddRange(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>&#125;);</div><div class="line">Console.WriteLine(<span class="string">"&#123;0&#125;_&#123;1&#125;"</span>, list.Count, list.Capacity);</div><div class="line">Console.ReadKey();</div></pre></td></tr></table></figure></p>
+<p>输出如下</p>
+<blockquote>
+<p>0_0<br>1_4<br>4_4<br>5_8<br>9_16</p>
+</blockquote>
+<p>可以看出一旦集合中实际包含的元素个数将要超过可以存储的元素个数时，集合的长度会成 2 的 n(n&gt;=2) 次方倍增。</p>
+<p>删除元素也会以相似的规则缩减集合的可包含元素的长度。</p>
+<h2 id="Hashtable"><a href="#Hashtable" class="headerlink" title="Hashtable"></a>Hashtable</h2><p>Hashtable 也是一种集合，是一种键值对集合，也可以称为字典。<br>例如我们要在字典中查找 hello 的中文解释，就先找到 hello 这个单词（键），然后再找到 hello 的中文解释（值）。</p>
+<p>Hashtable 和 ArrayList 都在 System.Collections 命名空间下。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//想集合中添加键值对</span></div><div class="line">Hashtable hashtable = <span class="keyword">new</span> Hashtable();</div><div class="line">hashtable.Add(<span class="string">"Name"</span>, <span class="string">"张三"</span>);</div><div class="line">hashtable.Add(<span class="string">"Age"</span>, <span class="number">18</span>);</div><div class="line">hashtable.Add(<span class="string">"Gender"</span>, <span class="string">'男'</span>);</div></pre></td></tr></table></figure>
+<p>这时候取值就不能使用下面的方式</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; hashtable.Count; i++) &#123;</div><div class="line">    Console.WriteLine(hashtable[i]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>因为假设当 i 为 0 时，我们希望输出的是 <code>&quot;张三&quot;</code>，但是循环内输出的是 <code>hashtable[0]</code>，键值对集合是通过键去找值，所以 [] 内放入的应该是键，显然该集合里没有键为 0 的键值对，如果想输出 <code>&quot;张三&quot;</code> ，应该这样写 <code>hashtable[&quot;Name&quot;]</code> ，但是集合包含很多键值对，我们不可能一个一个去编写取值代码，所以 C# 提供了另一种循环语法 foreach。</p>
+<p>foreach 循环输出 Hashtable 键值对中的值的示例如下</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">foreach</span> (<span class="keyword">var</span> key <span class="keyword">in</span> hashtable.Keys) &#123;</div><div class="line">    Console.WriteLine(hashtable[key]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里需要首先了解 推断类型 var 。</p>
+<p>推断类型 var ，C# 是一门强类型语言，对变量的类型必须有明确的定义。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">double</span> n1 = <span class="number">3.14</span>;</div><div class="line"><span class="keyword">int</span> n2 = <span class="number">233</span>;</div><div class="line"><span class="keyword">char</span> n3 = <span class="string">'男'</span>;</div><div class="line"></div><div class="line">Console.WriteLine(n1.GetType());</div><div class="line">Console.WriteLine(n2.GetType());</div><div class="line">Console.WriteLine(n3.GetType());</div><div class="line">Console.ReadKey();</div></pre></td></tr></table></figure>
+<p>输出</p>
+<blockquote>
+<p>System.Double<br>System.Int32<br>System.Char</p>
+</blockquote>
+<p>每一个变量都需要对其指定变量类型，使用 GetType 方法可以获得该变量的类型。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> n1 = <span class="number">3.14</span>;</div><div class="line"><span class="keyword">var</span> n2 = <span class="number">233</span>;</div><div class="line"><span class="keyword">var</span> n3 = <span class="string">'男'</span>;</div></pre></td></tr></table></figure>
+<p>使用推断类型 var 定义变量，使用 GetType 可以得到相同的输出，说明变量虽然使用 var 声明，但它还是拥有应该有的类型，这是因为 var 会根据变量的值去推断该变量的类型，并把该类型赋予给变量。</p>
+<p>但是使用 var 声明的变量在声明时必须为其初始化，不然就不能去推断该变量类型。</p>
+<p>回到 foreach 循环，key 代表当前键值对的键， in 代表 在 Hashtable 的所有键内，合起来就是在 Hashtable 的所有键当中的其中一个键，拿到了键，就可以根据键去取值 <code>hashtable[key]</code> 。</p>
+<p>键值对中，键只能是唯一的，值可以重复。</p>
+<p>Hashtable 还有另一种赋值方式</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//键是 "ID"，值是 101010</span></div><div class="line">hashtable[<span class="string">"ID"</span>] = <span class="number">101010</span>;</div></pre></td></tr></table></figure>
+<p>这中赋值方式的不同之处在于，如果已经具有键为 “ID” 的键值对，那么会被覆盖掉。</p>
+<p>Hashtable 也拥有删除元素的两种方法</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//删除所有元素</span></div><div class="line">hashtable.Clear();</div><div class="line"><span class="comment">//通过键删除元素</span></div><div class="line">hashtable.Remove(<span class="string">"ID"</span>);</div></pre></td></tr></table></figure>
+<h2 id="File"><a href="#File" class="headerlink" title="File"></a>File</h2><p>除了之前提到的 File 类的方法之外，File 类还可以读写文件。</p>
+<p>读写文件前应注意以下几个点。</p>
+<p>编码：将字符串以什么样的形式保存为二进制，这个就是编码，UTF-8, ASCII, Unicode 等。</p>
+<p>读取文件产生乱码的原因：保存时的编码格式和读取时的编码格式不一致，就可能产生乱码。</p>
+<p>文本文件：简单的解释，能被文本编辑器打开，且能正确识别内容的即是文本文件。</p>
+<p>File 类中有三个方法可以一次读取文件中的所有内容。</p>
+<p><code>File.ReadAllLines()</code> 该方法按行读取文件。需要一个路径字符串作为参数，另外有一个重载可以指定其读取时采用的编码方式，根据行数返回一个字符串类型的数组。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span>[] str = File.ReadAllLines(<span class="string">@"E:\test.txt"</span>, Encoding.UTF8);</div><div class="line"><span class="keyword">foreach</span> (<span class="keyword">string</span> t <span class="keyword">in</span> str) &#123;</div><div class="line">    Console.WriteLine(t);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>有时我们只是单纯的想把文本文件的内容读取出来，而不需要按行读取成数组，则可以使用 <code>File.ReadAllLines()</code>，它和 <code>File.ReadAllLines()</code>，需要的参数一样，且也有指定编码类型的重载，而它返回的是字符串类型的值。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span> str = File.ReadAllText(<span class="string">@"E:\test.txt"</span>,Encoding.UTF8);</div><div class="line">Console.WriteLine(str);</div></pre></td></tr></table></figure>
+<p>除了读取文本文件，还可以使用 <code>File.ReadAllBytes()</code> 来读取文件内容的字节形式。需要一个路径字符串作为参数，没有指定编码的重载，因为是是按字节读取，所以不需要编码。返回一个字节数组。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">byte</span>[] bytes = File.ReadAllBytes(<span class="string">@"E:\test.txt"</span>);</div><div class="line"><span class="keyword">string</span> str = Encoding.UTF8.GetString(bytes);</div><div class="line">Console.WriteLine(str);</div></pre></td></tr></table></figure>
+<p>使用 <code>Encoding.UTF8.GetString()</code> 来将字节数组按 UTF-8 编码转换为文本。</p>
+<h2 id="Directory"><a href="#Directory" class="headerlink" title="Directory"></a>Directory</h2><p>Directory 类用来操作文件夹。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">DelDir</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">try</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">//文件夹为空时删除</span></div><div class="line">        Directory.Delete(<span class="string">@"E:\abc"</span>);</div><div class="line">        Console.WriteLine(<span class="string">"目录为空，删除成功"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">catch</span> (Exception e)</div><div class="line">    &#123;</div><div class="line">        <span class="comment">//文件夹为非时删除</span></div><div class="line">        Directory.Delete(<span class="string">@"E:\abc"</span>, <span class="literal">true</span>);</div><div class="line">        Console.WriteLine(<span class="string">"目录非空，删除成功"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">MoveDir</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">try</span></div><div class="line">    &#123;</div><div class="line">        Directory.Move(<span class="string">@"E:\abc"</span>, <span class="string">@"E:\def"</span>);</div><div class="line">        Console.WriteLine(<span class="string">"移动成功"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">catch</span> (Exception e)</div><div class="line">    &#123;</div><div class="line">        Console.WriteLine(<span class="string">"该文件夹已存在"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">GetFileName</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="comment">//重载方法，指定搜索的文件名类型，不指定默认所有</span></div><div class="line">    <span class="comment">//string[] files = Directory.GetFiles(@"E:\abc","*.txt");</span></div><div class="line">    <span class="keyword">string</span>[] files = Directory.GetFiles(<span class="string">@"E:\abc"</span>);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; files.Length; i++)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span> index = files[i].LastIndexOf(<span class="string">"\\"</span>);</div><div class="line">        files[i] = files[i].Substring(index + <span class="number">1</span>);</div><div class="line">        Console.WriteLine(files[i]);</div><div class="line">    &#125;</div><div class="line">    Console.WriteLine(<span class="string">"读取文件名成功"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">GetDirName</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">string</span>[] dirs = Directory.GetDirectories(<span class="string">@"E:\abc"</span>);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dirs.Length; i++)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span> index = dirs[i].LastIndexOf(<span class="string">"\\"</span>);</div><div class="line">        dirs[i] = dirs[i].Substring(index + <span class="number">1</span>);</div><div class="line">        Console.WriteLine(dirs[i]);</div><div class="line">    &#125;</div><div class="line">    Console.WriteLine(<span class="string">"读取文件夹名成功"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">CreatDir</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">    Console.WriteLine(<span class="string">"文件夹不存在，创建文件夹"</span>);</div><div class="line">    Directory.CreateDirectory(<span class="string">@"E:\abc"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Path"><a href="#Path" class="headerlink" title="Path"></a>Path</h2><p>Path 类对路径字符串进行操作，对文件并没有影响。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span> path = <span class="string">@"E:\abc\test.txt"</span>;</div><div class="line"><span class="comment">//获取路径字符串中的文件名（包含后缀）</span></div><div class="line">Path.GetFileName(path);</div><div class="line"><span class="comment">//获取路径字符串中的文件名（不包含后缀）</span></div><div class="line">Path.GetFileNameWithoutExtension(path);</div><div class="line"><span class="comment">//获取路径字符串中文件名的后缀</span></div><div class="line">Path.GetExtension(path);</div><div class="line"><span class="comment">//获取路径字符串中文件所在的路径</span></div><div class="line">Path.GetDirectoryName(path);</div><div class="line"><span class="comment">//获取绝对路径</span></div><div class="line">Path.GetFullPath(path);</div><div class="line"><span class="comment">//改变路径字符串中文件名的后缀</span></div><div class="line">Path.ChangeExtension(path,<span class="string">"jpg"</span>)</div><div class="line"><span class="comment">//将路径字符串数组组合成路径</span></div><div class="line">Path.Combine(path1,path2,fileName);</div></pre></td></tr></table></figure>
+<p>绝对路径指从盘符开始的路径，例如 “E:\abc\test.txt” 。<br>相对路径指的是从当前路径开始的路径，这里当前路径指的就是可执行文件所在的路径，将 test.txt 放在当前项目的 Debug 文件夹下的 abc 文件夹下(可执行文件所在的文件夹)，那么它的相对路径就是 “abc/test.txt” 。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C#</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/24/C- 学习笔记-继承、new、this、里氏转换、File类/" rel="next" title="C# 学习笔记-继承、new、this、里氏转换、File类">
+                <i class="fa fa-chevron-left"></i> C# 学习笔记-继承、new、this、里氏转换、File类
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="可啦思刻" />
+          <p class="site-author-name" itemprop="name">可啦思刻</p>
+           
+              <p class="site-description motion-element" itemprop="description">你好，很高兴认识你。</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList"><span class="nav-number">1.</span> <span class="nav-text">ArrayList</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hashtable"><span class="nav-number">2.</span> <span class="nav-text">Hashtable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#File"><span class="nav-number">3.</span> <span class="nav-text">File</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Directory"><span class="nav-number">4.</span> <span class="nav-text">Directory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Path"><span class="nav-number">5.</span> <span class="nav-text">Path</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">可啦思刻</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+</body>
+</html>
