@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[xxx]]></title>
-    <url>%2F2017%2F05%2F27%2Fxxx%2F</url>
-    <content type="text"></content>
+    <title><![CDATA[C# 学习笔记-FileStream]]></title>
+    <url>%2F2017%2F05%2F27%2FC-%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-FileStream%2F</url>
+    <content type="text"><![CDATA[FileStreamFile 类可以方便的操作小文件，但是如果是操作大文件，速度就很慢。原因是因为 File 类采用的方式是一次性读写，会将文件一次性读取到内存当中，所以对内存的消耗很大，速度也比较慢。对于大文件的操作，一般使用 FileStream 文件流。 FileStream 用来操作字节、StreamWriter 和 StreamReader 用来操作字符。 FileStream 可以用来操作所有文件，StreamWriter 和 StreamReader 可操作文本文件。 使用 FileStream 读取文件 1234567891011121314//首先创建一个 FileStream 对象，指定要操作文件的路径、文件操作方式和文件数据操作方式FileStream stream = new FileStream(@"D:\test.txt", FileMode.OpenOrCreate, FileAccess.Read);//创建一个读取所需的字节数组，假设文件大小小于 bytes 大小byte[] bytes = new byte[1024 * 1024];//指定数据存放的字节数组、读取的开始和最多读取字节数，并返回读取的总字节数int r = stream.Read(bytes, 0, bytes.Length);//操作完成后，需要关闭和释放文件流stream.Close();stream.Dispose();//只需要字节数组中的有意义的数据转换为字符串//因为有意义数据的大小小于字节数组，所以字节数组中部分值为默认值 0，是无意义的string str = Encoding.Default.GetString(bytes, 0, r);Console.WriteLine(str);Console.ReadKey(); 使用 FileStram 写入文件 12345FileStream stream = new FileStream(@"D:\test2.txt", FileMode.OpenOrCreate, FileAccess.Write);byte[] bytes = Encoding.Default.GetBytes("你好");stream.Write(bytes,0,bytes.Length);stream.Close();stream.Dispose(); FileMode.OpenOrCreate 模式会把原来文件中的数据覆盖掉，所以可以使用 FileMode.Append 来追加写入数据。 使用 using(){} 的方式创建文件流对象，会在该代码块执行完成后，自动释放和关闭文件流。 12345using (FileStream stream = new FileStream(@"D:\test2.txt", FileMode.Append, FileAccess.Write))&#123; byte[] bytes = Encoding.Default.GetBytes("你好"); stream.Write(bytes, 0, bytes.Length);&#125;]]></content>
+      <tags>
+        <tag>C#</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[C# 学习笔记-ArrayLsit、Hashtable、File、Direcotry、Path]]></title>

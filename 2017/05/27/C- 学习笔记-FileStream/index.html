@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="cla55ic" />
+  <meta name="keywords" content="C#," />
 
 
 
@@ -87,15 +87,22 @@
 
 
 
-<meta name="description" content="你好，很高兴认识你。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="可啦思刻的博客">
-<meta property="og:url" content="https://cla55ic.github.io/tags/C/index.html">
+<meta name="description" content="FileStreamFile 类可以方便的操作小文件，但是如果是操作大文件，速度就很慢。原因是因为 File 类采用的方式是一次性读写，会将文件一次性读取到内存当中，所以对内存的消耗很大，速度也比较慢。对于大文件的操作，一般使用 FileStream 文件流。
+FileStream 用来操作字节、StreamWriter 和 StreamReader 用来操作字符。
+FileStream 可以用来">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C# 学习笔记-FileStream">
+<meta property="og:url" content="https://cla55ic.github.io/2017/05/27/C- 学习笔记-FileStream/index.html">
 <meta property="og:site_name" content="可啦思刻的博客">
-<meta property="og:description" content="你好，很高兴认识你。">
+<meta property="og:description" content="FileStreamFile 类可以方便的操作小文件，但是如果是操作大文件，速度就很慢。原因是因为 File 类采用的方式是一次性读写，会将文件一次性读取到内存当中，所以对内存的消耗很大，速度也比较慢。对于大文件的操作，一般使用 FileStream 文件流。
+FileStream 用来操作字节、StreamWriter 和 StreamReader 用来操作字符。
+FileStream 可以用来">
+<meta property="og:updated_time" content="2017-05-30T15:47:21.723Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="可啦思刻的博客">
-<meta name="twitter:description" content="你好，很高兴认识你。">
+<meta name="twitter:title" content="C# 学习笔记-FileStream">
+<meta name="twitter:description" content="FileStreamFile 类可以方便的操作小文件，但是如果是操作大文件，速度就很慢。原因是因为 File 类采用的方式是一次性读写，会将文件一次性读取到内存当中，所以对内存的消耗很大，速度也比较慢。对于大文件的操作，一般使用 FileStream 文件流。
+FileStream 用来操作字节、StreamWriter 和 StreamReader 用来操作字符。
+FileStream 可以用来">
 
 
 
@@ -123,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="https://cla55ic.github.io/tags/C/"/>
+  <link rel="canonical" href="https://cla55ic.github.io/2017/05/27/C- 学习笔记-FileStream/"/>
 
 
 
 
 
-  <title> 标签: C# | 可啦思刻的博客 </title>
+  <title> C# 学习笔记-FileStream | 可啦思刻的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -164,7 +171,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -282,302 +289,164 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        C#
-        <small>标签</small>
-      </h2>
-    </div>
-
+  <div id="posts" class="posts-expand">
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/05/27/C- 学习笔记-FileStream/" itemprop="url">
-              
-                <span itemprop="name">C# 学习笔记-FileStream</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-27T01:10:35+08:00"
-              content="2017-05-27" >
-          05-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/05/26/C- 学习笔记-ArrayLsit、Hashtable、File、Direcotry、Path/" itemprop="url">
-              
-                <span itemprop="name">C# 学习笔记-ArrayLsit、Hashtable、File、Direcotry、Path</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-26T19:51:42+08:00"
-              content="2017-05-26" >
-          05-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/05/24/C- 学习笔记-继承、new、this、里氏转换、File类/" itemprop="url">
-              
-                <span itemprop="name">C# 学习笔记-继承、new、this、里氏转换、File类</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-24T23:17:40+08:00"
-              content="2017-05-24" >
-          05-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/05/22/C- 学习笔记-类、对象和字符串/" itemprop="url">
-              
-                <span itemprop="name">C# 学习笔记-类、对象和字符串</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-22T21:02:46+08:00"
-              content="2017-05-22" >
-          05-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/05/21/C- 学习笔记-面向对象简介/" itemprop="url">
-              
-                <span itemprop="name">C# 学习笔记-面向对象简介</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-21T19:25:42+08:00"
-              content="2017-05-21" >
-          05-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/05/16/C- 基础语法练习-飞行棋游戏/" itemprop="url">
-              
-                <span itemprop="name">C# 基础语法练习-飞行棋游戏</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-16T00:00:28+08:00"
-              content="2017-05-16" >
-          05-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/05/10/C-入门经典-读书笔记-第七章-调试和错误处理/" itemprop="url">
-              
-                <span itemprop="name">[C#入门经典]读书笔记-第七章-调试和错误处理</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-10T22:08:07+08:00"
-              content="2017-05-10" >
-          05-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/05/07/C-入门经典-读书笔记-第六章-函数/" itemprop="url">
-              
-                <span itemprop="name">[C#入门经典]读书笔记-第六章-函数</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-07T17:54:02+08:00"
-              content="2017-05-07" >
-          05-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/05/03/C-入门经典-读书笔记-第五章-变量的更多内容/" itemprop="url">
-              
-                <span itemprop="name">[C#入门经典]读书笔记-第五章-变量的更多内容</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-03T00:49:55+08:00"
-              content="2017-05-03" >
-          05-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/04/16/C-入门经典-读书笔记-第四章-流程控制/" itemprop="url">
-              
-                <span itemprop="name">[C#入门经典]读书笔记-第四章-流程控制</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-04-16T22:56:07+08:00"
-              content="2017-04-16" >
-          04-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-  </div>
 
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/tags/C/page/2/">2</a><a class="extend next" rel="next" href="/tags/C/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
 
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://cla55ic.github.io/2017/05/27/C- 学习笔记-FileStream/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="可啦思刻">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="可啦思刻的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                C# 学习笔记-FileStream
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-27T01:10:35+08:00">
+                2017-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="FileStream"><a href="#FileStream" class="headerlink" title="FileStream"></a>FileStream</h2><p>File 类可以方便的操作小文件，但是如果是操作大文件，速度就很慢。原因是因为 File 类采用的方式是一次性读写，会将文件一次性读取到内存当中，所以对内存的消耗很大，速度也比较慢。对于大文件的操作，一般使用 FileStream 文件流。</p>
+<p>FileStream 用来操作字节、StreamWriter 和 StreamReader 用来操作字符。</p>
+<p>FileStream 可以用来操作所有文件，StreamWriter 和 StreamReader 可操作文本文件。</p>
+<p>使用 FileStream 读取文件</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//首先创建一个 FileStream 对象，指定要操作文件的路径、文件操作方式和文件数据操作方式</span></div><div class="line">FileStream stream = <span class="keyword">new</span> FileStream(<span class="string">@"D:\test.txt"</span>, FileMode.OpenOrCreate, FileAccess.Read);</div><div class="line"><span class="comment">//创建一个读取所需的字节数组，假设文件大小小于 bytes 大小</span></div><div class="line"><span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span> * <span class="number">1024</span>];</div><div class="line"><span class="comment">//指定数据存放的字节数组、读取的开始和最多读取字节数，并返回读取的总字节数</span></div><div class="line"><span class="keyword">int</span> r = stream.Read(bytes, <span class="number">0</span>, bytes.Length);</div><div class="line"><span class="comment">//操作完成后，需要关闭和释放文件流</span></div><div class="line">stream.Close();</div><div class="line">stream.Dispose();</div><div class="line"><span class="comment">//只需要字节数组中的有意义的数据转换为字符串</span></div><div class="line"><span class="comment">//因为有意义数据的大小小于字节数组，所以字节数组中部分值为默认值 0，是无意义的</span></div><div class="line"><span class="keyword">string</span> str = Encoding.Default.GetString(bytes, <span class="number">0</span>, r);</div><div class="line">Console.WriteLine(str);</div><div class="line">Console.ReadKey();</div></pre></td></tr></table></figure>
+<p>使用 FileStram 写入文件</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">FileStream stream = <span class="keyword">new</span> FileStream(<span class="string">@"D:\test2.txt"</span>, FileMode.OpenOrCreate, FileAccess.Write);</div><div class="line"><span class="keyword">byte</span>[] bytes = Encoding.Default.GetBytes(<span class="string">"你好"</span>);</div><div class="line">stream.Write(bytes,<span class="number">0</span>,bytes.Length);</div><div class="line">stream.Close();</div><div class="line">stream.Dispose();</div></pre></td></tr></table></figure>
+<p>FileMode.OpenOrCreate 模式会把原来文件中的数据覆盖掉，所以可以使用 FileMode.Append 来追加写入数据。</p>
+<p>使用 using(){} 的方式创建文件流对象，会在该代码块执行完成后，自动释放和关闭文件流。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">using</span> (FileStream stream = <span class="keyword">new</span> FileStream(<span class="string">@"D:\test2.txt"</span>, FileMode.Append, FileAccess.Write))</div><div class="line">&#123;</div><div class="line">    <span class="keyword">byte</span>[] bytes = Encoding.Default.GetBytes(<span class="string">"你好"</span>);</div><div class="line">    stream.Write(bytes, <span class="number">0</span>, bytes.Length);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C#</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/26/C- 学习笔记-ArrayLsit、Hashtable、File、Direcotry、Path/" rel="next" title="C# 学习笔记-ArrayLsit、Hashtable、File、Direcotry、Path">
+                <i class="fa fa-chevron-left"></i> C# 学习笔记-ArrayLsit、Hashtable、File、Direcotry、Path
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -585,6 +454,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -604,8 +477,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -658,6 +540,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#FileStream"><span class="nav-number">1.</span> <span class="nav-text">FileStream</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -752,6 +650,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 
