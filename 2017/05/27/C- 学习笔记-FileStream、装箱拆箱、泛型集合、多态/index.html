@@ -1,0 +1,948 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C#," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="FileStreamFile 类可以方便的操作小文件，但是如果是操作大文件，速度就很慢。原因是因为 File 类采用的方式是一次性读写，会将文件一次性读取到内存当中，所以对内存的消耗很大，速度也比较慢。对于大文件的操作，一般使用 FileStream 文件流。
+FileStream 用来操作字节、StreamWriter 和 StreamReader 用来操作字符。
+FileStream 可以用来">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C# 学习笔记-FileStream、装箱拆箱、泛型集合、多态">
+<meta property="og:url" content="https://cla55ic.github.io/2017/05/27/C- 学习笔记-FileStream、装箱拆箱、泛型集合、多态/index.html">
+<meta property="og:site_name" content="可啦思刻的博客">
+<meta property="og:description" content="FileStreamFile 类可以方便的操作小文件，但是如果是操作大文件，速度就很慢。原因是因为 File 类采用的方式是一次性读写，会将文件一次性读取到内存当中，所以对内存的消耗很大，速度也比较慢。对于大文件的操作，一般使用 FileStream 文件流。
+FileStream 用来操作字节、StreamWriter 和 StreamReader 用来操作字符。
+FileStream 可以用来">
+<meta property="og:updated_time" content="2017-06-01T14:30:54.260Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C# 学习笔记-FileStream、装箱拆箱、泛型集合、多态">
+<meta name="twitter:description" content="FileStreamFile 类可以方便的操作小文件，但是如果是操作大文件，速度就很慢。原因是因为 File 类采用的方式是一次性读写，会将文件一次性读取到内存当中，所以对内存的消耗很大，速度也比较慢。对于大文件的操作，一般使用 FileStream 文件流。
+FileStream 用来操作字节、StreamWriter 和 StreamReader 用来操作字符。
+FileStream 可以用来">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://cla55ic.github.io/2017/05/27/C- 学习笔记-FileStream、装箱拆箱、泛型集合、多态/"/>
+
+
+
+
+
+  <title> C# 学习笔记-FileStream、装箱拆箱、泛型集合、多态 | 可啦思刻的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2385a75ec51281bae03b58fccb06fb1c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">可啦思刻的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://cla55ic.github.io/2017/05/27/C- 学习笔记-FileStream、装箱拆箱、泛型集合、多态/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="可啦思刻">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="可啦思刻的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                C# 学习笔记-FileStream、装箱拆箱、泛型集合、多态
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-27T01:10:35+08:00">
+                2017-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="FileStream"><a href="#FileStream" class="headerlink" title="FileStream"></a>FileStream</h2><p>File 类可以方便的操作小文件，但是如果是操作大文件，速度就很慢。原因是因为 File 类采用的方式是一次性读写，会将文件一次性读取到内存当中，所以对内存的消耗很大，速度也比较慢。对于大文件的操作，一般使用 FileStream 文件流。</p>
+<p>FileStream 用来操作字节、StreamWriter 和 StreamReader 用来操作字符。</p>
+<p>FileStream 可以用来操作所有文件，StreamWriter 和 StreamReader 可操作文本文件。</p>
+<p>使用 FileStream 读取文件</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 首先创建一个 FileStream 对象，指定要操作文件的路径、文件操作方式和文件数据操作方式</span></div><div class="line">FileStream stream = <span class="keyword">new</span> FileStream(<span class="string">@"D:\test.txt"</span>, FileMode.OpenOrCreate, FileAccess.Read);</div><div class="line"><span class="comment">// 创建一个读取所需的字节数组，假设文件大小小于 bytes 大小</span></div><div class="line"><span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span> * <span class="number">1024</span>];</div><div class="line"><span class="comment">// 指定数据存放的字节数组、读取的开始和最多读取字节数，并返回读取的总字节数</span></div><div class="line"><span class="keyword">int</span> r = stream.Read(bytes, <span class="number">0</span>, bytes.Length);</div><div class="line"><span class="comment">// 操作完成后，需要关闭和释放文件流</span></div><div class="line">stream.Close();</div><div class="line">stream.Dispose();</div><div class="line"><span class="comment">// 只需要字节数组中的有意义的数据转换为字符串</span></div><div class="line"><span class="comment">// 因为有意义数据的大小小于字节数组，所以字节数组中部分值为默认值 0，是无意义的</span></div><div class="line"><span class="keyword">string</span> str = Encoding.Default.GetString(bytes, <span class="number">0</span>, r);</div><div class="line">Console.WriteLine(str);</div><div class="line">Console.ReadKey();</div></pre></td></tr></table></figure>
+<p>使用 FileStream 写入文件</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">FileStream stream = <span class="keyword">new</span> FileStream(<span class="string">@"D:\test2.txt"</span>, FileMode.OpenOrCreate, FileAccess.Write);</div><div class="line"><span class="keyword">byte</span>[] bytes = Encoding.Default.GetBytes(<span class="string">"你好"</span>);</div><div class="line">stream.Write(bytes,<span class="number">0</span>,bytes.Length);</div><div class="line">stream.Close();</div><div class="line">stream.Dispose();</div></pre></td></tr></table></figure>
+<p>FileMode.OpenOrCreate 模式会把原来文件中的数据覆盖掉，所以可以使用 FileMode.Append 来追加写入数据。</p>
+<p>使用 using(){} 的方式创建文件流对象，会在该代码块执行完成后，自动释放和关闭文件流。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">using</span> (FileStream stream = <span class="keyword">new</span> FileStream(<span class="string">@"D:\test2.txt"</span>, FileMode.Append, FileAccess.Write))</div><div class="line">&#123;</div><div class="line">    <span class="keyword">byte</span>[] bytes = Encoding.Default.GetBytes(<span class="string">"你好"</span>);</div><div class="line">    stream.Write(bytes, <span class="number">0</span>, bytes.Length);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>FileStream 更多的用于对大文件的读写操作</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">CopyFile</span>(<span class="params"><span class="keyword">string</span> source, <span class="keyword">string</span> target</span>) </span>&#123;</div><div class="line">    <span class="comment">// 分别使用 using 的方式创建两个 FileStream 对象，分别用来读和写</span></div><div class="line">    <span class="keyword">using</span> (FileStream reader = <span class="keyword">new</span> FileStream( source, FileMode.OpenOrCreate, FileAccess.Read)) &#123;</div><div class="line">        <span class="keyword">using</span> (FileStream writer = <span class="keyword">new</span> FileStream( target, FileMode.OpenOrCreate, FileAccess.Write)) &#123;</div><div class="line">            <span class="comment">// 定义一个用于缓存的字节数组，这里定义的长度为 2M ，也就是每次最大读写 2M 的数据</span></div><div class="line">            <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>*<span class="number">1024</span>*<span class="number">2</span>];</div><div class="line">            <span class="keyword">int</span> r = reader.Read(buffer, <span class="number">0</span>, buffer.Length);</div><div class="line">            <span class="comment">// 判断 Read 方法返回的读取的有效字节数</span></div><div class="line">            <span class="keyword">while</span> (r &gt; <span class="number">0</span>) &#123;</div><div class="line">                <span class="comment">// 写入读取到的有效字节数大小的数据</span></div><div class="line">                writer.Write(buffer,<span class="number">0</span>,r);</div><div class="line">                <span class="comment">// 进行下一次读取</span></div><div class="line">                r = reader.Read(buffer, <span class="number">0</span>, buffer.Length);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用 StreamReader 读取文本数据</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 两个参数分别为目标文件路径、指定写入编码方式。该函数具有多个重载</span></div><div class="line"><span class="keyword">using</span> (StreamReader reader = <span class="keyword">new</span> StreamReader(<span class="string">@"C:\Users\47641\Desktop\test.txt"</span>, Encoding.Default))</div><div class="line">&#123;</div><div class="line">    <span class="comment">// 当读取到结尾时跳出</span></div><div class="line">    <span class="keyword">while</span> (!reader.EndOfStream)</div><div class="line">    &#123;</div><div class="line">        <span class="comment">// 逐行读取，另外也有整个数据读取的函数</span></div><div class="line">        Console.WriteLine(reader.ReadLine());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用 StreamWriter 写入文本数据</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 三个参数分别为目标文件路径、是否追加、指定写入编码方式。该函数具有多个重载</span></div><div class="line"><span class="keyword">using</span> (StreamWriter writer = <span class="keyword">new</span> StreamWriter(<span class="string">@"D:\test.txt"</span>,<span class="literal">true</span>,Encoding.Default)) &#123;</div><div class="line">    writer.Write(<span class="string">"你好"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="装箱和拆箱"><a href="#装箱和拆箱" class="headerlink" title="装箱和拆箱"></a>装箱和拆箱</h2><p>装箱：将值类型转换为引用类型，且两类型有继承关系<br>拆箱：将引用类型转换为值类型，且两类型有继承关系</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> num = <span class="number">10</span>;</div><div class="line"><span class="comment">// object 类是一切类型的父类，object 为引用类型， int 为值类型，所以这里发生了一次装箱操作</span></div><div class="line"><span class="keyword">object</span> obj = num;</div><div class="line"><span class="comment">// object 为引用类型， int 为值类型，所以这里发生了一次拆箱操作</span></div><div class="line">num = (<span class="keyword">int</span>) obj;</div></pre></td></tr></table></figure>
+<p>两者没有继承关系的，不属于装拆箱操作。（即使有关系，有时也不是装拆箱子操作???）</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span> str = <span class="string">"123"</span>;</div><div class="line"><span class="keyword">int</span> num = Convert.ToInt32(str);</div></pre></td></tr></table></figure>
+<p>装箱和拆箱的操作，转换类型要统一</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> num = <span class="number">10</span>;</div><div class="line"><span class="keyword">object</span> obj = num;</div><div class="line"><span class="keyword">double</span> num2 = (<span class="keyword">double</span>) obj;</div><div class="line"><span class="comment">// error: 指定的转换无效。</span></div></pre></td></tr></table></figure>
+<p>在程序中，要尽量少的进行这种操作，因为装箱和拆箱都涉及到类型转换，转换量大之后会明显的影响程序运行效率。</p>
+<h2 id="泛型集合"><a href="#泛型集合" class="headerlink" title="泛型集合"></a>泛型集合</h2><p>两个泛型集合：List 和 Dictionary ，分别对应集合 ArrayList 和 Hashtable 。泛型集合相对于数组的好处就是长度不固定，相对于集合的好处就是不涉及到装箱和拆箱的操作，因为泛型集合是长度固定的，这也是泛型集合的缺点。</p>
+<p>泛型集合的添加单个元素、添加集合元素、删除元素、清空数组和排序等等的方式和集合一样。</p>
+<p>泛型集合在名称空间 <code>System.Collections.Generic</code> 下。</p>
+<p>泛型集合的声明方式如下</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// List</span></div><div class="line">List&lt;<span class="keyword">int</span>&gt; list = <span class="keyword">new</span> List&lt;<span class="keyword">int</span>&gt;();</div><div class="line"><span class="comment">// Dictionary</span></div><div class="line">Dictionary&lt;<span class="keyword">string</span>, <span class="keyword">int</span>&gt; dictionary = <span class="keyword">new</span> Dictionary&lt;<span class="keyword">string</span>, <span class="keyword">int</span>&gt;();</div></pre></td></tr></table></figure>
+<p>List 集合转换为数组</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 返回的数组类型由集合的类型的类型决定</span></div><div class="line">list.ToArray();</div></pre></td></tr></table></figure>
+<p>之前遍历 Hashtable 集合的时候是遍历集合中的键，这里由于 Dictionary 在创建对象时已经固定了键值对的类型，所以可以直接遍历键值对</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">foreach</span> (KeyValuePair&lt;<span class="keyword">string</span>, <span class="keyword">int</span>&gt; item <span class="keyword">in</span> dictionary) &#123;</div><div class="line">    Console.WriteLine(<span class="string">"&#123;0&#125;--&#123;1&#125;"</span>,item.Key,item.Value);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Dictionary 练习，忽略大小写和空格，统计字符出现次数</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span> str = <span class="string">"Welcome to China"</span>.ToLower().Replace(<span class="string">" "</span>, <span class="string">""</span>);</div><div class="line"></div><div class="line">Dictionary&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt; dictionary = <span class="keyword">new</span> Dictionary&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt;();</div><div class="line"><span class="keyword">foreach</span> (<span class="keyword">char</span> key <span class="keyword">in</span> str)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (dictionary.ContainsKey(key))</div><div class="line">    &#123;</div><div class="line">        dictionary[key] += <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        dictionary.Add(key, <span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>让一个对象表现出多种状态（类型）</p>
+<p>实现多态的三种方法</p>
+<ol>
+<li>虚方法</li>
+<li>抽象类</li>
+<li>接口</li>
+</ol>
+<p>//屏蔽对象间差异性，减少代码量</p>
+<p>多态的使用场景</p>
+<p>首先定义三个类，人类和继承于人类的教师类和学生类</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Person</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SayHello</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        Console.WriteLine(<span class="string">"我是人类"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Teacher</span> : <span class="title">Person</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SayHello</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        Console.WriteLine(<span class="string">"我是教师"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Student</span> : <span class="title">Person</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SayHello</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        Console.WriteLine(<span class="string">"我是学生"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>两个子类中分别有各自的 SayHello 方法，覆盖了父类中的 SayHello 方法。</p>
+<p>在主函数中编写如下代码</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">List&lt;Person&gt; persons = <span class="keyword">new</span> List&lt;Person&gt;();</div><div class="line">Student student = <span class="keyword">new</span> Student();</div><div class="line">Teacher teacher = <span class="keyword">new</span> Teacher();</div><div class="line">persons.Add(student);</div><div class="line">persons.Add(teacher);</div><div class="line"><span class="keyword">foreach</span> (<span class="keyword">var</span> person <span class="keyword">in</span> persons) &#123;</div><div class="line">    <span class="keyword">if</span>(person <span class="keyword">is</span> Student)</div><div class="line">        ((Student)person).SayHello();</div><div class="line">    <span class="keyword">else</span></div><div class="line">        ((Teacher)person).SayHello();</div><div class="line">&#125;</div><div class="line">Console.ReadKey();</div></pre></td></tr></table></figure>
+<p>可以看到这里如果想调用各子类的 SayHello 方法，需要逐一的进行判断。多态就可以解决这种问题，下面是使用虚方法来实现多态的示例</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//在父类中的方法上加上 virtual 关键字，代表此方法为虚方法</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">SayHello</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    Console.WriteLine(<span class="string">"我是人类"</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">//在子类的方法上加上 override 关键字，代表此方法重写了父类的瞳名方法</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">SayHello</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    Console.WriteLine(<span class="string">"我是教师"</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">//在主函数中就不需要进行判断，只要直接调用该方法就可以</span></div><div class="line">person.SayHello();</div></pre></td></tr></table></figure>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*使用抽象类实现多态</span></div><div class="line"></div><div class="line">当父类中的方法没有意义时（eg），可以使用抽象类</div><div class="line">抽象类不能被实例化</div><div class="line">抽象方法存在的意义就是被子类重写</div><div class="line">抽象方法没有方法体</div><div class="line">抽象成员必须在抽象类中</div><div class="line">继承于抽象类的子类必须重写父类中的抽象成员</div><div class="line"></div><div class="line">虚方法实现多态该方法需要有方法体，子类可以重写方法。</div><div class="line">抽象方法实现多态该方法不许有方法体，子类必须重写方法，除非子类也是抽象类则可以不重写。</div><div class="line"></div><div class="line">父类需要被实例化、父类中的方法是有意义的用虚方法。父类不需要被实例化、父类中的方法没有意义用抽象类。</div><div class="line">*/</div></pre></td></tr></table></figure>
+<p>如果父类中的方法有默认的实现（方法有意义），并且父类需要被实例化，那么可以考虑将使用虚方法来实现多态。</p>
+<p>如果父类中的方法没有默认实现（方法没有意义），并且父类不需要被实例化，那么可以将该父类定义为抽象类来实现多态。</p>
+<p>使用抽象类实现多态的示例</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title">Shape</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">double</span> <span class="title">GetArea</span>(<span class="params"></span>)</span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">double</span> <span class="title">GetPerimeter</span>(<span class="params"></span>)</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Circle</span> : <span class="title">Shape</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Circle</span>(<span class="params"><span class="keyword">double</span> r</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.R = r;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">double</span> R &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">double</span> <span class="title">GetArea</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> Math.PI * <span class="keyword">this</span>.R * <span class="keyword">this</span>.R;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">double</span> <span class="title">GetPerimeter</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">2</span> * Math.PI * <span class="keyword">this</span>.R;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Oblong</span> : <span class="title">Shape</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Oblong</span>(<span class="params"><span class="keyword">double</span> length, <span class="keyword">double</span> width</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.Length = length;</div><div class="line">        <span class="keyword">this</span>.Width = width;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">double</span> Length &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">double</span> Width &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">double</span> <span class="title">GetArea</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.Length * <span class="keyword">this</span>.Width;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">double</span> <span class="title">GetPerimeter</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> (<span class="keyword">this</span>.Length + <span class="keyword">this</span>.Width)*<span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>编写完成抽象父类，和其子类后，就可以在主函数中这样实现多态。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Shape shape = <span class="keyword">new</span> Oblong(<span class="number">2</span>,<span class="number">3</span>);</div><div class="line">Console.WriteLine(<span class="string">"面积：&#123;0&#125;，周长：&#123;1&#125;"</span>,shape.GetArea(),shape.GetPerimeter());</div><div class="line">Console.ReadKey();</div></pre></td></tr></table></figure>
+<p>抽象类的要点</p>
+<ol>
+<li>使用 abstract 修饰抽象类和抽象方法。仍然使用 override 来表示重写父类的方法。</li>
+<li>被标记为 abstract 的抽象成员，不能有方法体。</li>
+<li>抽象成员只能在抽象类中。</li>
+<li>抽象类不能被实例化。但是抽象类是有构造函数的</li>
+<li>继承于抽象类的子类必须重写父类中的抽象成员，除非子类也是抽象类。而子类继承的普通父类中的虚方法，子类可以选择性的重写。</li>
+<li>抽象类的成员不能被 private 修饰，因为这与第 5 条矛盾。</li>
+<li>在抽象类中可以有实例成员，作用是被子类所继承，同样的，抽象方法存在的作用就是被子类重写。</li>
+<li>在子类中重写抽象父类的中的抽象方法时，需要保证函数的签名和返回值一致。</li>
+</ol>
+<p>抽象方法与虚方法的的区别如下表</p>
+<table>
+<thead>
+<tr>
+<th>虚方法</th>
+<th>抽象方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用 virtual 修饰</td>
+<td>用 abstract 修饰</td>
+</tr>
+<tr>
+<td>有方法体</td>
+<td>没有方法体</td>
+</tr>
+<tr>
+<td>可以被子类重写</td>
+<td>必须被子类重写</td>
+</tr>
+<tr>
+<td>除了密封类都可以写</td>
+<td>只能写在抽象类中</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C#</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/26/C- 学习笔记-ArrayLsit、Hashtable、File、Direcotry、Path/" rel="next" title="C# 学习笔记-ArrayLsit、Hashtable、File、Direcotry、Path">
+                <i class="fa fa-chevron-left"></i> C# 学习笔记-ArrayLsit、Hashtable、File、Direcotry、Path
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="可啦思刻" />
+          <p class="site-author-name" itemprop="name">可啦思刻</p>
+           
+              <p class="site-description motion-element" itemprop="description">你好，很高兴认识你。</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#FileStream"><span class="nav-number">1.</span> <span class="nav-text">FileStream</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#装箱和拆箱"><span class="nav-number">2.</span> <span class="nav-text">装箱和拆箱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泛型集合"><span class="nav-number">3.</span> <span class="nav-text">泛型集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多态"><span class="nav-number">4.</span> <span class="nav-text">多态</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">可啦思刻</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+</body>
+</html>
