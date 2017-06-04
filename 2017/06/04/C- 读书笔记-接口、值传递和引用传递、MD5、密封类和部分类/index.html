@@ -1,0 +1,909 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C#," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="接口类只能继承一个父类，而可以继承多个接口。
+接口是一种规范，类只要继承了接口，就必须实现接口中的方法(继承抽象类叫做重写方法)。
+也可以说接口表示一种能力，继承了该接口，就有了该接口中标明的能力，所以接口的命名一般以 I 开头，以 able 结尾。代表我这个类可以了做什么，拥有了某种能力。
+接口的声明语法：[public] interface Iflyable 。
+接口中的成员不能有实现，且不能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C# 读书笔记-接口、值传递和引用传递、MD5、密封类和部分类">
+<meta property="og:url" content="https://cla55ic.github.io/2017/06/04/C- 读书笔记-接口、值传递和引用传递、MD5、密封类和部分类/index.html">
+<meta property="og:site_name" content="可啦思刻的博客">
+<meta property="og:description" content="接口类只能继承一个父类，而可以继承多个接口。
+接口是一种规范，类只要继承了接口，就必须实现接口中的方法(继承抽象类叫做重写方法)。
+也可以说接口表示一种能力，继承了该接口，就有了该接口中标明的能力，所以接口的命名一般以 I 开头，以 able 结尾。代表我这个类可以了做什么，拥有了某种能力。
+接口的声明语法：[public] interface Iflyable 。
+接口中的成员不能有实现，且不能">
+<meta property="og:updated_time" content="2017-06-04T14:51:24.387Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C# 读书笔记-接口、值传递和引用传递、MD5、密封类和部分类">
+<meta name="twitter:description" content="接口类只能继承一个父类，而可以继承多个接口。
+接口是一种规范，类只要继承了接口，就必须实现接口中的方法(继承抽象类叫做重写方法)。
+也可以说接口表示一种能力，继承了该接口，就有了该接口中标明的能力，所以接口的命名一般以 I 开头，以 able 结尾。代表我这个类可以了做什么，拥有了某种能力。
+接口的声明语法：[public] interface Iflyable 。
+接口中的成员不能有实现，且不能">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://cla55ic.github.io/2017/06/04/C- 读书笔记-接口、值传递和引用传递、MD5、密封类和部分类/"/>
+
+
+
+
+
+  <title> C# 读书笔记-接口、值传递和引用传递、MD5、密封类和部分类 | 可啦思刻的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2385a75ec51281bae03b58fccb06fb1c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">可啦思刻的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://cla55ic.github.io/2017/06/04/C- 读书笔记-接口、值传递和引用传递、MD5、密封类和部分类/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="可啦思刻">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="可啦思刻的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                C# 读书笔记-接口、值传递和引用传递、MD5、密封类和部分类
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-04T18:01:07+08:00">
+                2017-06-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>类只能继承一个父类，而可以继承多个接口。</p>
+<p>接口是一种规范，类只要继承了接口，就必须实现接口中的方法(继承抽象类叫做重写方法)。</p>
+<p>也可以说接口表示一种能力，继承了该接口，就有了该接口中标明的能力，所以接口的命名一般以 I 开头，以 able 结尾。代表我这个类可以了做什么，拥有了某种能力。</p>
+<p>接口的声明语法：<code>[public] interface Iflyable</code> 。</p>
+<p>接口中的成员不能有实现，且不能有访问修饰符（默认为 public）。</p>
+<p>一个类继承了一个接口，就必须实现该接口中的成员。</p>
+<p>接口和抽象类一样，不能被实例化。</p>
+<p>接口中只能有方法、属性、索引器、事件、不能有字段和构造函数。属性、事件和索引器本质上也是方法，所以接口中只能有方法(除了构造函数)。</p>
+<p>接口与接口之间可以继承，而且可以多继承。接口不能继承类。</p>
+<p>子类同时继承父类和接口时，父类应该写在前，各类和接口用逗号分隔。</p>
+<p>下面是接口的简单示例</p>
+<p>定义一个鸟类，有体重、尺寸属性，和吃、和的抽象方法。<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title">Bird</span> </div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">string</span> Weight &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">double</span> Size &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">Drink</span>(<span class="params"></span>)</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">Eat</span>(<span class="params"></span>)</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>但不是所有的鸟都会飞，所以 飞 的方法，不能写在抽象类鸟类当中，因为类似鸵鸟、企鹅也要继承鸟类，但是他们不会飞，所以飞的方法不能写在抽象类鸟类之中，但也有不少的鸟类飞，所以将飞的方法写在各子类中，也会增加代码的冗余性，所以这时就可以将飞的方法写成接口，让各个会飞的鸟继承该接口，就代表它们拥有了飞的能力。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IFlyable</span> </div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Fly</span>(<span class="params"></span>)</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>定义各个鸟子类，使它们继承 Bird 父类，会飞的鸟同时继承 IFly 接口。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">//会飞的鸟继承 IFlyable 接口，必须实现 IFlyable 接口中的 Fly 方法</div><div class="line">public class Sparrow : Bird, IFlyable</div><div class="line">&#123;</div><div class="line">    public override void Eat()</div><div class="line">    &#123;</div><div class="line">        Console.WriteLine("麻雀吃");</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public override void Drink()</div><div class="line">    &#123;</div><div class="line">        Console.WriteLine("麻雀喝");</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void Fly()</div><div class="line">    &#123;</div><div class="line">        Console.WriteLine("麻雀飞");</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//不会飞的鸟只继承 Bird 父类，</div><div class="line">public class Ostrich : Bird </div><div class="line">&#123;</div><div class="line">    public override void Eat()</div><div class="line">    &#123;</div><div class="line">        Console.WriteLine("鸵鸟吃");</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public override void Drink()</div><div class="line">    &#123;</div><div class="line">        Console.WriteLine("鸵鸟喝");</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接口实现多态</p>
+<p>继续定义一个鹦鹉类继承 IFlyable 接口</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">public class Parrot : Bird, IFlyable</div><div class="line">&#123;</div><div class="line">    public override void Eat()</div><div class="line">    &#123;</div><div class="line">        Console.WriteLine("鹦鹉吃");</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public override void Drink()</div><div class="line">    &#123;</div><div class="line">        Console.WriteLine("鹦鹉喝");</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void Fly()</div><div class="line">    &#123;</div><div class="line">        Console.WriteLine("鹦鹉飞");</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样就可以用接口实现多态</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//这种使用接口创建出来的对象，只能使用接口中标明的方法，</span></div><div class="line">IFlyable fly = <span class="keyword">new</span> Sparrow();</div><div class="line"><span class="comment">//fly 对象不能使用 Sparrow 类中的 Eat 和 Drink 方法。</span></div><div class="line">fly.Fly();</div><div class="line">fly = <span class="keyword">new</span> Parrot();</div><div class="line">fly.Fly();</div></pre></td></tr></table></figure>
+<p>输出</p>
+<blockquote>
+<p>麻雀飞<br>鹦鹉飞</p>
+</blockquote>
+<p>显式的实现接口</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> IFlyable.Fly()</div><div class="line">&#123;</div><div class="line">    Console.WriteLine(<span class="string">"麻雀飞"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>显示实现接口是解决方法重名的问题，也就是继承接口的类中的方法和接口中的方法名称参数一致时的问题。</p>
+<p>当方法的签名(方法名和参数一致时)，需要使用显式的方式实现接口。</p>
+<p>这种方式编写的方法只能通过 <code>IFlyable fly = new Sparrow(); fly.Fly();</code> 来调用。</p>
+<p>当一个抽象类实现接口的时候，需要子类去实现接口，因为抽象类实现接口并没有意义（无法调用）。必须使用该抽象类的子类才能调用。</p>
+<p>尽量不要让一个父类去继承接口，因为父类继承接口，就代表所有继承于该父类的子类，都拥有这个能力，但是可能有些子类不需要或者不能有这个能力，这就出现了设计上的错误。假设所有的子类都用有该能力，那么不如在父类中编写该能力(方法)，让子类直接去继承。</p>
+<p>谁需要这个接口（拥有这个能力），谁去继承这个接口。</p>
+<p>疑问：飞行生物父类的所有子类都可以飞，飞机父类的所有子类也都可以飞，如果单独在每个父类中编写飞的方法，是否是代码冗余。是否应该提供一个飞的接口，让两个父类去继承？</p>
+<h2 id="值传递和引用传递"><a href="#值传递和引用传递" class="headerlink" title="值传递和引用传递"></a>值传递和引用传递</h2><p>值类型：int double decimal char bool struct enum<br>引用类型：string 数组 集合 自定义类 接口</p>
+<p>值传递就是传递值，引用传递就是传递地址。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//主函数中</span></div><div class="line"><span class="keyword">int</span> n = <span class="number">10</span>;</div><div class="line">Test(n);</div><div class="line">Console.WriteLine(n);</div><div class="line"></div><div class="line"><span class="comment">//Test 函数</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Test</span>(<span class="params"><span class="keyword">int</span> n</span>) </span>&#123;</div><div class="line">    n += <span class="number">10</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>此时在主函数中输出仍然是 10，因为传递给 Test 函数的是值 10，并非 n 在栈上的地址，所以即使在 Test 函数中改变 n 的时，也和主函数中的 n 没有关系。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//定义一个Person类，Person 属于引用类型</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Person</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">string</span> Name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">// Test 函数需要一个 Peson 对象，在函数内部改变该对象的 Name 的值</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Test</span>(<span class="params">Person p</span>)</span></div><div class="line">&#123;</div><div class="line">    p.Name = <span class="string">"李四"</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//主函数中定义 Person 对象并为 Name 赋值，传递给 Test 函数后，输出该对象的 Name 值。</span></div><div class="line">Person p = <span class="keyword">new</span> Person();</div><div class="line">p.Name = <span class="string">"张三"</span>;</div><div class="line">Test(p);</div><div class="line">Console.WriteLine(p.Name);</div></pre></td></tr></table></figure>
+<p>输出</p>
+<blockquote>
+<p>李四</p>
+</blockquote>
+<p>因为创建 Person 对象后，Person 对象存储在了堆中，在栈中存储了该对象在堆中的值，调用 Test 函数传递对象是引用传递，而引用传递传递的是地址，所以传递后在栈上新开了一个空间，该空间仍然存储了那个 Person 对象的地址。此时栈上的两个空间都同时指向了堆上的同一位置。在 Test 函数中改变对象 Peson 的 Name 的值，两个引用都会发生改变。</p>
+<h2 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h2><p>MD5 加密简单示例</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">string</span> <span class="title">GetMD5</span>(<span class="params"><span class="keyword">string</span> str</span>) </span>&#123;</div><div class="line">    MD5 md5 = MD5.Create();</div><div class="line">    <span class="keyword">byte</span>[] bytes = Encoding.Default.GetBytes(str);</div><div class="line">    bytes = md5.ComputeHash(bytes);</div><div class="line">    str = String.Empty;</div><div class="line">    <span class="keyword">foreach</span> (<span class="keyword">byte</span> b <span class="keyword">in</span> bytes) &#123;</div><div class="line">        <span class="comment">//这里 x2 是指定 ToString 的转换方式</span></div><div class="line">        <span class="comment">//x2 只是其中一种受支持的格式，更多格式查阅 MSDN</span></div><div class="line">        str += b.ToString(<span class="string">"x2"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> str;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="sealed-和-partial"><a href="#sealed-和-partial" class="headerlink" title="sealed 和 partial"></a>sealed 和 partial</h2><p>sealed 和 partial 都用来修饰类。</p>
+<p>被 sealed 修饰的类表示密封类，意思是该类不能再被继承。</p>
+<p>被 partial 修饰的类表示部分类，意思是可以同时定义多个同名称的类，该类中的成员有两个类共同确定。</p>
+<p>密封类和部分类的简单示例</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//密封类，该类不能被继承，但可以继承其他类</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">sealed</span> <span class="keyword">class</span> <span class="title">Bird</span>:<span class="title">Animal</span> &#123;</div><div class="line">    <span class="comment">//balabala...            </span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//部分类</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">partial</span> <span class="keyword">class</span> <span class="title">Person</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span>(<span class="params"><span class="keyword">string</span> name</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.Name = name;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">string</span> Name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">partial</span> <span class="keyword">class</span> <span class="title">Person</span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SayHello</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        Console.WriteLine(<span class="string">"你好，我叫&#123;0&#125;。"</span>,<span class="keyword">this</span>.Name);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//主函数创建 Person 类并调用其中方法</span></div><div class="line"><span class="comment">//在处理大型项目或自动生成的代码（如 Windows 窗体设计器提供的代码）时，在多个文件间拆分类、结构或接口类型可能会非常有用。</span></div><div class="line">Person p = <span class="keyword">new</span> Person(<span class="string">"张三"</span>);</div><div class="line">p.SayHello();</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C#</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/01/C- 学习笔记-访问修饰符、简单工厂设计模式、序列化和反序列化/" rel="next" title="C# 学习笔记-访问修饰符、简单工厂设计模式、序列化和反序列化">
+                <i class="fa fa-chevron-left"></i> C# 学习笔记-访问修饰符、简单工厂设计模式、序列化和反序列化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="可啦思刻" />
+          <p class="site-author-name" itemprop="name">可啦思刻</p>
+           
+              <p class="site-description motion-element" itemprop="description">你好，很高兴认识你。</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#接口"><span class="nav-number">1.</span> <span class="nav-text">接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#值传递和引用传递"><span class="nav-number">2.</span> <span class="nav-text">值传递和引用传递</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MD5"><span class="nav-number">3.</span> <span class="nav-text">MD5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sealed-和-partial"><span class="nav-number">4.</span> <span class="nav-text">sealed 和 partial</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">可啦思刻</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+</body>
+</html>
