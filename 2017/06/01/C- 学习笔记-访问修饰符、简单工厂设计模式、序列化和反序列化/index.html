@@ -97,7 +97,7 @@
 <meta property="og:description" content="访问修饰符public : 公开的、公共的private : 私有的，只能在当前类的内部访问protected : 受保护的，只能在当前类的内部和其子类内部访问internal : 只能在当前程序集中访问protect internal : protected + internal
 类的访问修饰符只有两个：public 和 internal
 在同一个程序集中比较，internal 的权限要高于 p">
-<meta property="og:updated_time" content="2017-06-04T09:36:49.902Z">
+<meta property="og:updated_time" content="2017-06-10T09:30:25.043Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C# 学习笔记-访问修饰符、简单工厂设计模式、序列化和反序列化">
 <meta name="twitter:description" content="访问修饰符public : 公开的、公共的private : 私有的，只能在当前类的内部访问protected : 受保护的，只能在当前类的内部和其子类内部访问internal : 只能在当前程序集中访问protect internal : protected + internal
@@ -375,6 +375,7 @@
 <p>类的访问修饰符只有两个：public 和 internal</p>
 <p>在同一个程序集中比较，internal 的权限要高于 protected ，因为 internal 的权限是当前程序集内部，而 protected 的权限是当前类和其子类内部。</p>
 <p>在多个程序集中比较，假设程序集 A 中有被 public 修饰的 Person 类，其中有被 protected 修饰的 Name 属性和被 internal 修饰的 Age 属性。<br>如果在程序集 B 中有 Student 类继承了 Person 类，则在 B 程序集中可以访问到 Name，而访问不到 Age 。此时 protected 的权限要高于 internal 。</p>
+<p>子类的访问修饰符权限不能高于父类的访问修饰符权限，因为这样可能暴露父类中的成员。</p>
 <h2 id="简单工厂设计模式"><a href="#简单工厂设计模式" class="headerlink" title="简单工厂设计模式"></a>简单工厂设计模式</h2><p>设计模式</p>
 <blockquote>
 <p>设计模式是软件开发人员在软件开发过程中面临的一般问题的解决方案。这些解决方案是众多软件开发人员经过相当长的一段时间的试验和错误总结出来的。</p>
@@ -452,8 +453,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/04/C- 读书笔记-接口、值传递和引用传递、MD5、密封类和部分类/" rel="prev" title="C# 读书笔记-接口、值传递和引用传递、MD5、密封类和部分类">
-                C# 读书笔记-接口、值传递和引用传递、MD5、密封类和部分类 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/04/C- 学习笔记-接口、值传递和引用传递、MD5、密封类和部分类/" rel="prev" title="C# 学习笔记-接口、值传递和引用传递、MD5、密封类和部分类">
+                C# 学习笔记-接口、值传递和引用传递、MD5、密封类和部分类 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -526,7 +527,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

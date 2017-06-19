@@ -93,17 +93,17 @@
 接口的声明语法：[public] interface Iflyable 。
 接口中的成员不能有实现，且不能">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C# 读书笔记-接口、值传递和引用传递、MD5、密封类和部分类">
-<meta property="og:url" content="https://cla55ic.github.io/2017/06/04/C- 读书笔记-接口、值传递和引用传递、MD5、密封类和部分类/index.html">
+<meta property="og:title" content="C# 学习笔记-接口、值传递和引用传递、MD5、密封类和部分类">
+<meta property="og:url" content="https://cla55ic.github.io/2017/06/04/C- 学习笔记-接口、值传递和引用传递、MD5、密封类和部分类/index.html">
 <meta property="og:site_name" content="可啦思刻的博客">
 <meta property="og:description" content="接口类只能继承一个父类，而可以继承多个接口。
 接口是一种规范，类只要继承了接口，就必须实现接口中的方法(继承抽象类叫做重写方法)。
 也可以说接口表示一种能力，继承了该接口，就有了该接口中标明的能力，所以接口的命名一般以 I 开头，以 able 结尾。代表我这个类可以了做什么，拥有了某种能力。
 接口的声明语法：[public] interface Iflyable 。
 接口中的成员不能有实现，且不能">
-<meta property="og:updated_time" content="2017-06-04T14:51:24.387Z">
+<meta property="og:updated_time" content="2017-06-10T07:59:32.280Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C# 读书笔记-接口、值传递和引用传递、MD5、密封类和部分类">
+<meta name="twitter:title" content="C# 学习笔记-接口、值传递和引用传递、MD5、密封类和部分类">
 <meta name="twitter:description" content="接口类只能继承一个父类，而可以继承多个接口。
 接口是一种规范，类只要继承了接口，就必须实现接口中的方法(继承抽象类叫做重写方法)。
 也可以说接口表示一种能力，继承了该接口，就有了该接口中标明的能力，所以接口的命名一般以 I 开头，以 able 结尾。代表我这个类可以了做什么，拥有了某种能力。
@@ -136,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="https://cla55ic.github.io/2017/06/04/C- 读书笔记-接口、值传递和引用传递、MD5、密封类和部分类/"/>
+  <link rel="canonical" href="https://cla55ic.github.io/2017/06/04/C- 学习笔记-接口、值传递和引用传递、MD5、密封类和部分类/"/>
 
 
 
 
 
-  <title> C# 读书笔记-接口、值传递和引用传递、MD5、密封类和部分类 | 可啦思刻的博客 </title>
+  <title> C# 学习笔记-接口、值传递和引用传递、MD5、密封类和部分类 | 可啦思刻的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -305,7 +305,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://cla55ic.github.io/2017/06/04/C- 读书笔记-接口、值传递和引用传递、MD5、密封类和部分类/">
+    <link itemprop="mainEntityOfPage" href="https://cla55ic.github.io/2017/06/04/C- 学习笔记-接口、值传递和引用传递、MD5、密封类和部分类/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="可啦思刻">
@@ -326,7 +326,7 @@
             
             
               
-                C# 读书笔记-接口、值传递和引用传递、MD5、密封类和部分类
+                C# 学习笔记-接口、值传递和引用传递、MD5、密封类和部分类
               
             
           </h1>
@@ -421,6 +421,7 @@
 <p>李四</p>
 </blockquote>
 <p>因为创建 Person 对象后，Person 对象存储在了堆中，在栈中存储了该对象在堆中的值，调用 Test 函数传递对象是引用传递，而引用传递传递的是地址，所以传递后在栈上新开了一个空间，该空间仍然存储了那个 Person 对象的地址。此时栈上的两个空间都同时指向了堆上的同一位置。在 Test 函数中改变对象 Peson 的 Name 的值，两个引用都会发生改变。</p>
+<p>ref 关键字实际上就是把值传递改为引用传递。</p>
 <h2 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h2><p>MD5 加密简单示例</p>
 <figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">string</span> <span class="title">GetMD5</span>(<span class="params"><span class="keyword">string</span> str</span>) </span>&#123;</div><div class="line">    MD5 md5 = MD5.Create();</div><div class="line">    <span class="keyword">byte</span>[] bytes = Encoding.Default.GetBytes(str);</div><div class="line">    bytes = md5.ComputeHash(bytes);</div><div class="line">    str = String.Empty;</div><div class="line">    <span class="keyword">foreach</span> (<span class="keyword">byte</span> b <span class="keyword">in</span> bytes) &#123;</div><div class="line">        <span class="comment">//这里 x2 是指定 ToString 的转换方式</span></div><div class="line">        <span class="comment">//x2 只是其中一种受支持的格式，更多格式查阅 MSDN</span></div><div class="line">        str += b.ToString(<span class="string">"x2"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> str;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="sealed-和-partial"><a href="#sealed-和-partial" class="headerlink" title="sealed 和 partial"></a>sealed 和 partial</h2><p>sealed 和 partial 都用来修饰类。</p>
@@ -478,6 +479,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/10/C- 学习笔记-单例模式、静态与非静态、索引器、对象初始化器、委托、LAMDA、XML/" rel="prev" title="C# 学习笔记-单例模式、静态与非静态、索引器、对象初始化器、委托、LAMDA、XML">
+                C# 学习笔记-单例模式、静态与非静态、索引器、对象初始化器、委托、LAMDA、XML <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -549,7 +554,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
