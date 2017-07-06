@@ -1,0 +1,891 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C#," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="事件事件的由来使用委托实现不同的打招呼方式12345678910111213141516171819public delegate void GreetingDelegate(string name);class Program &amp;#123;    static void Main() &amp;#123;        GreetPeople(&quot;小明&quot;,ChineseGreet);        Con">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C# 学习笔记-事件">
+<meta property="og:url" content="https://cla55ic.github.io/2017/07/02/C-学习笔记-事件/index.html">
+<meta property="og:site_name" content="可啦思刻的博客">
+<meta property="og:description" content="事件事件的由来使用委托实现不同的打招呼方式12345678910111213141516171819public delegate void GreetingDelegate(string name);class Program &amp;#123;    static void Main() &amp;#123;        GreetPeople(&quot;小明&quot;,ChineseGreet);        Con">
+<meta property="og:updated_time" content="2017-07-06T16:23:15.335Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C# 学习笔记-事件">
+<meta name="twitter:description" content="事件事件的由来使用委托实现不同的打招呼方式12345678910111213141516171819public delegate void GreetingDelegate(string name);class Program &amp;#123;    static void Main() &amp;#123;        GreetPeople(&quot;小明&quot;,ChineseGreet);        Con">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://cla55ic.github.io/2017/07/02/C-学习笔记-事件/"/>
+
+
+
+
+
+  <title> C# 学习笔记-事件 | 可啦思刻的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2385a75ec51281bae03b58fccb06fb1c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">可啦思刻的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://cla55ic.github.io/2017/07/02/C-学习笔记-事件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="可啦思刻">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="可啦思刻的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                C# 学习笔记-事件
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-02T01:09:21+08:00">
+                2017-07-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><h3 id="事件的由来"><a href="#事件的由来" class="headerlink" title="事件的由来"></a>事件的由来</h3><p>使用委托实现不同的打招呼方式<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">delegate</span> <span class="keyword">void</span> <span class="title">GreetingDelegate</span>(<span class="params"><span class="keyword">string</span> name</span>)</span>;</div><div class="line"><span class="keyword">class</span> <span class="title">Program</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        GreetPeople(<span class="string">"小明"</span>,ChineseGreet);</div><div class="line">        Console.ReadKey();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">GreetPeople</span>(<span class="params"><span class="keyword">string</span> name, GreetingDelegate makeGreeting</span>) </span>&#123;</div><div class="line">        makeGreeting(name);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">EnglishGreet</span>(<span class="params"><span class="keyword">string</span> name</span>) </span>&#123;</div><div class="line">        Console.WriteLine(<span class="string">"Morning, "</span> + name);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">ChineseGreet</span>(<span class="params"><span class="keyword">string</span> name</span>) </span>&#123;</div><div class="line">        Console.WriteLine(<span class="string">"早上好，"</span> + name);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>对于上面的例子，在实际应用中，一般把打招呼的方法 <code>GreetingManager</code> 写在一个类中，它的委托变量参数所需要的方法 <code>EnglishGreet</code> 和 <code>ChineseGreet</code> 写在另外一个类中。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">delegate</span> <span class="keyword">void</span> <span class="title">GreetingDelegate</span>(<span class="params"><span class="keyword">string</span> name</span>)</span>;</div><div class="line"><span class="keyword">class</span> <span class="title">Program</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        GreetingManager gm =<span class="keyword">new</span> GreetingManager();</div><div class="line">        gm.GreetPeople(<span class="string">"小明"</span>, ChineseGreet);</div><div class="line">        Console.ReadKey();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">EnglishGreet</span>(<span class="params"><span class="keyword">string</span> name</span>) </span>&#123;</div><div class="line">        Console.WriteLine(<span class="string">"Morning, "</span> + name);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">ChineseGreet</span>(<span class="params"><span class="keyword">string</span> name</span>) </span>&#123;</div><div class="line">        Console.WriteLine(<span class="string">"早上好，"</span> + name);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">GreetingManager</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">GreetPeople</span>(<span class="params"><span class="keyword">string</span> name, GreetingDelegate makeGreeting</span>) </span>&#123;</div><div class="line">        makeGreeting(name);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>将多个方法绑定到同一个委托变量，则可以这样写</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    GreetingManager gm =<span class="keyword">new</span> GreetingManager();</div><div class="line">    GreetingDelegate delegate1 = ChineseGreet;</div><div class="line">    delegate1 += EnglishGreet;</div><div class="line">    gm.GreetPeople(<span class="string">"小明"</span>, delegate1);</div><div class="line">    Console.ReadKey();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>面向对象的一大特性就是封装，于是我们想到应该把 <code>GreetingManager</code> 类中 <code>GreetPeople</code> 方法所需要的委托变量也封装在该类中。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">GreetingManager</span> &#123;</div><div class="line">    <span class="keyword">public</span> GreetingDelegate Delegate1;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">GreetPeople</span>(<span class="params"><span class="keyword">string</span> name</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (Delegate1 != <span class="literal">null</span>)</div><div class="line">            Delegate1(name);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//使用时则可以这样</span></div><div class="line">GreetingManager gm =<span class="keyword">new</span> GreetingManager();</div><div class="line">gm.Delegate1 = ChineseGreet;</div><div class="line">gm.Delegate1 += EnglishGreet;</div><div class="line">gm.GreetPeople(<span class="string">"小明"</span>);</div></pre></td></tr></table></figure>
+<p>但是这里的问题是，我们应该将 Delegate1 的访问修饰符写成 <code>public</code> 还是 <code>private</code>。<br>如果写成 <code>public</code> ，那么在类之外就可以对它进行随意的赋值等操作，并不符合对象的封装性。<br>如果写成 <code>private</code> ，那么外界就无法访问到它，那么它也就失去了它的意义。<br>还有，如果它是 <code>public</code> ，外界对它进行注册时，第一次是赋值，用 <code>=</code> ，因为要实例化 ( 初始化？ ) ，第二次使用 <code>+=</code>，是注册。但是不管是赋值还是注册，都是将方法绑定到委托变量上，除了调用顺序不同外，没有什么差别。</p>
+<p>综上所述，再联想到我们通常把字段修饰为 <code>private</code>，然后为了能让外界访问，又通过 <code>public</code> 的属性对其进行封装 ( 保护 ) ，那么我们也应该将委托变量定为 <code>private</code>，然后再想办法对其进行封装 ( 保护 ) 。</p>
+<p>事件(Event)的作用就是封装委托变量。</p>
+<p>使用事件改写范例</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">GreetingManager</span> &#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">event</span> GreetingDelegate MakeGreet;</div><div class="line">    <span class="comment">//public GreetingDelegate Delegate1;</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">GreetPeople</span>(<span class="params"><span class="keyword">string</span> name</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (Delegate1 != <span class="literal">null</span>)</div><div class="line">            Delegate1(name);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>事件就向自动属性一样，声明事件，就会在编译的时候生成一个与之对象的私有委托变量。</p>
+<p>如果此时还是在类的外部进行先 <code>=</code> 后 <code>+=</code> 的绑定方法操作</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    GreetingManager gm =<span class="keyword">new</span> GreetingManager();</div><div class="line">    gm.MakeGreet = ChineseGreet;<span class="comment">//错误</span></div><div class="line">    gm.MakeGreet += EnglishGreet;</div><div class="line">    gm.GreetPeople(<span class="string">"小明"</span>);</div><div class="line">    Console.ReadKey();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>就会出现编译错误</p>
+<blockquote>
+<p>事件“ConsoleApplication.GreetingManager.Delegate1”只能出现在 += 或 -= 的左边(从类型“ConsoleApplication.GreetingManager”中使用时除外)</p>
+</blockquote>
+<p>因为 <code>=</code> 是发生在类外部的直接赋值的访问形式，所以会出现错误。</p>
+<h3 id="事件和委托的编译代码"><a href="#事件和委托的编译代码" class="headerlink" title="事件和委托的编译代码"></a>事件和委托的编译代码</h3><p>对可执行应用程序反编译后会发现 <code>public event GreetingDelegate MakeGreet;</code> 产生了如下代码</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> GreetingDelegate MakeGreet; <span class="comment">//对事件的声明 实际是 声明一个私有的委托变量</span></div><div class="line"> </div><div class="line">[MethodImpl(MethodImplOptions.Synchronized)]</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add_MakeGreet</span>(<span class="params">GreetingDelegate <span class="keyword">value</span></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.MakeGreet = (GreetingDelegate) Delegate.Combine(<span class="keyword">this</span>.MakeGreet, <span class="keyword">value</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">[MethodImpl(MethodImplOptions.Synchronized)]</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove_MakeGreet</span>(<span class="params">GreetingDelegate <span class="keyword">value</span></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.MakeGreet = (GreetingDelegate) Delegate.Remove(<span class="keyword">this</span>.MakeGreet, <span class="keyword">value</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>再次印证了之前的委托变量相当于私有字段，而事件则是对其封装的自动属性。</p>
+<p><code>add_MakeGreet</code> 方法则相当于自动属性的 <code>+=</code> ， <code>remove_MakeGreet</code> 相当于 <code>-=</code>。分别用于给委托变量注册方法和取消注册。而这两个方法的访问修饰符取决于声明事件的访问修饰符。</p>
+<h3 id="委托、事件与-Observer-设计模式"><a href="#委托、事件与-Observer-设计模式" class="headerlink" title="委托、事件与 Observer 设计模式"></a>委托、事件与 Observer 设计模式</h3><p>编写一个类模拟热水器，当水温达到 95 度时，发出警告，同时显示水温。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> <span class="title">Heater</span> &#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> temperature;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">BoilWater</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">100</span>; i++) &#123;</div><div class="line">            temperature=i;</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (temperature &gt;= <span class="number">95</span>) &#123;</div><div class="line">                ShowMsg(temperature);</div><div class="line">                MakeAlert(temperature);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ShowMsg</span>(<span class="params"><span class="keyword">int</span> param</span>) </span>&#123;</div><div class="line">        Console.WriteLine(<span class="string">"当前水温&#123;0&#125;度"</span>, param);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">MakeAlert</span>(<span class="params"><span class="keyword">int</span> param</span>) </span>&#123;</div><div class="line">        Console.WriteLine(<span class="string">"警告，水温&#123;0&#125;度大于等于95度"</span>,param);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">class</span> <span class="title">Program</span> &#123;</div><div class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            Heater heater = <span class="keyword">new</span> Heater();</div><div class="line">            heater.BoilWater();</div><div class="line">            Console.ReadKey();</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h3 id="Observer-设计模式简介"><a href="#Observer-设计模式简介" class="headerlink" title="Observer 设计模式简介"></a>Observer 设计模式简介</h3><p>上面的代码可以完成需求，但是进一步想，热水器应当仅用于加热水，而提示水温应当由显示器去做，发出警告应当由警报器去做，三个设备各司其职。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> <span class="title">Heater</span> &#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> temperature;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">BoilWater</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">100</span>; i++) &#123;</div><div class="line">            temperature=i;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">class</span> <span class="title">Alarm</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">MakeAlert</span>(<span class="params"><span class="keyword">int</span> param</span>) </span>&#123;</div><div class="line">        Console.WriteLine(<span class="string">"警告，水温&#123;0&#125;度大于等于95度"</span>, param);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">class</span> <span class="title">Display</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ShowMsg</span>(<span class="params"><span class="keyword">int</span> param</span>) </span>&#123;</div><div class="line">        Console.WriteLine(<span class="string">"当前水温&#123;0&#125;度"</span>, param);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但是当水温高于 95 度时，应如可通知警告器和显示器呢？</p>
+<p>Observer 设计模式主要包含两类对象：监视者 ( Observer ) 和监视对象 ( Subject ) 。</p>
+<p>监视对象包含其他对象感兴趣的的内容，这里就是温度，而监视对象就是热水器。当水温高于 95 度时，会不断把数据发给监视它的对象。</p>
+<p>监视者监视监视对象，当监视对象中的某件事发生时，会告知监视者，从而使监视者采取某些行动。这里警告器和显示器就是监视者。</p>
+<p>本例中，事情的发生顺序如下描述</p>
+<ol>
+<li>警报器和显示器告诉热水器，它对它的温度比较感兴趣(注册)。</li>
+<li>热水器知道后保留对警报器和显示器的引用。</li>
+<li>热水器进行烧水这一动作，当水温超过95度时，通过对警报器和显示器的引用，自动调用警报器的MakeAlert()方法、显示器的ShowMsg()方法。</li>
+</ol>
+<p>Observer 设计模式是为了定义对象间的一种一对多的依赖关系，以便于当一个对象的状态改变时，其他依赖于它的对象会被自动告知并更新。Observer模式是一种松耦合的设计模式。</p>
+<p>使用 Observer 设计模式完成范例</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> <span class="title">Program</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        Heater heater = <span class="keyword">new</span> Heater();</div><div class="line">        Alarm alarm = <span class="keyword">new</span> Alarm();</div><div class="line">        Display display = <span class="keyword">new</span> Display();</div><div class="line">        heater.BoilEvent += alarm.MakeAlert;</div><div class="line">        heater.BoilEvent += display.ShowMsg;</div><div class="line">        heater.BoilWater();</div><div class="line">        Console.ReadKey();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">class</span> <span class="title">Heater</span> &#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> temperature;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">delegate</span> <span class="keyword">void</span> <span class="title">BoilHandler</span>(<span class="params"><span class="keyword">int</span> param</span>)</span>;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">event</span> BoilHandler BoilEvent;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">BoilWater</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">100</span>; i++) &#123;</div><div class="line">            temperature=i;</div><div class="line">            <span class="keyword">if</span> (temperature &gt;= <span class="number">95</span>) &#123;</div><div class="line">                <span class="keyword">if</span> (BoilEvent != <span class="literal">null</span>)</div><div class="line">                    BoilEvent(temperature);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">class</span> <span class="title">Alarm</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">MakeAlert</span>(<span class="params"><span class="keyword">int</span> param</span>) </span>&#123;</div><div class="line">        Console.WriteLine(<span class="string">"警告，水温&#123;0&#125;度大于等于95度"</span>, param);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">class</span> <span class="title">Display</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ShowMsg</span>(<span class="params"><span class="keyword">int</span> param</span>) </span>&#123;</div><div class="line">        Console.WriteLine(<span class="string">"当前水温&#123;0&#125;度"</span>, param);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p><em><a href="http://www.tracefact.net/CSharp-Programming/Delegates-and-Events-in-CSharp.aspx" target="_blank" rel="external">#文章参考自：C# 中的委托和事件 - 张子阳的博客</a></em></p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C#</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/10/C- 学习笔记-单例模式、静态与非静态、索引器、对象初始化器、委托、LAMDA、XML/" rel="next" title="C# 学习笔记-单例模式、静态与非静态、索引器、对象初始化器、委托、LAMDA、XML">
+                <i class="fa fa-chevron-left"></i> C# 学习笔记-单例模式、静态与非静态、索引器、对象初始化器、委托、LAMDA、XML
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="可啦思刻" />
+          <p class="site-author-name" itemprop="name">可啦思刻</p>
+           
+              <p class="site-description motion-element" itemprop="description">你好，很高兴认识你。</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#事件"><span class="nav-number">1.</span> <span class="nav-text">事件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事件的由来"><span class="nav-number">1.1.</span> <span class="nav-text">事件的由来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件和委托的编译代码"><span class="nav-number">1.2.</span> <span class="nav-text">事件和委托的编译代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#委托、事件与-Observer-设计模式"><span class="nav-number">1.3.</span> <span class="nav-text">委托、事件与 Observer 设计模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Observer-设计模式简介"><span class="nav-number">1.4.</span> <span class="nav-text">Observer 设计模式简介</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">可啦思刻</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+</body>
+</html>
