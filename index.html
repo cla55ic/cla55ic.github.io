@@ -294,6 +294,137 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://cla55ic.github.io/2017/07/08/C-学习笔记-反射/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="可啦思刻">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="可啦思刻的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/07/08/C-学习笔记-反射/" itemprop="url">
+                  C# 学习笔记-反射
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-08T22:41:43+08:00">
+                2017-07-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          程序集.net 中 dll 和 exe 文件都是程序集，可以看作是多个相关类的集合。
+程序集包含资源文件、类型元数据，每个城预计都有自己的名称、版本等信息。这些信息可以通过 AssemblyInfo.cs 文件来自定义。
+反射反射就是动态的获取程序集中的元数据。反编译工具、VS智能提示就是通过反射来实现。
+获取元数据首先需要创建程序集对象并且加载程序集，需要注意的是加载程序集所使用的路径需要绝对路径。
+12345//此时用于测试的 dll 文件放在 Debug 目录下。//动态获取可执行程序的路径，并与程序集名称拼接，形成该程序集的绝对路径string path = Path.Combine(
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/08/C-学习笔记-反射/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://cla55ic.github.io/2017/07/02/C-学习笔记-事件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1457,148 +1588,6 @@ ArrayList 类不是静态类，所以想要使用该集合，要先实例化一�
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://cla55ic.github.io/2017/05/16/C- 基础语法练习-飞行棋游戏/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="可啦思刻">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="可啦思刻的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/16/C- 基础语法练习-飞行棋游戏/" itemprop="url">
-                  C# 基础语法练习-飞行棋游戏
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-16T00:00:28+08:00">
-                2017-05-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          玩法描述
-先后输入两个玩家的姓名
-打印出棋盘，开始游戏
-双方掷骰子，按掷得的点数向前走相应的步数
-走完后按棋子落在棋盘上的位置，做出相应的动作，如下
-□ 什么都不发生
-◎ 幸运轮盘，与对方交换位置，或轰炸对方使其后退 6 格
-☆ 地雷，玩家后退 6 格
-▲ 暂停，玩家跳过下一回合
-卐 时空隧道，玩家前进 10 格
-
-
-先走出棋盘的玩家获得胜利
-
-思路可通过数组来存储棋盘和玩家，通过枚举来存储棋盘上各个位置的符号(特殊符号不可作为枚举值)，轮流掷骰子、改变棋子位置等步骤通过 while 循环实现，跳出条件是，其中一方走出了棋盘。
-代码除主函数外，一共分为 6 个函数，各个函数的作用在文档注释中有
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/05/16/C- 基础语法练习-飞行棋游戏/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1648,7 +1637,7 @@ ArrayList 类不是静态类，所以想要使用该集合，要先实例化一�
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
